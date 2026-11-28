@@ -4,15 +4,23 @@ import { evaluateScenario, pendingInputs } from "../../src";
 import { isK1FactKey } from "../../src/facts";
 import type { AIDecisionRow, TaxFactRow } from "../../src/facts/rows";
 import { decisionsWithPreparerStyle } from "../helpers/preparer";
+import { sampledScenariosByKey } from "../helpers/sharedAnswers";
 import { loadScenarios } from "../scenarios/index";
 import type { Scenario } from "../types";
 
 /*
- * The check evaluates a whole return once for each answer of each scenario, so
- * it is the slowest test of the engine. This file holds the cases and the list
- * of optional inputs. The files requiredInputs.part<n>.test.ts each run one
- * share of the scenarios, because vitest runs files side by side and the tests
- * of one file one after another.
+ * The check evaluates a whole return once for each answer it removes, so it is
+ * the slowest test of the engine. This file holds the cases and the list of
+ * optional inputs. The files requiredInputs.part<n>.test.ts each run one share
+ * of the scenarios, because vitest runs files side by side and the tests of
+ * one file one after another.
+ *
+ * The everyday run (`npm run test:integration`, the commit hook) removes an
+ * answer that many scenarios share (the name, the filing status) from a fixed
+ * sample of scenarios only, and every other answer from every scenario that
+ * has it (tests/helpers/sharedAnswers.ts). The full run (`npm run test:inputs`,
+ * REQUIRED_INPUTS_FULL=1) removes every answer from every scenario; it must
+ * pass before a pull request merges.
  *
  * On a failure, add a missingInputs entry in the form's resolver, or list the
  * input here with the reason it is optional.
@@ -742,10 +750,45 @@ const scenariosOfPart = (part: number): Scenario[] =>
  * file can hold the worker's event loop past its 60-second RPC timeout on a
  * busy machine. Yield to the event loop before each case.
  */
+/* The keys of the answers the check can remove from a scenario. */
+function removableKeys(scenario: Scenario): string[] {
+  return [
+    ...decisionsWithPreparerStyle(scenario).map((decision) => decision.decisionKey),
+    ...scenario.facts.map((fact) => fact.key).filter((key) => !isDocument(key)),
+  ].filter((key) => !isOptional(key));
+}
+
+/* Scenarios with one filing status and the same state return are one kind. */
+function kindOf(scenario: Scenario): string {
+  const decisionOf = (key: string) =>
+    JSON.stringify(scenario.decisions.find((row) => row.decisionKey === key)?.decision ?? null);
+  return `${decisionOf("decisions.scope.filing_status")} ${decisionOf("decisions.scope.must_file_ca_540")}`;
+}
+
+const SAMPLES = sampledScenariosByKey(
+  ALL_SCENARIOS.map((scenario) => ({
+    name: scenario.name,
+    keys: removableKeys(scenario),
+    group: kindOf(scenario),
+    size: scenario.facts.length,
+  })),
+);
+
+/* Read at call time, so the script's env var decides each run. */
+const fullRun = (): boolean => process.env.REQUIRED_INPUTS_FULL === "1";
+
+const isChecked = (scenario: Scenario, key: string): boolean =>
+  fullRun() || (SAMPLES.get(key)?.has(scenario.name) ?? true);
+
 export function registerRequiredInputsPart(part: number): void {
   beforeEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
 
-  describe.each(scenariosOfPart(part))("required inputs: $name", (scenario) => {
+  /* A suite with no case fails, so a scenario with nothing to check this run is left out. */
+  const withCases = scenariosOfPart(part).filter((scenario) =>
+    removableKeys(scenario).some((key) => isChecked(scenario, key)),
+  );
+
+  describe.each(withCases)("required inputs: $name", (scenario) => {
     const decisions = decisionsWithPreparerStyle(scenario);
     /*
      * Evaluated on first use inside a test, not while the suite is collected:
@@ -775,7 +818,7 @@ export function registerRequiredInputsPart(part: number): void {
               decisions,
             ),
         })),
-    ].filter((input) => !isOptional(input.key));
+    ].filter((input) => !isOptional(input.key) && isChecked(scenario, input.key));
 
     it.each(answers)("missing $key is reported", ({ drop }) => {
       expect(unreported(base(), drop()).slice(0, 3)).toEqual([]);

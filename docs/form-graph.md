@@ -19,25 +19,25 @@ A form also depends on another form when both use the same input (Schedule D and
 
 ## Summary
 
-The golden suite ran 185 scenarios.
+The golden suite ran 192 scenarios.
 
 | Form | Jurisdiction | Tier 1 | Scenarios | Fields | Verified | Locked | Not run | Unsupported | Reads forms | Feeds forms |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Form 8949 | Federal 2025 | Yes | 17 | 200 | 121 | 2 | 31 | 46 | 0 | 0 |
 | Schedule D | Federal 2025 | Yes | 38 | 53 | 26 | 10 | 2 | 15 | 2 | 16 |
-| Form 1040 | Federal 2025 | Yes | 185 | 199 | 108 | 21 | 10 | 60 | 23 | 67 |
+| Form 1040 | Federal 2025 | Yes | 192 | 199 | 108 | 21 | 10 | 60 | 23 | 67 |
 | Schedule A | Federal 2025 | Yes | 16 | 32 | 27 | 0 | 3 | 2 | 4 | 11 |
 | Schedule B | Federal 2025 | Yes | 33 | 72 | 13 | 11 | 48 | 0 | 1 | 4 |
-| Form 4562 | Federal 2025 | Yes | 2 | 240 | 19 | 3 | 66 | 152 | 0 | 0 |
+| Form 4562 | Federal 2025 | Yes | 3 | 240 | 19 | 8 | 61 | 152 | 0 | 0 |
 | Form 8829 | Federal 2025 |  | 1 | 58 | 23 | 0 | 28 | 7 | 0 | 0 |
-| Schedule C | Federal 2025 | Yes | 53 | 105 | 58 | 9 | 20 | 18 | 0 | 4 |
-| Schedule SE | Federal 2025 | Yes | 58 | 25 | 14 | 3 | 1 | 7 | 2 | 15 |
+| Schedule C | Federal 2025 | Yes | 57 | 105 | 58 | 9 | 20 | 18 | 0 | 4 |
+| Schedule SE | Federal 2025 | Yes | 64 | 25 | 14 | 3 | 1 | 7 | 2 | 15 |
 | Form 8582 | Federal 2025 | Yes | 9 | 198 | 31 | 36 | 106 | 25 | 4 | 7 |
-| Schedule E | Federal 2025 | Yes | 41 | 176 | 40 | 58 | 72 | 6 | 1 | 15 |
-| Schedule 1 | Federal 2025 | Yes | 107 | 72 | 35 | 13 | 1 | 23 | 5 | 31 |
+| Schedule E | Federal 2025 | Yes | 45 | 176 | 40 | 58 | 72 | 6 | 1 | 15 |
+| Schedule 1 | Federal 2025 | Yes | 114 | 72 | 35 | 13 | 1 | 23 | 5 | 31 |
 | Schedule 1-A | Federal 2025 | Yes | 11 | 54 | 13 | 4 | 0 | 37 | 2 | 4 |
-| Schedule 2 | Federal 2025 | Yes | 108 | 62 | 11 | 34 | 2 | 15 | 10 | 16 |
-| Schedule 3 | Federal 2025 | Yes | 56 | 37 | 6 | 19 | 1 | 11 | 20 | 20 |
+| Schedule 2 | Federal 2025 | Yes | 115 | 62 | 11 | 34 | 2 | 15 | 10 | 16 |
+| Schedule 3 | Federal 2025 | Yes | 63 | 37 | 6 | 19 | 1 | 11 | 20 | 20 |
 | Form 2441 | Federal 2025 | Yes | 3 | 72 | 53 | 8 | 11 | 0 | 4 | 3 |
 | Schedule R | Federal 2025 |  | 2 | 27 | 18 | 0 | 9 | 0 | 2 | 1 |
 | Schedule H | Federal 2025 | Yes | 1 | 72 | 0 | 15 | 4 | 53 | 0 | 4 |
@@ -46,11 +46,11 @@ The golden suite ran 185 scenarios.
 | Form 8889 | Federal 2025 | Yes | 3 | 27 | 18 | 0 | 2 | 7 | 0 | 4 |
 | Form 4952 | Federal 2025 | Yes | 5 | 17 | 17 | 0 | 0 | 0 | 3 | 12 |
 | Schedule 8812 | Federal 2025 | Yes | 25 | 40 | 35 | 3 | 1 | 1 | 7 | 6 |
-| Form 8959 | Federal 2025 | Yes | 48 | 26 | 19 | 1 | 4 | 2 | 3 | 4 |
+| Form 8959 | Federal 2025 | Yes | 51 | 26 | 19 | 1 | 4 | 2 | 3 | 4 |
 | Form 8960 | Federal 2025 | Yes | 28 | 38 | 20 | 3 | 1 | 14 | 5 | 1 |
-| Form 8995-A | Federal 2025 | Yes | 28 | 94 | 54 | 0 | 27 | 13 | 5 | 1 |
-| Form 8995 | Federal 2025 | Yes | 43 | 33 | 26 | 2 | 4 | 1 | 5 | 1 |
-| Form 6251 | Federal 2025 | Yes | 27 | 62 | 38 | 1 | 7 | 16 | 6 | 9 |
+| Form 8995-A | Federal 2025 | Yes | 30 | 94 | 54 | 0 | 27 | 13 | 5 | 1 |
+| Form 8995 | Federal 2025 | Yes | 47 | 33 | 26 | 2 | 4 | 1 | 5 | 1 |
+| Form 6251 | Federal 2025 | Yes | 30 | 62 | 38 | 1 | 7 | 16 | 6 | 9 |
 | Schedule C (Form 8995-A) | Federal 2025 |  | 2 | 19 | 13 | 0 | 5 | 1 | 4 | 1 |
 | Form 8962 | Federal 2025 |  | 1 | 141 | 20 | 0 | 121 | 0 | 1 | 3 |
 | Form 4684 | Federal 2025 |  | 1 | 162 | 23 | 0 | 39 | 100 | 1 | 1 |
@@ -60,12 +60,12 @@ The golden suite ran 185 scenarios.
 | Form 2210 | Federal 2025 | Yes | 2 | 167 | 0 | 166 | 1 | 0 | 8 | 0 |
 | Form 8801 | Federal 2025 | Yes | 1 | 57 | 0 | 56 | 1 | 0 | 4 | 0 |
 | Form 8814 | Federal 2025 | Yes | 3 | 24 | 0 | 23 | 1 | 0 | 0 | 0 |
-| Schedule F | Federal 2025 |  | 10 | 89 | 0 | 89 | 0 | 0 | 0 | 0 |
+| Schedule F | Federal 2025 |  | 12 | 89 | 0 | 89 | 0 | 0 | 0 | 0 |
 | Form 461 | Federal 2025 | Yes | 5 | 16 | 0 | 15 | 1 | 0 | 3 | 4 |
 | Form 965-A | Federal 2025 |  | 1 | 391 | 0 | 118 | 273 | 0 | 0 | 0 |
 | Form 2106 | Federal 2025 |  | 2 | 82 | 0 | 65 | 17 | 0 | 0 | 0 |
 | Form 2555 | Federal 2025 |  | 2 | 160 | 0 | 95 | 65 | 0 | 1 | 0 |
-| Form 3800 | Federal 2025 | Yes | 29 | 1635 | 0 | 275 | 1360 | 0 | 9 | 1 |
+| Form 3800 | Federal 2025 | Yes | 36 | 1635 | 0 | 292 | 1343 | 0 | 9 | 1 |
 | Form 3903 | Federal 2025 |  | 2 | 10 | 0 | 10 | 0 | 0 | 0 | 0 |
 | Form 4136 | Federal 2025 |  | 2 | 276 | 0 | 276 | 0 | 0 | 0 | 0 |
 | Form 4137 | Federal 2025 |  | 1 | 33 | 0 | 25 | 8 | 0 | 0 | 3 |
@@ -135,13 +135,13 @@ The golden suite ran 185 scenarios.
 | Form 8820 | Federal 2025 |  | 2 | 98 | 0 | 25 | 73 | 0 | 0 | 0 |
 | Form 8835 | Federal 2025 |  | 1 | 85 | 0 | 36 | 49 | 0 | 0 | 0 |
 | Form 8864 | Federal 2025 |  | 1 | 12 | 0 | 10 | 2 | 0 | 0 | 0 |
-| Form 8874 | Federal 2025 |  | 0 | 40 | 0 | 0 | 0 | 40 | 0 | 0 |
+| Form 8874 | Federal 2025 |  | 1 | 40 | 0 | 40 | 0 | 0 | 0 | 0 |
 | Form 8896 | Federal 2025 |  | 0 | 12 | 0 | 0 | 0 | 12 | 0 | 0 |
-| Form 8900 | Federal 2025 |  | 0 | 12 | 0 | 0 | 0 | 12 | 0 | 0 |
+| Form 8900 | Federal 2025 |  | 1 | 12 | 0 | 12 | 0 | 0 | 0 | 0 |
 | Form 8906 | Federal 2025 |  | 0 | 6 | 0 | 0 | 0 | 6 | 0 | 0 |
 | Form 8908 | Federal 2025 |  | 0 | 256 | 0 | 0 | 0 | 256 | 0 | 0 |
-| Form 8932 | Federal 2025 |  | 0 | 8 | 0 | 0 | 0 | 8 | 0 | 0 |
-| Form 8941 | Federal 2025 |  | 0 | 28 | 0 | 0 | 0 | 28 | 0 | 0 |
+| Form 8932 | Federal 2025 |  | 2 | 8 | 0 | 6 | 2 | 0 | 0 | 0 |
+| Form 8941 | Federal 2025 |  | 3 | 28 | 0 | 24 | 4 | 0 | 0 | 0 |
 | Form 8994 | Federal 2025 |  | 0 | 13 | 0 | 0 | 0 | 13 | 0 | 0 |
 | Schedule A (Form 8911) | Federal 2025 |  | 0 | 33 | 0 | 0 | 0 | 33 | 0 | 0 |
 | Schedule A (Form 8936) | Federal 2025 |  | 0 | 64 | 0 | 0 | 0 | 64 | 0 | 0 |
@@ -153,11 +153,11 @@ The golden suite ran 185 scenarios.
 | Schedule F (Form 8933) | Federal 2025 |  | 0 | 147 | 0 | 0 | 0 | 147 | 0 | 0 |
 | Schedule D (540) | California 2025 | Yes | 5 | 125 | 0 | 25 | 100 | 0 | 1 | 1 |
 | FTB 3885A | California 2025 | Yes | 3 | 65 | 14 | 1 | 50 | 0 | 0 | 0 |
-| Schedule CA (540) | California 2025 | Yes | 59 | 253 | 98 | 31 | 31 | 93 | 10 | 6 |
+| Schedule CA (540) | California 2025 | Yes | 60 | 253 | 98 | 31 | 31 | 93 | 10 | 6 |
 | FTB 3526 | California 2025 | Yes | 2 | 17 | 17 | 0 | 0 | 0 | 5 | 4 |
 | FTB 3805P | California 2025 | Yes | 2 | 27 | 11 | 0 | 8 | 8 | 0 | 1 |
 | FTB 3514 | California 2025 |  | 4 | 94 | 51 | 0 | 43 | 0 | 2 | 0 |
-| Form 540 | California 2025 | Yes | 63 | 169 | 80 | 18 | 6 | 65 | 13 | 17 |
+| Form 540 | California 2025 | Yes | 64 | 169 | 80 | 18 | 6 | 65 | 13 | 17 |
 | Schedule P (540) | California 2025 | Yes | 14 | 131 | 21 | 46 | 12 | 52 | 8 | 9 |
 | FTB 5805 | California 2025 | Yes | 1 | 111 | 55 | 0 | 0 | 56 | 1 | 1 |
 | FTB 3532 | California 2025 |  | 2 | 16 | 10 | 0 | 6 | 0 | 0 | 0 |
@@ -189,6 +189,29 @@ The golden suite ran 185 scenarios.
 | Schedule D-1 | California 2025 | Yes | 2 | 172 | 0 | 65 | 100 | 7 | 0 | 0 |
 | Schedule D (540NR) | California 2025 | Yes | 3 | 125 | 0 | 25 | 100 | 0 | 1 | 1 |
 | Schedule P (540NR) | California 2025 | Yes | 1 | 180 | 0 | 42 | 61 | 77 | 6 | 1 |
+| FTB 3503 | California 2025 |  | 0 | 20 | 0 | 0 | 0 | 20 | 0 | 0 |
+| FTB 3504 | California 2025 |  | 0 | 43 | 0 | 0 | 0 | 43 | 0 | 0 |
+| FTB 3521 | California 2025 |  | 0 | 57 | 0 | 0 | 0 | 57 | 0 | 0 |
+| FTB 3523 | California 2025 |  | 0 | 110 | 0 | 0 | 0 | 110 | 0 | 0 |
+| FTB 3531 | California 2025 |  | 0 | 59 | 0 | 0 | 0 | 59 | 0 | 0 |
+| FTB 3540 | California 2025 |  | 0 | 45 | 0 | 0 | 0 | 45 | 0 | 0 |
+| FTB 3547 | California 2025 |  | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
+| FTB 3548 | California 2025 |  | 0 | 19 | 0 | 0 | 0 | 19 | 0 | 0 |
+| FTB 3554 | California 2025 |  | 0 | 41 | 0 | 0 | 0 | 41 | 0 | 0 |
+| FTB 3568 | California 2025 |  | 0 | 46 | 0 | 0 | 0 | 46 | 0 | 0 |
+| FTB 3592 | California 2025 |  | 0 | 18 | 0 | 0 | 0 | 18 | 0 | 0 |
+| FTB 3596 | California 2025 |  | 0 | 25 | 0 | 0 | 0 | 25 | 0 | 0 |
+| FTB 3808 | California 2025 |  | 0 | 35 | 0 | 0 | 0 | 35 | 0 | 0 |
+| FTB 3814 | California 2025 |  | 0 | 119 | 0 | 0 | 0 | 119 | 0 | 0 |
+| FTB 3820 | California 2025 |  | 0 | 22 | 0 | 0 | 0 | 22 | 0 | 0 |
+| FTB 3821 | California 2025 |  | 0 | 14 | 0 | 0 | 0 | 14 | 0 | 0 |
+| FTB 3831 | California 2025 |  | 0 | 78 | 0 | 0 | 0 | 78 | 0 | 0 |
+| FTB 3835 | California 2025 |  | 0 | 18 | 0 | 0 | 0 | 18 | 0 | 0 |
+| FTB 3870 | California 2025 |  | 0 | 36 | 0 | 0 | 0 | 36 | 0 | 0 |
+| FTB 3872 | California 2025 |  | 0 | 34 | 0 | 0 | 0 | 34 | 0 | 0 |
+| FTB 4197 | California 2025 |  | 0 | 59 | 0 | 0 | 0 | 59 | 0 | 0 |
+| Form 540 2EZ | California 2025 |  | 0 | 125 | 0 | 0 | 0 | 125 | 0 | 0 |
+| Schedule R (California) | California 2025 |  | 0 | 404 | 0 | 0 | 0 | 404 | 0 | 0 |
 
 ## By form
 
@@ -2009,6 +2032,190 @@ For each form: the fields that are not verified and that other fields read, by t
 | `0.line.13j_research_experimental` | Line 13j. Research and experimental costs. | unsupported | 47 | none |
 
 170 more not checked, each of which feeds fewer fields.
+
+### FTB 3503
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 20 verified, 20 not checked
+
+20 more not checked, each of which feeds fewer fields.
+
+### FTB 3504
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 43 verified, 43 not checked
+
+43 more not checked, each of which feeds fewer fields.
+
+### FTB 3521
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 57 verified, 57 not checked
+
+57 more not checked, each of which feeds fewer fields.
+
+### FTB 3523
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 110 verified, 110 not checked
+
+110 more not checked, each of which feeds fewer fields.
+
+### FTB 3531
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 59 verified, 59 not checked
+
+59 more not checked, each of which feeds fewer fields.
+
+### FTB 3540
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 45 verified, 45 not checked
+
+45 more not checked, each of which feeds fewer fields.
+
+### FTB 3547
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 14 verified, 14 not checked
+
+14 more not checked, each of which feeds fewer fields.
+
+### FTB 3548
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 19 verified, 19 not checked
+
+19 more not checked, each of which feeds fewer fields.
+
+### FTB 3554
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 41 verified, 41 not checked
+
+41 more not checked, each of which feeds fewer fields.
+
+### FTB 3568
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 46 verified, 46 not checked
+
+46 more not checked, each of which feeds fewer fields.
+
+### FTB 3592
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 18 verified, 18 not checked
+
+18 more not checked, each of which feeds fewer fields.
+
+### FTB 3596
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 25 verified, 25 not checked
+
+25 more not checked, each of which feeds fewer fields.
+
+### FTB 3808
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 35 verified, 35 not checked
+
+35 more not checked, each of which feeds fewer fields.
+
+### FTB 3814
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 119 verified, 119 not checked
+
+119 more not checked, each of which feeds fewer fields.
+
+### FTB 3820
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 22 verified, 22 not checked
+
+22 more not checked, each of which feeds fewer fields.
+
+### FTB 3821
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 14 verified, 14 not checked
+
+14 more not checked, each of which feeds fewer fields.
+
+### FTB 3831
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 78 verified, 78 not checked
+
+78 more not checked, each of which feeds fewer fields.
+
+### FTB 3835
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 18 verified, 18 not checked
+
+18 more not checked, each of which feeds fewer fields.
+
+### FTB 3870
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 36 verified, 36 not checked
+
+36 more not checked, each of which feeds fewer fields.
+
+### FTB 3872
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 34 verified, 34 not checked
+
+34 more not checked, each of which feeds fewer fields.
+
+### FTB 4197
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 59 verified, 59 not checked
+
+59 more not checked, each of which feeds fewer fields.
+
+### Form 540 2EZ
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 125 verified, 125 not checked
+
+125 more not checked, each of which feeds fewer fields.
+
+### Schedule R (California)
+
+- Reads: none
+- Feeds: none
+- Fields: 0 of 404 verified, 404 not checked
+
+404 more not checked, each of which feeds fewer fields.
 
 ## Forms the engine lacks
 
