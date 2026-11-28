@@ -25,6 +25,7 @@ import { researchCreditSources } from "../6765/form3800.js";
 import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
 import { cleanElectricitySources } from "../7211/form3800.js";
 import { nuclearProductionSources } from "../7213/form3800.js";
+import { withForm7218 } from "../7218/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { orphanDrugCreditSourcesOf } from "../8820/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
@@ -223,8 +224,15 @@ const missingResearch = (source: CreditSource) =>
  *   the taxpayer owns (8835/form3800.ts).
  * - Lines 1cc and 1u: Form 7213 Part I line 9 and Part II line 13 of each
  *   nuclear facility the taxpayer owns (7213/form3800.ts).
+ * - Line 1q: Form 7218 line 3 of each clean fuel facility the taxpayer owns;
+ *   next to one, a stated line 1q credit with no entity is a gap (7218/form3800.ts),
+ *   so this returns the stated sources too, in their own place.
  */
-function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
+function laterFormSources(
+  inputs: ResolverInputs,
+  stated: CreditSource[],
+): { stated: CreditSource[]; sources: CreditSource[]; missing: string[] } {
+  const cleanFuel = withForm7218(inputs, stated);
   const forms = [
     cleanHydrogenSourcesOf(inputs),
     biodieselCreditSourcesOf(inputs),
@@ -232,8 +240,10 @@ function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; mi
     cleanElectricitySources(inputs),
     renewableElectricitySourcesOf(inputs),
     nuclearProductionSources(inputs),
+    cleanFuel,
   ];
   return {
+    stated: cleanFuel.stated,
     sources: forms.flatMap((form) => form.sources),
     missing: forms.flatMap((form) => form.missing),
   };
@@ -275,11 +285,11 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...research.sources.filter(missingResearch).map((source) => source.credit.key),
     ...research.missing,
   );
-  const later = laterFormSources(inputs);
+  const later = laterFormSources(inputs, stated);
   missing.push(...later.missing);
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
-    ...stated,
+    ...later.stated,
     ...tips.sources,
     ...childcare.sources,
     ...housing.sources,
