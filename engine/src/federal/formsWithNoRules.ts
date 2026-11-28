@@ -10,8 +10,6 @@ import type { Form5471FilingInfo } from "./5471/filingInfo.js";
 import { resolve5471Info } from "./5471/resolveInfo.js";
 import type { Form7207FilingInfo } from "./7207/filingInfo.js";
 import { resolve7207Info } from "./7207/resolveInfo.js";
-import type { Form7213FilingInfo } from "./7213/filingInfo.js";
-import { resolve7213Info } from "./7213/resolveInfo.js";
 import type { Form7218FilingInfo } from "./7218/filingInfo.js";
 import { resolve7218Info } from "./7218/resolveInfo.js";
 import type { Form8874FilingInfo } from "./8874/filingInfo.js";
@@ -54,7 +52,6 @@ export type FederalFormsWithNoRulesFilingInfo = Form5471FilingInfo &
   Form8933FilingInfo &
   Form8992FilingInfo &
   Form7207FilingInfo &
-  Form7213FilingInfo &
   Form7218FilingInfo &
   Form8874FilingInfo &
   Form8896FilingInfo &
@@ -80,7 +77,6 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve8933Info,
   resolve8992Info,
   resolve7207Info,
-  resolve7213Info,
   resolve7218Info,
   resolve8874Info,
   resolve8896Info,

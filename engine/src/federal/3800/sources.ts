@@ -24,6 +24,7 @@ import { statedOwnBiofuelGap } from "../6478/form3800.js";
 import { researchCreditSources } from "../6765/form3800.js";
 import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
 import { cleanElectricitySources } from "../7211/form3800.js";
+import { nuclearProductionSources } from "../7213/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { orphanDrugCreditSourcesOf } from "../8820/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
@@ -220,6 +221,8 @@ const missingResearch = (source: CreditSource) =>
  *   taxpayer owns (7211/form3800.ts).
  * - Lines 4e and 1f: Form 8835 line 15 of each renewable electricity facility
  *   the taxpayer owns (8835/form3800.ts).
+ * - Lines 1cc and 1u: Form 7213 Part I line 9 and Part II line 13 of each
+ *   nuclear facility the taxpayer owns (7213/form3800.ts).
  */
 function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
   const forms = [
@@ -228,6 +231,7 @@ function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; mi
     orphanDrugCreditSourcesOf(inputs),
     cleanElectricitySources(inputs),
     renewableElectricitySourcesOf(inputs),
+    nuclearProductionSources(inputs),
   ];
   return {
     sources: forms.flatMap((form) => form.sources),

@@ -19,9 +19,10 @@
  * producer credit; Form 8820, the orphan drug credit; Form 7211, the clean
  * electricity production credit of each facility the taxpayer owns; and Form
  * 8835, the renewable electricity production credit of each facility, which
- * adds sources to Form 3800 lines 4e and 1f. They are joined here, in this
- * order, and filingInfo.ts takes them as one, so that file stays under its line
- * limit. A new credit form adds its type and resolver here, not to
+ * adds sources to Form 3800 lines 4e and 1f; and Form 7213, the nuclear power
+ * production credit of each facility the taxpayer owns. They are joined here,
+ * in this order, and filingInfo.ts takes them as one, so that file stays under
+ * its line limit. A new credit form adds its type and resolver here, not to
  * filingInfo.ts.
  */
 
@@ -41,6 +42,8 @@ import type { Form7210FilingInfo } from "./7210/filingInfo.js";
 import { resolve7210Info } from "./7210/resolveInfo.js";
 import type { Form7211FilingInfo } from "./7211/filingInfo.js";
 import { resolve7211Info } from "./7211/resolveInfo.js";
+import type { Form7213FilingInfo } from "./7213/filingInfo.js";
+import { resolve7213Info } from "./7213/resolveInfo.js";
 import type { Form8582CRFilingInfo } from "./8582-cr/filingInfo.js";
 import { resolve8582CRInfo } from "./8582-cr/resolveInfo.js";
 import type { Form8586FilingInfo } from "./8586/filingInfo.js";
@@ -87,7 +90,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form8864FilingInfo &
   Form8820FilingInfo &
   Form7211FilingInfo &
-  Form8835FilingInfo;
+  Form8835FilingInfo &
+  Form7213FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -110,4 +114,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve8820Info,
   resolve7211Info,
   resolve8835Info,
+  resolve7213Info,
 ];
