@@ -86,6 +86,13 @@ row in `docs/rule-decisions.md`.
   when a Form 3468 Part V or Part VI property has the same address,
   coordinates or registration number. A property at another place is taken as
   another facility.
+- **The same facility on Form 8835.** Done. A facility whose construction
+  began before 2025 and that was placed in service in 2025 fits Form 8835
+  (section 45) too, and the caution above bars both credits. When a Form 8835
+  facility fact has the same address, coordinates or registration number,
+  line 11 of this copy and line 15 of that Form 8835 are both gaps
+  (`federal/electricityFacilities.ts`). The engine does not pick the credit;
+  the taxpayer states only one. A new unit at the same site is a gap too.
 - **Placed in service before 2025.** Not now: a new unit or added capacity
   qualifies "only to the extent of the increased amount of electricity
   produced" (`irs-7211-inst-2025::sec::applicable-amount::b04`). The engine

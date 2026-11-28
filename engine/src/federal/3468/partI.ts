@@ -28,7 +28,7 @@ export const usDate = (date: string) => ISODate.usSlash(isoDate(date));
 export const LATITUDE_DIGITS = 2;
 export const LONGITUDE_DIGITS = 3;
 
-/* Line 3d (Form 7211 line 2c the same): the sign box, the whole degrees filling their boxes, and the digits after the point. */
+/* Line 3d (Form 7211 line 2c and Form 8835 line 3b the same): the sign box, the whole degrees filling their boxes, and the digits after the point. */
 export function coordinate(prefix: string, degrees: number, wholeDigits: number): Lines {
   const size = roundToPlaces(Math.abs(degrees), COORDINATE_PLACES);
   const [, decimal] = String(size).split(".");

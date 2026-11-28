@@ -123,6 +123,7 @@ export * from "./kinds/priorYearMinimumTax.js";
 export * from "./kinds/qualifiedElectricVehicleCredit.js";
 export * from "./kinds/refuelingProperty.js";
 export * from "./kinds/refundDeposit.js";
+export * from "./kinds/renewableElectricityFacility.js";
 export * from "./kinds/rental.js";
 export * from "./kinds/researchCredit.js";
 export * from "./kinds/retirementDistribution.js";

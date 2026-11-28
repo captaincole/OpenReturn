@@ -22,6 +22,7 @@ import type { ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import type { Cells } from "../3468/cells.js";
 import type { Cell } from "../3800/cells.js";
+import { BOTH_PRODUCTION_CREDITS_GAP, cleanFacilityOnForm8835 } from "../electricityFacilities.js";
 import {
   alternativeBoxes,
   CALENDAR_YEAR,
@@ -104,6 +105,7 @@ function facilityGap(inputs: ResolverInputs, value: CleanElectricityFacilityFact
   if (value.placedInService >= FIRST_DAY_2026) return AFTER_2025;
   if (value.otherCreditClaimed) return OTHER_CREDIT;
   if (claimedOnForm3468(inputs, value)) return SAME_FACILITY;
+  if (cleanFacilityOnForm8835(inputs, value)) return BOTH_PRODUCTION_CREDITS_GAP;
   return undefined;
 }
 

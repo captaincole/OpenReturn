@@ -127,6 +127,11 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 7211 lists a facility fact whose answers are missing",
   ],
   [
+    /^renewable_electricity\.facility\.[^.]+$/,
+    "each fact is one whole facility on its own Form 8835; whether one exists is Cade's " +
+      "question, and Form 8835 lists a facility fact whose answers are missing",
+  ],
+  [
     /^tax_credit_bond\.[^.]+$/,
     "each fact is one whole bond or pass-through credit of a Form 8912 Part IV; whether one " +
       "exists is Cade's question, and the form lists a fact whose answers are missing",

@@ -16,11 +16,13 @@
  * 6478, the biofuel producer credit a pass-through entity allocates from a tax
  * year that began in 2024; Form 7210, the clean hydrogen production credit of
  * each facility the taxpayer owns; Form 8864, the small agri-biodiesel
- * producer credit; Form 8820, the orphan drug credit; and Form 7211, the clean
- * electricity production credit of each facility the taxpayer owns. They are
- * joined here, in this order, and filingInfo.ts takes them as one, so that file
- * stays under its line limit. A new credit form adds its type and resolver
- * here, not to filingInfo.ts.
+ * producer credit; Form 8820, the orphan drug credit; Form 7211, the clean
+ * electricity production credit of each facility the taxpayer owns; and Form
+ * 8835, the renewable electricity production credit of each facility, which
+ * adds sources to Form 3800 lines 4e and 1f. They are joined here, in this
+ * order, and filingInfo.ts takes them as one, so that file stays under its line
+ * limit. A new credit form adds its type and resolver here, not to
+ * filingInfo.ts.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";
@@ -51,6 +53,8 @@ import type { Form8826FilingInfo } from "./8826/filingInfo.js";
 import { resolve8826Info } from "./8826/resolveInfo.js";
 import type { Form8834FilingInfo } from "./8834/filingInfo.js";
 import { resolve8834Info } from "./8834/resolveInfo.js";
+import type { Form8835FilingInfo } from "./8835/filingInfo.js";
+import { resolve8835Info } from "./8835/resolveInfo.js";
 import type { Form8844FilingInfo } from "./8844/filingInfo.js";
 import { resolve8844Info } from "./8844/resolveInfo.js";
 import type { Form8846FilingInfo } from "./8846/filingInfo.js";
@@ -82,7 +86,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form7210FilingInfo &
   Form8864FilingInfo &
   Form8820FilingInfo &
-  Form7211FilingInfo;
+  Form7211FilingInfo &
+  Form8835FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -104,4 +109,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve8864Info,
   resolve8820Info,
   resolve7211Info,
+  resolve8835Info,
 ];
