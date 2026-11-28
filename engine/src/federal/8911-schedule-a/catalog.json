@@ -1,0 +1,524 @@
+{
+  "form": {
+    "formId": "form-8911-schedule-a",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Alternative Fuel Vehicle Refueling Property"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8911-schedule-a.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 683.968
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 461.8,
+        "y": 683.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.1_irs_registration_number",
+      "label": "Line 1 — If making an elective payment election or transfer election, enter the IRS-issued registration number for the refueling property",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 623.97
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.2a_property_description",
+      "label": "Line 2a — Description of refueling property",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 200.912,
+        "y": 611.968
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.2b_i_owner_name",
+      "label": "Line 2b(i) — If different than filer, enter the owner's name",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 251.2,
+        "y": 599.969
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.2b_ii_owner_tin",
+      "label": "Line 2b(ii) — If different than filer, enter the owner's TIN",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 506.6,
+        "y": 599.969
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.3a_property_address",
+      "label": "Line 3a — Location of refueling property: Address (if applicable)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 160.59,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.3b_i_latitude_sign",
+      "label": "Line 3b(i) — Latitude: Enter a \"+\" (plus) or \"-\" (minus) sign in the first box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 180,
+        "y": 557.968
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.3b_i_latitude_degrees",
+      "label": "Line 3b(i) — Latitude: whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 201.6,
+        "y": 557.968
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.3b_i_latitude_decimal",
+      "label": "Line 3b(i) — Latitude: decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Latitude_CombFields[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 237.6,
+        "y": 557.968
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.3b_ii_longitude_sign",
+      "label": "Line 3b(ii) — Longitude: Enter a \"+\" (plus) or \"-\" (minus) sign in the first box",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 403.2,
+        "y": 557.968
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.3b_ii_longitude_degrees",
+      "label": "Line 3b(ii) — Longitude: whole degrees (before the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 424.8,
+        "y": 557.968
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.3b_ii_longitude_decimal",
+      "label": "Line 3b(ii) — Longitude: decimal digits (after the decimal point)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Longitude_CombFields[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 475.2,
+        "y": 557.968
+      },
+      "maxLength": 6
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.4_date_construction_began",
+      "label": "Line 4 — Date construction began (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 234.8,
+        "y": 533.97
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.5_date_placed_in_service",
+      "label": "Line 5 — Date placed in service (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 225.8,
+        "y": 521.968
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.6a_eligible_census_tract_yes",
+      "label": "Line 6a — Was the refueling property placed in service in an eligible census tract? Yes. Continue to line 6b",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 487.968
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.6a_eligible_census_tract_no",
+      "label": "Line 6a — Was the refueling property placed in service in an eligible census tract? No. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 475.969
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.6b_census_tract_geoid",
+      "label": "Line 6b — Enter the 11-digit census tract GEOID pertaining to your refueling property",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].GEOID-Comb_Ln6b[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 64.8,
+        "y": 449.968
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.7_certification_permit_number",
+      "label": "Line 7 — Certification/permit number issued by government with jurisdiction over operation of refueling property",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_17[0]",
+      "position": {
+        "page": 0,
+        "x": 410.4,
+        "y": 425.97
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.8_refueling_property_cost",
+      "label": "Line 8 — Enter the cost of the qualified alternative fuel vehicle refueling property described above",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_18[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 395.968
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.9_business_use_percentage",
+      "label": "Line 9 — Business/investment use percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 383.969
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.10_business_use_cost",
+      "label": "Line 10 — Multiply line 8 by line 9",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 371.97
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.11_section_179_deduction",
+      "label": "Line 11 — Section 179 expense deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 359.968
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.12_cost_less_section_179",
+      "label": "Line 12 — Subtract line 11 from line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 347.969
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.13_prevailing_wage_yes",
+      "label": "Line 13 — Is the refueling property part of a qualified alternative fuel vehicle refueling project that meets the prevailing wage and apprenticeship requirements? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line13_ReadOrder[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 391.8,
+        "y": 315.469
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.13_prevailing_wage_no",
+      "label": "Line 13 — Is the refueling property part of a qualified alternative fuel vehicle refueling project that meets the prevailing wage and apprenticeship requirements? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line13_ReadOrder[0].c1_2[1]",
+      "position": {
+        "page": 0,
+        "x": 433,
+        "y": 315.469
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.14_tentative_business_credit",
+      "label": "Line 14 — Multiply line 12 by 6% (0.06) (30% (0.30) if the answer on line 13 above is \"Yes\")",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 299.97
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.16_business_use_credit",
+      "label": "Line 16 — Enter the smaller of line 14 or line 15",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_25[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 263.97
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.17_main_home_yes",
+      "label": "Line 17 — Was the refueling property installed on property used as your main home? Yes. Continue to line 18",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line17_ReadOrder[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 65.8,
+        "y": 229.97
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.17_main_home_no",
+      "label": "Line 17 — Was the refueling property installed on property used as your main home? No. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line17_ReadOrder[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 65.7,
+        "y": 217.968
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.18_personal_use_cost",
+      "label": "Line 18 — Subtract line 10 from line 8",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_26[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 191.97
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.19_tentative_personal_credit",
+      "label": "Line 19 — Multiply line 18 by 30% (0.30)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_27[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8911-schedule-a.0.line.21_personal_use_credit",
+      "label": "Line 21 — Enter the smaller of line 19 or line 20",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_29[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 155.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8911-schedule-a/blank.pdf",
+    "ingestedAt": "2026-11-27T21:04:27.401Z",
+    "totalFields": 33,
+    "skipped": 0,
+    "catalogEntries": 33
+  }
+}

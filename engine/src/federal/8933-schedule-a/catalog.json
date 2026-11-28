@@ -1,0 +1,351 @@
+{
+  "form": {
+    "formId": "form-8933-schedule-a",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Disposal or Enhanced Oil Recovery Owner Certification"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8933-schedule-a.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.966
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+      "position": {
+        "page": 0,
+        "x": 447.4,
+        "y": 671.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.header.a_geological_disposal_site_owner",
+      "label": "Line A (i) — Check if you are filing this as a geological disposal site owner",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 79.2,
+        "y": 650.218
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.header.a_eor_project_owner",
+      "label": "Line A (ii) — Check if you are filing this as an enhanced oil recovery project owner",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 266.4,
+        "y": 650.218
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.1_owner_name",
+      "label": "Line 1 — Name (owner of the geological disposal site or EOR project)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 599.966
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.2_owner_ein",
+      "label": "Line 2 — Employer identification number (EIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+      "position": {
+        "page": 0,
+        "x": 411.4,
+        "y": 599.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.3_owner_address",
+      "label": "Line 3 — Address",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 575.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.4_supplier_name",
+      "label": "Line 4 — Name (supplier of qualified carbon oxide)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 527.966
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.5_supplier_ein",
+      "label": "Line 5 — EIN (supplier of qualified carbon oxide)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+      "position": {
+        "page": 0,
+        "x": 411.4,
+        "y": 527.966
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.6_supplier_facility_name_location",
+      "label": "Line 6 — Name and location (county and state) of facility (if supplier supplied any qualified carbon oxide)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 503.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.7_industrial_facility_type",
+      "label": "Line 7 — Type of industrial facility at which the supplier captured its qualified carbon oxide",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 479.967
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.8_you_were_a_supplier",
+      "label": "Line 8 — Check here if you were one of the suppliers",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 566,
+        "y": 445.97
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.9_binding_contract_attested_yes",
+      "label": "Line 9 — Unless line 8 is checked, do you attest that a binding written contract between you and the supplier exists that ensures that you will securely store the qualified carbon oxide in the manner required under section 45Q and the underlying regulations? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 397.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.9_binding_contract_attested_no",
+      "label": "Line 9 — Unless line 8 is checked, do you attest that a binding written contract between you and the supplier exists that ensures that you will securely store the qualified carbon oxide in the manner required under section 45Q and the underlying regulations? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 547.2,
+        "y": 397.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.10_contract_date",
+      "label": "Line 10 — Provide the date (MM/DD/YYYY) of the contract referenced on line 9 or the date of the most recent amendment",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+      "position": {
+        "page": 0,
+        "x": 504,
+        "y": 359.968
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.11_qualified_tons_received",
+      "label": "Line 11 — Metric tons of qualified carbon oxide received from the supplier during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 311.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.12_qualified_tons_received_stored",
+      "label": "Line 12 — Metric tons of qualified carbon oxide received from the supplier and stored by you during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 251.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.13_nonqualified_tons_received",
+      "label": "Line 13 — Metric tons of nonqualified carbon oxide received by you during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 227.97
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.14_nonqualified_tons_stored",
+      "label": "Line 14 — Metric tons of nonqualified carbon oxide stored or utilized as a tertiary injectant stored by you during the tax year",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 179.968
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.15_total_tons_injected",
+      "label": "Line 15 — Add lines 11 and 13. Total amount of qualified carbon oxide injected",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 131.969
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.16_total_tons_stored",
+      "label": "Line 16 — Add lines 12 and 14. Total amount of qualified carbon oxide stored",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+      "position": {
+        "page": 0,
+        "x": 489.6,
+        "y": 83.97
+      }
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.17_supplier_election_attested",
+      "label": "Line 17 — Check here if you attest that the supplier of qualified carbon oxide elected to allow you to claim some or all of the carbon oxide sequestration credit attributable to their qualified carbon oxide",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 566,
+        "y": 50.97
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8933-schedule-a/blank.pdf",
+    "ingestedAt": "2026-11-27T21:05:23.501Z",
+    "totalFields": 22,
+    "skipped": 0,
+    "catalogEntries": 22
+  }
+}

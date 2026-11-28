@@ -46,22 +46,14 @@ export const MISSING_FORMS: MissingForm[] = [
     "Credit for contributions to selected community development corporations",
   ),
   federal("Form 8861", "credits", "Welfare-to-work credit"),
-  federal("Form 8874", "credits", "New markets credit"),
   federal("Form 8884", "credits", "New York Liberty Zone business employee credit"),
-  federal("Form 8896", "credits", "Low sulfur diesel fuel production credit"),
-  federal("Form 8900", "credits", "Qualified railroad track maintenance credit"),
   federal("Form 8904", "credits", "Credit for oil and gas production from marginal wells"),
-  federal("Form 8906", "credits", "Distilled spirits credit"),
   federal("Form 8907", "credits", "Nonconventional source fuel credit"),
-  federal("Form 8908", "credits", "Energy efficient home credit"),
   federal("Form 8909", "credits", "Energy efficient appliance credit"),
   federal("Form 8910", "credits", "Alternative motor vehicle credit"),
   federal("Form 8923", "credits", "Mine rescue team training credit"),
   federal("Form 8931", "credits", "Agricultural chemicals security credit"),
-  federal("Form 8932", "credits", "Credit for employer differential wage payments"),
-  federal("Form 8941", "credits", "Credit for small employer health insurance premiums"),
   federal("Form 8942", "credits", "Qualifying therapeutic discovery project credit"),
-  federal("Form 8994", "credits", "Employer credit for paid family and medical leave"),
 ];
 
 /*

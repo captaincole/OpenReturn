@@ -1,0 +1,78 @@
+{
+  "formId": "form-8932",
+  "fieldCount": 8,
+  "entries": [
+    {
+      "fieldId": "form-8932.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-RY5GQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8932.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-R5J1T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8932.0.line.1_eligible_differential_wage_payments",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "9,867"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8932.0.line.2_line1_times_20_percent",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "2,466"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8932.0.line.3_credit_from_pass_through_entities",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "4,310"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8932.0.line.4_add_lines_2_and_3",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "7,682"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8932.0.line.5_amount_allocated_to_patrons_beneficiaries",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "6,949"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8932.0.line.6_cooperatives_estates_trusts_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "3,003"
+        }
+      ]
+    }
+  ]
+}

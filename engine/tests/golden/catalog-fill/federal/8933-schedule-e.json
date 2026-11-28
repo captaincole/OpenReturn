@@ -1,0 +1,402 @@
+{
+  "formId": "form-8933-schedule-e",
+  "fieldCount": 44,
+  "entries": [
+    {
+      "fieldId": "form-8933-schedule-e.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-DXQU8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-CBRRR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.1_electing_taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-1B1VU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.10_credit_claimant_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "T-D4RR4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.11_claimant_not_subcontractor_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.11_claimant_not_subcontractor_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.12a_disposed_geological_not_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.12b_disposed_geological_used_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.12c_utilized_45q_f_5",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.13_disposal_site_location",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "T-609UI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.14a_disposal_site_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "T-7UWJZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.14b_disposal_site_epa_eggrt_id",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "T-1JSM8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15a_pre2023_equipment_geological_not_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15b_pre2023_equipment_geological_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15c_pre2023_equipment_utilized",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15d_post2022_equipment_geological_not_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15e_post2022_equipment_geological_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.15f_post2022_equipment_utilized",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[5]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.16_elect_pre_2018_credit_rates",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.2_electing_taxpayer_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-1WLQ4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.3_electing_taxpayer_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-12IY9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.4_capture_facility_location",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "T-1KG18"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.5_capture_equipment_placed_in_service_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.6_industrial_facility_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-OM9XM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.7a_capture_facility_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "T-68ZQP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.7b_capture_facility_epa_eggrt_id",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "T-1X17F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.8_credit_claimant_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "T-1AT6Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.0.part1.9_credit_claimant_tin",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "T-O9TYS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17a_rate_old_equipment_no_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17b_rate_old_equipment_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17c_rate_new_equipment_no_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[2]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17d_rate_new_equipment_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[3]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17e_rate_post_2022_no_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[4]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17f_rate_post_2022_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[5]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17g_rate_dac_no_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[6]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part1.17h_rate_dac_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[7]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.1_tons_secure_storage_no_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+          "text": "T-13685"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.2_tons_secure_storage_eor",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "T-1RWO2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.3_tons_utilized_lca",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "T-1DEPT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.4_tons_allowed_to_claimant",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_04[0]",
+          "text": "T-23TI6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.5_credit_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_05[0]",
+          "text": "T-GOSUL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.6_credit_allowed_to_claimant",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_06[0]",
+          "text": "5,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.7_tons_not_allowed_to_claimant",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_07[0]",
+          "text": "T-QQXLI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-e.1.part2.8_credit_retained_by_electing_taxpayer",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_08[0]",
+          "text": "5,975"
+        }
+      ]
+    }
+  ]
+}

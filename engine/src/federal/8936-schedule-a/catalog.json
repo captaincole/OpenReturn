@@ -1,0 +1,981 @@
+{
+  "form": {
+    "formId": "form-8936-schedule-a",
+    "taxYear": 2025,
+    "jurisdiction": "federal",
+    "title": "Clean Vehicle Credit Amount"
+  },
+  "fields": [
+    {
+      "fieldId": "form-8936-schedule-a.0.header.taxpayer_name",
+      "label": "Name(s) shown on return",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 36,
+        "y": 671.998
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.header.identifying_number",
+      "label": "Identifying number",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 671.998
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.1a_vehicle_year",
+      "label": "Line 1a — Year",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 618.001
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.1b_vehicle_make",
+      "label": "Line 1b — Make",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 600.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.1c_vehicle_model",
+      "label": "Line 1c — Model",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 582.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.2_vehicle_identification_number",
+      "label": "Line 2 — Vehicle identification number (VIN)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].Line2_Comb[0].f1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 302.4,
+        "y": 560
+      },
+      "maxLength": 17
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.3_date_placed_in_service",
+      "label": "Line 3 — Enter date vehicle was placed in service (MM/DD/YYYY)",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 540
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.4a_transferred_credit_to_dealer_yes",
+      "label": "Line 4a — Did you transfer the credit to the dealer at the time of sale? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 512.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.4a_transferred_amount_seller_report",
+      "label": "Line 4a — Enter the transferred amount shown on the seller's report",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 446.4,
+        "y": 510.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.4a_transferred_credit_to_dealer_no",
+      "label": "Line 4a — Did you transfer the credit to the dealer at the time of sale? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 500.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.4b_directed_by_line_8_or_13",
+      "label": "Line 4b — If line 4a is \"Yes,\" complete line 8 or line 13, as applicable, and check here if directed to do so by line 8a, 8d, 13a, or 13c",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+      "position": {
+        "page": 0,
+        "x": 562.599,
+        "y": 488
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.5_new_clean_vehicle_yes",
+      "label": "Line 5 — Does the VIN entered on line 2 belong to a new clean vehicle acquired before October 1, 2025 and placed in service during the tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 446.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.5_new_clean_vehicle_no",
+      "label": "Line 5 — Does the VIN entered on line 2 belong to a new clean vehicle acquired before October 1, 2025 and placed in service during the tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 434
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.6_previously_owned_vehicle_yes",
+      "label": "Line 6 — Does the VIN entered on line 2 belong to a previously owned clean vehicle acquired after 2022 and before October 1, 2025 and placed in service during the tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 392.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.6_previously_owned_vehicle_no",
+      "label": "Line 6 — Does the VIN entered on line 2 belong to a previously owned clean vehicle acquired after 2022 and before October 1, 2025 and placed in service during the tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_4[1]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 380
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.7_qualified_commercial_vehicle_yes",
+      "label": "Line 7 — Does the VIN entered on line 2 belong to a qualified commercial clean vehicle acquired after 2022 and before October 1, 2025 and placed in service during the tax year? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[0]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 338.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.7_qualified_commercial_vehicle_no",
+      "label": "Line 7 — Does the VIN entered on line 2 belong to a qualified commercial clean vehicle acquired after 2022 and before October 1, 2025 and placed in service during the tax year? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_5[1]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 326
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8a_resold_within_30_days_yes",
+      "label": "Line 8a — Did you resell the vehicle within 30 days of the placed-in-service date shown on line 3? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[0]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 278.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8a_resold_within_30_days_no",
+      "label": "Line 8a — Did you resell the vehicle within 30 days of the placed-in-service date shown on line 3? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_6[1]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 254
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8b_individual_income_tax_return_yes",
+      "label": "Line 8b — Are you filing this form with an individual income tax return? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[0]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 224.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8b_individual_income_tax_return_no",
+      "label": "Line 8b — Are you filing this form with an individual income tax return? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_7[1]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 212.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8c_2025_magi_over_limit_yes",
+      "label": "Line 8c — Complete Form 8936, lines 1 and 2. Is line 2 more than the \"Part II/III limits\" amount shown on the chart below line 5, Form 8936 for your 2025 filing status? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[0]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 170.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8c_2025_magi_over_limit_no",
+      "label": "Line 8c — Complete Form 8936, lines 1 and 2. Is line 2 more than the \"Part II/III limits\" amount shown on the chart below line 5, Form 8936 for your 2025 filing status? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_8[1]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 152.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8d_2024_magi_over_limit_yes",
+      "label": "Line 8d — Complete Form 8936, lines 3, 4, and 5. Is line 4 more than the \"Part II/III limits\" amount shown on the chart below line 5, Form 8936 for your 2024 filing status? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_9[0]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 98.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.0.line.8d_2024_magi_over_limit_no",
+      "label": "Line 8d — Complete Form 8936, lines 3, 4, and 5. Is line 4 more than the \"Part II/III limits\" amount shown on the chart below line 5, Form 8936 for your 2024 filing status? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page1[0].c1_9[1]",
+      "position": {
+        "page": 0,
+        "x": 65.799,
+        "y": 74
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.8e_acquired_for_use_not_resale_yes",
+      "label": "Line 8e — Did you acquire the vehicle for use or to lease to others, and not for resale? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 692.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.8e_acquired_for_use_not_resale_no",
+      "label": "Line 8e — Did you acquire the vehicle for use or to lease to others, and not for resale? No. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_1[1]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 680.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.9_tentative_credit_amount",
+      "label": "Line 9 — Tentative credit amount",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_1[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 642.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.10_business_investment_use_percentage",
+      "label": "Line 10 — Business/investment use percentage",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_2[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 618.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.11_business_use_credit_amount",
+      "label": "Line 11 — Multiply line 9 by line 10",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 594
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.12_personal_use_credit_amount",
+      "label": "Line 12 — Subtract line 11 from line 9 in Part II",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 558
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13a_resold_within_30_days_yes",
+      "label": "Line 13a — Did you resell the vehicle within 30 days of the placed-in-service date shown on line 3? Yes. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[0]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 524
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13a_resold_within_30_days_no",
+      "label": "Line 13a — Did you resell the vehicle within 30 days of the placed-in-service date shown on line 3? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_3[1]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 500.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13b_2025_magi_over_limit_yes",
+      "label": "Line 13b — Is Form 8936, line 2 more than the \"Part IV limits\" amount shown on the chart below line 5, Form 8936 for your 2025 filing status? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[0]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 458.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13b_2025_magi_over_limit_no",
+      "label": "Line 13b — Is Form 8936, line 2 more than the \"Part IV limits\" amount shown on the chart below line 5, Form 8936 for your 2025 filing status? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_4[1]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 446.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13c_2024_magi_over_limit_yes",
+      "label": "Line 13c — Is Form 8936, line 4 more than the \"Part IV limits\" amount shown on the chart below line 5, Form 8936 for your 2024 filing status? Yes. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 392.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13c_2024_magi_over_limit_no",
+      "label": "Line 13c — Is Form 8936, line 4 more than the \"Part IV limits\" amount shown on the chart below line 5, Form 8936 for your 2024 filing status? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_5[1]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 368.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13d_prior_used_credit_3_years_yes",
+      "label": "Line 13d — Have you claimed a previously owned clean vehicle credit for another vehicle purchased in the 3-year period ending on the date you purchased the vehicle identified in Part I? Yes. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 314.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13d_prior_used_credit_3_years_no",
+      "label": "Line 13d — Have you claimed a previously owned clean vehicle credit for another vehicle purchased in the 3-year period ending on the date you purchased the vehicle identified in Part I? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_6[1]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 290
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13e_sales_price_over_25000_yes",
+      "label": "Line 13e — Is the sales price of the vehicle more than $25,000? Yes. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[0]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 260.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13e_sales_price_over_25000_no",
+      "label": "Line 13e — Is the sales price of the vehicle more than $25,000? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_7[1]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 248.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13f_acquired_for_use_not_resale_yes",
+      "label": "Line 13f — Did you acquire the vehicle for use and not for resale? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 218
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13f_acquired_for_use_not_resale_no",
+      "label": "Line 13f — Did you acquire the vehicle for use and not for resale? No. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_8[1]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 206.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13g_claimed_as_dependent_yes",
+      "label": "Line 13g — Can you be claimed as a dependent on another person's tax return, such as your parent's return? Yes. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[0]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 176.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.13g_claimed_as_dependent_no",
+      "label": "Line 13g — Can you be claimed as a dependent on another person's tax return, such as your parent's return? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].c2_9[1]",
+      "position": {
+        "page": 1,
+        "x": 65.799,
+        "y": 164
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.14_vehicle_sales_price",
+      "label": "Line 14 — Enter the sales price of the vehicle",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_5[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 138.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.15_sales_price_times_30_percent",
+      "label": "Line 15 — Multiply line 14 by 30% (0.30)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_6[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 114.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.1.line.17_previously_owned_credit_amount",
+      "label": "Line 17 — Enter the smaller of line 15 or line 16",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page2[0].f2_8[0]",
+      "position": {
+        "page": 1,
+        "x": 468,
+        "y": 66.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18a_commercial_registration_number",
+      "label": "Line 18a — If making an elective payment election, enter the IRS-issued registration number for the vehicle",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 446.4,
+        "y": 714.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18b_subject_to_depreciation_yes",
+      "label": "Line 18b — Is the vehicle of a character subject to the allowance for depreciation? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[0]",
+      "position": {
+        "page": 2,
+        "x": 65.799,
+        "y": 674.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18b_subject_to_depreciation_no",
+      "label": "Line 18b — Is the vehicle of a character subject to the allowance for depreciation? No. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_1[1]",
+      "position": {
+        "page": 2,
+        "x": 65.799,
+        "y": 662.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18c_acquired_for_use_yes",
+      "label": "Line 18c — Did you acquire the vehicle for use or to lease to others, and not for resale? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 65.799,
+        "y": 620.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18c_acquired_for_use_no",
+      "label": "Line 18c — Did you acquire the vehicle for use or to lease to others, and not for resale? No. Stop here",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_2[1]",
+      "position": {
+        "page": 2,
+        "x": 65.799,
+        "y": 608.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18d_powered_by_gas_diesel_yes",
+      "label": "Line 18d — Is the vehicle also powered in part by gas or diesel? Yes",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 65.799,
+        "y": 566.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18d_powered_by_gas_diesel_no",
+      "label": "Line 18d — Is the vehicle also powered in part by gas or diesel? No",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].c3_3[1]",
+      "position": {
+        "page": 2,
+        "x": 65.799,
+        "y": 554.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.18e_gross_vehicle_weight_rating",
+      "label": "Line 18e — Enter the vehicle's gross vehicle weight rating (GVWR)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_2[0]",
+      "position": {
+        "page": 2,
+        "x": 446.4,
+        "y": 534.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.19_commercial_vehicle_cost_basis",
+      "label": "Line 19 — Enter the cost or other basis of the vehicle",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_3[0]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 504
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.20_section_179_expense_deduction",
+      "label": "Line 20 — Section 179 expense deduction",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_4[0]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 480.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.21_basis_less_section_179",
+      "label": "Line 21 — Subtract line 20 from line 19",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_5[0]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 456.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.22_basis_times_credit_rate",
+      "label": "Line 22 — Multiply line 21 by 15% (0.15) (30% (0.30) if the answer on line 18d above is \"No\")",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_6[0]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 432
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.23_incremental_cost_vehicle",
+      "label": "Line 23 — Enter the incremental cost of the vehicle",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_7[0]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 408.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.24_smaller_line_22_23",
+      "label": "Line 24 — Enter the smaller of line 22 or line 23",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_8[0]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 384.001
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.25_commercial_maximum_credit",
+      "label": "Line 25 — Maximum credit. Enter $7,500 ($40,000 if the vehicle's gross vehicle weight rating (see line 18e) is 14,000 pounds or more)",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_9[0]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 354.002
+      }
+    },
+    {
+      "fieldId": "form-8936-schedule-a.2.line.26_commercial_clean_vehicle_credit",
+      "label": "Line 26 — Enter the smaller of line 24 or line 25",
+      "labelSource": "vision",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "topmostSubform[0].Page3[0].f3_10[0]",
+      "position": {
+        "page": 2,
+        "x": 468,
+        "y": 324
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/federal/8936-schedule-a/blank.pdf",
+    "ingestedAt": "2026-11-27T21:05:14.027Z",
+    "totalFields": 64,
+    "skipped": 0,
+    "catalogEntries": 64
+  }
+}
