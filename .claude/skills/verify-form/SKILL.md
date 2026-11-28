@@ -1,6 +1,6 @@
 ---
 name: verify-form
-description: Run every gate for a form change (typecheck, lint, unit, integration, golden and catalog-fill tests) and list the form's unsupported lines for the PR body. Use as the last step before a PR that adds or changes a form.
+description: Run every gate for a form change (typecheck, lint, unit, integration, golden values, and the PDF fill of the scenarios and catalogs) and list the form's unsupported lines for the PR body. Use as the last step before a PR that adds or changes a form.
 argument-hint: <form>  e.g. federal/8959
 ---
 

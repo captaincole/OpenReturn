@@ -50,7 +50,7 @@ Use fake data only: invented names and addresses, and SSNs, EINs and TINs in the
 1. Read each new PDF. Every value on it is in a fact, and every document fact has its PDF.
 2. Point each fact's `sourceNote` at its PDF (`"SSA-1099 (docs/04-ssa-1099.pdf)."`).
 3. Note in the scenario's README which documents you made and from what.
-4. Run `npm test -- <scenario>`. A document changes no value: if the golden changes, a fact changed by mistake.
+4. Run `npm run test:pdf -- <scenario>`. A document changes no value and no filled form: if the golden changes, a fact changed by mistake.
 
 Not in this step: Cade's ingest eval cases (`cade/evals/ingest/`). They come when the evals are updated. Fact kinds and Cade ingest tools for a new document type come in the next step of `/add-scenario`.
 
