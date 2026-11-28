@@ -267,6 +267,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Cade's question. Form 8820 lists the fact again while Part II or line 2b is missing",
   ],
   [
+    /^railroad_track_maintenance$/,
+    "the fact is the whole railroad track maintenance credit of the taxpayer's own business " +
+      "(Form 8900 lines 1 to 5); whether the business paid for track maintenance or assigned " +
+      "miles is Cade's question. Form 8900 lists the fact again while it is malformed or line 3a is missing",
+  ],
+  [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
     "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
       "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +
