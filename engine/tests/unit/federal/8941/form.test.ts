@@ -2,7 +2,8 @@
  * Form 8941 on a whole return: who files, each line, the gaps, the premiums
  * deduction (Schedule C line 14, Schedule F line 15), Form 3800 line 4h and
  * Schedule CA line 3 column B. The synthetic jaim (both phaseouts, a K-1) and
- * kenly (no phaseout, California) are the bases; daise's ranch is the farm.
+ * kenly (no phaseout, California) are the bases; daise's ranch is the farm,
+ * and sulin is the synthetic farm with the credit.
  */
 
 import { describe, expect, it } from "vitest";
@@ -27,6 +28,7 @@ import {
 } from "../../../scenarios/synthetic/jaim/facts.js";
 import { jaimScenario as jaim } from "../../../scenarios/synthetic/jaim/index.js";
 import { kenlyScenario as kenly } from "../../../scenarios/synthetic/kenly/index.js";
+import { sulinScenario as sulin } from "../../../scenarios/synthetic/sulin/index.js";
 import type { Scenario } from "../../../types.js";
 
 const decision = (base: Scenario, key: string, value: unknown): AIDecisionRow =>
@@ -334,5 +336,18 @@ describe("a farm", () => {
     );
     expect(isGap(out.field("form-8941", LINES.l12))).toBe(true);
     expect(out.value("schedule-f", "0.line.15_employee_benefit_programs")).toBe(39_100);
+  });
+
+  it("sulin: line 15 is $24,800 less line 12, and the stated $24,800 with no credit fact", () => {
+    const out = evaluate(sulin, sulin.facts);
+    expect(out.line(LINES.l12)).toBe(11_488);
+    expect(out.value("schedule-f", "0.line.15_employee_benefit_programs")).toBe(13_312);
+    expect(out.value("form-3800", COL_E)).toBe(11_488);
+    const none = evaluate(
+      sulin,
+      factsWith(sulin, { [SMALL_EMPLOYER_HEALTH_CREDIT_KEY]: undefined }),
+    );
+    expect(none.files("form-8941")).not.toBe(true);
+    expect(none.value("schedule-f", "0.line.15_employee_benefit_programs")).toBe(24_800);
   });
 });

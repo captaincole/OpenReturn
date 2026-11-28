@@ -1,6 +1,6 @@
 # Form 8941 — doubts and defaults
 
-The engine fills Form 8941 for an individual: a sole proprietor or a farmer who pays health insurance premiums for employees through a SHOP Marketplace, and K-1 credits on line 15. One fact holds Worksheets 1 and 4 (`facts/kinds/smallEmployerHealthCredit.ts`). The instructions publish examples for the premiums (Examples 3 and 4) and the FTE count. The regulations (26 CFR 1.45R-3) publish examples for the phaseouts and the state subsidy limit. The IRS Q&A publishes one for the average premium limit. Each one is a unit test. The synthetic `jaim` (both phaseouts, a K-1) and `kenly` (no phaseout, California) fill every line.
+The engine fills Form 8941 for an individual: a sole proprietor or a farmer who pays health insurance premiums for employees through a SHOP Marketplace, and K-1 credits on line 15. One fact holds Worksheets 1 and 4 (`facts/kinds/smallEmployerHealthCredit.ts`). The instructions publish examples for the premiums (Examples 3 and 4) and the FTE count. The regulations (26 CFR 1.45R-3) publish examples for the phaseouts and the state subsidy limit. The IRS Q&A publishes one for the average premium limit. Each one is a unit test. The synthetic `jaim` (both phaseouts, a K-1) and `kenly` (no phaseout, California) fill every line. The synthetic `sulin` is a farm: it locks Schedule F line 15 less line 12.
 
 ## Confidence by field group
 
@@ -67,37 +67,42 @@ No field is unsupported. Lines 17 to 20 are blank because an individual is not a
 - Source: line 9: "If line 3 is $33,000 or less, enter the amount from line 8" (`irs-8941-face-2025::sec::face-page-1::b03`). Worksheet 6: "Subtract $33,300 from line 3" (`worksheet-6-information-needed-to::b01`).
 - Default: no conflict. Line 3 is a multiple of $1,000, so $33,000 or less and $33,300 or less are the same test. Above it, Worksheet 6 uses $33,300.
 - Changes dollars: no.
+- Status: done.
 
 ### 7. Hours and FTEs round down
 
 - Source: Worksheet 2: "generally round the result down to the next lowest whole number" (`worksheet-2-information-needed-to::b01`).
 - Default: always round down; "less than one" is 1. The instructions name no case that rounds another way.
 - Changes dollars: no.
+- Status: done.
 
 ### 8. The credit is more than the stated premiums line
 
 - Source: "You must reduce your line 14 deduction by the amount of any credit" (`irs-1040sc-inst-2025::sec::line-14::b01`).
 - Default: a credit larger than the stated Schedule C line 14 (or Schedule F line 15) is a gap: the line holds the premiums the credit reduces. A household employee's premiums count for the credit (`column-a-individuals-considered::b04`) but are not a business deduction; that case is the same gap.
 - Changes dollars: no; the return waits for a person.
+- Status: done.
 
 ### 9. Hawaii
 
 - Source: "Employers in Hawaii can't participate in the SHOP Marketplace or claim the credit" (`line-a::b02`).
 - Default: a Hawaii employer answers line A "No", so the form does not file. The engine does not check the state.
 - Changes dollars: no.
+- Status: not now: line A is the taxpayer's own answer, and a check of the business address adds a rule for one state with no dollars at stake.
 
 ### 10. Other K-1 and cooperative sources of line 15
 
 - Source: line 15 also takes Schedule K-1 (Form 1041) box 13 code G and Form 1099-PATR box 12 (`line-15::b01`).
 - Default: the engine reads only partnership and S corporation K-1s (code BA). The trust table does not list box 13 code G, so that K-1 item is not modeled (`passThrough/README.md`). The engine does not read Form 1099-PATR box 12.
 - Changes dollars: yes, for a trust beneficiary or a patron with this credit. Rare.
-- Status: not now.
+- Status: not now: both need a new row in the pass-through box tables or a Form 1099-PATR box the engine does not read, for a rare credit.
 
 ### 11. California and a farm
 
 - Source: "For California purposes, the full amount of insurance is deductible" (`ftb-pub-1001-2025::sec::small-employer-health::b01`), entered on "line 3, column B" (`::enter-on-schedule-ca-540-part-i-or-10::b01`).
 - Default: Schedule CA line 3 column B gives back the Schedule C reduction. The text names no line for a farm, so Schedule CA line 6 stays the gap it already is for a farm's Form 8941 credit (`state/ca/schedule-ca/answerLines.ts`).
 - Changes dollars: no for a Schedule C business.
+- Status: done for a Schedule C business; not now for a farm, because the text names no Schedule CA line for it and a California question the texts leave open is not decided here.
 
 ### 12. A state subsidy paid to the insurer is in line 4
 
@@ -111,6 +116,17 @@ No field is unsupported. Lines 17 to 20 are blank because an individual is not a
 - Source: Worksheet 5 line 5 "Multiply line 1 by line 4" and line 6 "Subtract line 5 from line 1"; Worksheet 6 lines 6 and 7 the same (`worksheet-5-information-needed-to::b01`, `worksheet-6-information-needed-to::b01`). No text says where cents drop.
 - Default: the reduction (line 5, line 6) rounds to the dollar, and line 8 or 9 is whole dollars less a whole reduction. Worksheet 6 line 1 takes line 8 as entered. The blind fill kept cents and rounded only the result.
 - Changes dollars: at most $1, only when the reduction ends in exactly 50 cents. No blind case differed.
+- Status: done.
+
+### 14. No scenario locked the farm's line 15
+
+- Source: "You must reduce your line 15 deduction by the amount of any credit for small employer health insurance premiums determined on Form 8941" (`irs-1040sf-inst-2025::sec::line-15::b01`).
+- Found by the tax review: only a unit test on daise's ranch checked Schedule F line 15, so a change to the order of the farm credits in `farmsOnReturn` could drop the reduction with no golden failing.
+- Status: done. The synthetic `sulin` (a sugar beet farm, line 12 $11,488) locks Schedule F line 15 at $24,800 − $11,488 = $13,312 and Form 3800 line 4h at $11,488. A unit test checks that line 15 is the stated $24,800 with no credit fact.
+
+## Pattern change
+
+- **Schedule F line 15 takes a figured credit.** Before: a farm's Form 8941 credit was a stated amount on the farm fact (`smallEmployerHealthCredit`). After: `farmsOnReturn` figures it from the small employer health credit fact (`withHealthCredit`, before the labor and plan credits), and a farm that also states one is a gap on Form 8941.
 
 ## Second opinions
 
