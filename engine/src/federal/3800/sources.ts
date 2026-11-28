@@ -32,6 +32,7 @@ import { biodieselCreditSourcesOf } from "../8864/form3800.js";
 import { isBiodieselK1Credit } from "../8864/k1.js";
 import { smallEmployerPlanSources } from "../8881/sources.js";
 import { childcareCreditSourcesOf } from "../8882/form3800.js";
+import { smallEmployerHealthSourcesOf } from "../8941/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -214,12 +215,14 @@ const missingResearch = (source: CreditSource) =>
  * - Lines 1l and 1ff: Form 8864 line 11, the taxpayer's own production and each
  *   K-1 code AC (8864/form3800.ts).
  * - Line 1h: Form 8820 line 2c, the taxpayer's own clinical testing (8820/form3800.ts).
+ * - Line 4h: Form 8941 line 12, the premiums of the taxpayer's own employees (8941/form3800.ts).
  */
 function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
   const forms = [
     cleanHydrogenSourcesOf(inputs),
     biodieselCreditSourcesOf(inputs),
     orphanDrugCreditSourcesOf(inputs),
+    smallEmployerHealthSourcesOf(inputs),
   ];
   return {
     sources: forms.flatMap((form) => form.sources),
