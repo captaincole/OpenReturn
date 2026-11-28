@@ -1,0 +1,1131 @@
+{
+  "formId": "form-540-2ez",
+  "fieldCount": 125,
+  "entries": [
+    {
+      "fieldId": "form-540-2ez.0.header.additional_information",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1012",
+          "text": "T-NNRCA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.apartment",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1014",
+          "text": "T-1J5N5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.ca_filing_status_differs_from_federal",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1033 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.city",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1016",
+          "text": "T-YZRBD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.claimed_as_dependent",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1040 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.county_at_filing",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1026",
+          "text": "T-ZASZD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.date_of_birth",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1022",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.filing_status",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1034 RB",
+          "text": " Line 1 . Single."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.first_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1002",
+          "text": "T-1NWWR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.foreign_country_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1019",
+          "text": "T-1MVC2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.foreign_postal_code",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1021",
+          "text": "T-UAV6K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.foreign_province_state_county",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1020",
+          "text": "T-JPFSL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.home_address",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1013",
+          "text": "T-12TGU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.is_amended_return",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1001 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.last_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1004",
+          "text": "T-XU9TE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.mailing_same_as_residence",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1027 CBa",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.middle_initial",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1003",
+          "text": "2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.prior_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1024",
+          "text": "T-P7KJX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.private_mailbox",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1015",
+          "text": "T-1UMCQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.qualifying_surviving_spouse_instructions_ref",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1039",
+          "text": "T-KF9PU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_apartment",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1029",
+          "text": "T-1485T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_city",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1030",
+          "text": "T-RDPAU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_state",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1031",
+          "text": "56"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_street_address",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1028",
+          "text": "T-X5J7G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_zip",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1032",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_date_of_birth",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1023",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_first_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1007",
+          "text": "T-NK6KO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_last_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1009",
+          "text": "T-MO7G1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_middle_initial",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1008",
+          "text": "3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_prior_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1025",
+          "text": "T-R9QRE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_rdp_year_of_death",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1038",
+          "text": "1869"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_ssn",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1011",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_suffix",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1010",
+          "text": "T-1GY49"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.ssn",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1006",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.state",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1017",
+          "text": "47"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.suffix",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1005",
+          "text": "T-8PCJY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.zip",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 1018",
+          "text": "94110"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep1_first_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2005",
+          "text": "T-637GS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep1_last_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2006",
+          "text": "T-YY18C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep1_relationship",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2008",
+          "text": "T-1ULQE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep1_ssn",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2007",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep2_first_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2009",
+          "text": "T-1PZZD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep2_last_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2010",
+          "text": "T-1NJ70"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep2_relationship",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2012",
+          "text": "T-1EEBW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep2_ssn",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2011",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep3_first_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2013",
+          "text": "T-1V5XO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep3_last_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2014",
+          "text": "T-1YE4P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep3_relationship",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2016",
+          "text": "T-112BO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep3_ssn",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2015",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2001",
+          "text": "T-94Z5Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.header.taxpayer_ssn",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2002",
+          "text": "123-45-6789"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.10_total_interest_income",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2018",
+          "text": "1,357"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.11_total_dividend_income",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2019",
+          "text": "8,991"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.12_taxable_pension_amount",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2021",
+          "text": "2,748"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.12_total_pension_income",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2020",
+          "text": "9,782"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.13_capital_gains_distributions",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2022",
+          "text": "5,685"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.16_total_income",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2023",
+          "text": "8,332"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.17_tax_from_2ez_table",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2024",
+          "text": "2,522"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.18_senior_exemption_amount",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2025",
+          "text": "265"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.19_renters_credit",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2026",
+          "text": "2,917"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.20_total_credits",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2027",
+          "text": "1,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.21_tax_after_credits",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2028",
+          "text": "1,388"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.22_total_tax_withheld",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2029",
+          "text": "9,725"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.23a_eitc",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2030",
+          "text": "4,617"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.23b_young_child_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2031",
+          "text": "3,947"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.23c_foster_youth_tax_credit",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2032",
+          "text": "6,920"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.25_total_payments",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2033",
+          "text": "5,815"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.26_no_use_tax_owed",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2036 RB",
+          "text": "No use tax is owed. "
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.26_use_tax",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2034",
+          "text": "9,650"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.7_senior_exemption_count",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2003",
+          "text": "0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.8_dependent_exemption_count",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2004",
+          "text": "9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.9_total_wages",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 2017",
+          "text": "6,516"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.27_full_year_health_coverage",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3001 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.27_isr_penalty",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3002",
+          "text": "4,072"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.28_payments_balance",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3003",
+          "text": "7,846"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.29_use_tax_balance",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3004",
+          "text": "7,017"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.30_payments_after_isr_penalty",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3005",
+          "text": "2,666"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.31_isr_penalty_balance",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3006",
+          "text": "5,997"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.32_overpaid_tax",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3007",
+          "text": "4,245"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.33_tax_due",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3008",
+          "text": "3,962"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_400_ca_seniors_special_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3009",
+          "text": "6,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_401_alzheimers_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3010",
+          "text": "6,079"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_403_rare_endangered_species_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3011",
+          "text": "2,536"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_405_breast_cancer_research_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3012",
+          "text": "1,939"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_406_firefighters_memorial_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3013",
+          "text": "2,217"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_407_emergency_food_for_families_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3014",
+          "text": "8,734"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_408_peace_officer_memorial_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3015",
+          "text": "2,640"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_413_ca_cancer_research_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3017",
+          "text": "5,197"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_422_school_supplies_homeless_children_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3018",
+          "text": "5,865"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_423_state_parks_protection_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3019",
+          "text": "8,639"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_424_protect_our_coast_and_oceans_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3020",
+          "text": "1,951"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_431_prevention_animal_homelessness_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3022",
+          "text": "1,539"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_438_senior_citizen_advocacy_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3023",
+          "text": "2,379"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_439_native_ca_wildlife_rehabilitation_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 3024",
+          "text": "5,534"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.34_total_contributions",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4008",
+          "text": "7,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.35_amount_you_owe",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4004 ",
+          "text": "4,559"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.36_refund_or_no_amount_due",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4005",
+          "text": "5,381"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.37_account_number",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4009",
+          "text": "T-C22B1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.37_account_type",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4008 RB",
+          "text": "Checking"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.37_direct_deposit_amount",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4006",
+          "text": "1,572"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.37_routing_number",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4007",
+          "text": "T-1ONPG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.38_secondary_account_number",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4013",
+          "text": "T-GZJAX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.38_secondary_account_type",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4012 RB",
+          "text": "Checking"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.38_secondary_direct_deposit_amount",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4010",
+          "text": "1,524"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.38_secondary_routing_number",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4011",
+          "text": "T-1CMVX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.contrib_445_mental_health_crisis_prevention_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4001",
+          "text": "5,799"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.contrib_447_ca_als_research_network_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4002",
+          "text": "9,434"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.contrib_448_ca_pediatric_cancer_research_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4003",
+          "text": "6,679"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.contrib_449_parkinsons_disease_research_fund",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4004",
+          "text": "4,146"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.signing.voter_registration_info_request",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4014 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.signing.wants_health_care_coverage_info",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 4015 RB",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.date_signed",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5003",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.organ_donor_primary_taxpayer",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5002 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.organ_donor_spouse_rdp",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5003 CB",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_firm_address",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5008",
+          "text": "T-1A7ID"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_firm_ein",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5009",
+          "text": "T-MBNTE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_firm_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5006",
+          "text": "T-12GV2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5005A",
+          "text": "T-TR0RH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_phone",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5005B",
+          "text": "555-123-4567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_ptin",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5007",
+          "text": "T-1RTY6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.taxpayer_email",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5004",
+          "text": "t-ew51b@example.com"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.taxpayer_phone",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5005",
+          "text": "555-123-4567"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.third_party_designee_authorized",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5010 RBc",
+          "text": "Yes"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.third_party_designee_name",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5011",
+          "text": "T-44ILJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.third_party_designee_phone",
+      "widgets": [
+        {
+          "widgetName": "540 2EZ Form 5012",
+          "text": "555-123-4567"
+        }
+      ]
+    }
+  ]
+}

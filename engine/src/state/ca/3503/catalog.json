@@ -1,0 +1,348 @@
+{
+  "form": {
+    "formId": "form-3503",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Natural Heritage Preservation Credit"
+  },
+  "fields": [
+    {
+      "fieldId": "form-3503.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA Corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 420.037,
+        "y": 699.354
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N).",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "California Corporation number.",
+          "label": "CA Corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "Federal Employer Identification Number (F E I N).",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3503.0.header.id_number",
+      "label": "Social Security Number (S S N), Individual Taxpayer Identification Numbers (I T I N) or California corporation number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Social Security Number (S S N), Individual Taxpayer Identification Numbers (I T I N) or California corporation number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 417.86,
+        "y": 683.239
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9885,
+        "y": 658.501
+      }
+    },
+    {
+      "fieldId": "form-3503.0.header.sos_file_number",
+      "label": "California Secretary of State file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 417.847,
+        "y": 658.481
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.part1.donor_name",
+      "label": "Part I, Donor's name as shown on certificate.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Donor's name as shown on certificate",
+      "position": {
+        "page": 0,
+        "x": 35.9836,
+        "y": 609.161
+      }
+    },
+    {
+      "fieldId": "form-3503.0.part1.donated_property_type",
+      "label": "Type of donated property.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Type of donated property",
+      "position": {
+        "page": 0,
+        "x": 170.963,
+        "y": 609.161
+      }
+    },
+    {
+      "fieldId": "form-3503.0.part1.donation_accepted_date",
+      "label": "Date donation was accepted (mm/dd/yyyy).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Date donation was accepted (mm/dd/yyyy)",
+      "position": {
+        "page": 0,
+        "x": 306.543,
+        "y": 609.161
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-3503.0.part1.fair_market_value",
+      "label": "Fair market value.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Fair market value",
+      "position": {
+        "page": 0,
+        "x": 441.241,
+        "y": 609.161
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.part1.project_name",
+      "label": "Project name.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Project name",
+      "position": {
+        "page": 0,
+        "x": 35.9864,
+        "y": 576.48
+      }
+    },
+    {
+      "fieldId": "form-3503.0.part1.wcb_id",
+      "label": "WCB ID#.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "WCB ID#",
+      "position": {
+        "page": 0,
+        "x": 441.233,
+        "y": 576.501
+      }
+    },
+    {
+      "fieldId": "form-3503.0.line.1_fair_market_value",
+      "label": "Part II, Line 1. Fair market value from Part I.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 1. Fair market value from Part I",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 545.89
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.2_current_year_credit",
+      "label": "Line 2. Multiply the amount on line 1 by 55% (.55).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. Multiply the amount on line 1 by 55% (.55)",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 526.889
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.3_pass_through_credit_k1",
+      "label": "Line 3. Pass-through Natural Heritage Preservation Credit(s) from Schedule K-1 (100S, 541, 565, or 568). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. Pass-through Natural Heritage Preservation Credit(s) from Schedule K-1 (100S, 541, 565, or 568). See instructions",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 495.876
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.4_total_current_year_credit",
+      "label": "Line 4. Total current year Natural Heritage Preservation Credit. Add line 2 and line 3.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. Total current year Natural Heritage Preservation Credit. Add line 2 and line 3",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 476.88
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.5_credit_carryover_prior_year",
+      "label": "Line 5. Credit carryover from 2024. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. Credit carryover from 2024. See instructions",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 457.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.6_total_available_credit",
+      "label": "Line 6. Total available Natural Heritage Preservation Credit. Add line 4 and line 5.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 6. Total available Natural Heritage Preservation Credit. Add line 4 and line 5",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 438.881
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.7a_credit_claimed",
+      "label": "Line 7a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B.).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 406.878
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.7b_total_credit_assigned",
+      "label": "Line 7b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 383.433
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.7c_credit_elected_refundable",
+      "label": "Line 7c. Credit amount to be elected as refundable in future years. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 7c. Credit amount to be elected as refundable in future years. See instructions",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 364.44
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-3503.0.line.8_credit_carryover_future_years",
+      "label": "Line 8. Credit carryover available for future years. Add lines 7a, 7b, and 7c, subtract the result from line 6.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 8. Credit carryover available for future years. Add lines 7a, 7b, and 7c, subtract the result from line 6",
+      "position": {
+        "page": 0,
+        "x": 436.741,
+        "y": 345.427
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/3503/blank.pdf",
+    "ingestedAt": "2026-11-28T04:28:49.037Z",
+    "totalFields": 20,
+    "skipped": 0,
+    "catalogEntries": 20
+  }
+}

@@ -1,0 +1,519 @@
+{
+  "formId": "form-3521",
+  "fieldCount": 57,
+  "entries": [
+    {
+      "fieldId": "form-3521.0.header.building_identification_number",
+      "widgets": [
+        {
+          "widgetName": "Building identification number (B I N). If more than one building, attach a list of all BINs for this credit",
+          "text": "T-M357E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-WDDHT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-G2W3Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State (S O S) file number (12 digits)",
+          "text": "T-1KZYT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.1_eligible_basis_decreased",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. Has the eligible basis of any project or building decreased since you received form C T C A C 3521A from the California Tax Credit Allocation Committee? If \"Yes,\" complete Part III before continuing. See General Information C",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row1_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Corporation name (1)",
+          "text": "T-1NABT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row1_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Line 10. California corporation number (12 digits) (1)",
+          "text": "T-V355E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row1_credit_allocated",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Amount of credit allocated (1)",
+          "text": "1,208"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row2_corporation_name",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Corporation name (2)",
+          "text": "T-18RLR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row2_corporation_number",
+      "widgets": [
+        {
+          "widgetName": "Line 10. California corporation number (12 digits) (2)",
+          "text": "T-10QLF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.10_row2_credit_allocated",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Amount of credit allocated (2)",
+          "text": "1,946"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.10_total_credit_allocated",
+      "widgets": [
+        {
+          "widgetName": "Line 10. Total amount of low-income housing credit allocated. If you are not a corporation, enter 0",
+          "text": "2,543"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.11_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 11. Total available low-income housing credit. Subtract line 10 from line 9",
+          "text": "9,445"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.2_current_year_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Current year credit. See instructions",
+          "text": "7,371"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_beneficiary_bin_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Beneficiary, (c) B I N",
+          "text": "T-Z8KQI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_beneficiary_credit_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Beneficiary, (d) Total amount of affiliated corporation or pass-through credit(s)",
+          "text": "5,178"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_beneficiary_entity_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Beneficiary, (a) Name of entity passing through the credit",
+          "text": "T-LJBWG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_beneficiary_id_number_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Beneficiary, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera",
+          "text": "T-J8A8O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_corporation_bin_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Corporation, (c) B I N",
+          "text": "T-1QNGJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_corporation_credit_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Corporation, (d) Total amount of affiliated corporation or pass-through credit(s)",
+          "text": "2,327"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_corporation_entity_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Corporation, (a) Name of entity passing through the credit",
+          "text": "T-1UAF7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_corporation_id_number_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Corporation, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera",
+          "text": "T-Q339L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_partner_bin_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Partner or L L C member, (c) B I N",
+          "text": "T-1SF1K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_partner_credit_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Partner or L L C member, (d) Total amount of affiliated corporation or pass-through credit(s)",
+          "text": "4,983"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_partner_entity_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Partner or L L C member, (a) Name of entity passing through the credit",
+          "text": "T-QMXQ5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_partner_id_number_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Partner or L L C member, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera",
+          "text": "T-SPDK1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_s_corporation_bin_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 3. S corporation shareholder, (c) B I N",
+          "text": "T-188ZH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_s_corporation_credit_amount_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 3. S corporation shareholder, (d) Total amount of affiliated corporation or pass-through credit(s)",
+          "text": "8,485"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_s_corporation_entity_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 3. S corporation shareholder, (a) Name of entity passing through the credit",
+          "text": "T-PDG59"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_s_corporation_id_number_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 3. S corporation shareholder, (b) Identification numbers - California corporation, F E I N (12 digits), etcetera",
+          "text": "T-1NV3E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.3_total_pass_through_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Total pass-through low-income housing credit. Add the amounts in column (d)",
+          "text": "8,349"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.4_current_year_housing_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Current year low-income housing credit. Add line 2 and line 3",
+          "text": "1,378"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.5_credit_from_passive_activities",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Enter the amount of low-income housing credit on line 4 that is from passive activities. If none of the amount on line 4 is from passive activities, enter 0",
+          "text": "7,829"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.6_line_4_minus_line_5",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Subtract line 5 from line 4",
+          "text": "6,672"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.7_allowable_passive_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Enter the allowable low-income housing credit from passive activities. See instructions",
+          "text": "9,918"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.8_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 8. Low-income housing credit carryover from prior year",
+          "text": "9,479"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.0.line.9_add_lines_6_through_8",
+      "widgets": [
+        {
+          "widgetName": "Line 9. Add line 6 through line 8",
+          "text": "7,799"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.12a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 12a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions",
+          "text": "5,235"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.12b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 12b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+          "text": "2,759"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.13_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 13. Credit carryover available for future years. Add line 12a and line 12b, subtract the result from line 11",
+          "text": "4,442"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.14_date_placed_in_service_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part III, Line 14. Date building was placed in service (month/year), (a) Building 1",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.14_date_placed_in_service_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 14. Date building was placed in service (month/year), (b) Building 2",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.15_building_identification_number_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 15. B I N, (a) Building 1",
+          "text": "T-18DEL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.15_building_identification_number_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 15. B I N, (b) Building 2",
+          "text": "T-STSGH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.16_eligible_basis_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Eligible basis of building. See General Information C, (a) Building 1",
+          "text": "4,894"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.16_eligible_basis_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Eligible basis of building. See General Information C, (b) Building 2",
+          "text": "4,899"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.16_eligible_basis_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 16. Eligible basis of building. See General Information C, (c) Total",
+          "text": "6,101"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.17_low_income_portion_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Low-income portion (lesser of unit percentage or floor-space percentage). See instructions, (a) Building 1",
+          "text": "T-1RDQ6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.17_low_income_portion_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 17. Low-income portion (lesser of unit percentage or floor-space percentage). See instructions, (b) Building 2",
+          "text": "T-1Q41F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.18_qualified_basis_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Qualified basis of low-income building. Multiply line 16 by line 17, (a) Building 1",
+          "text": "8,159"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.18_qualified_basis_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 18. Qualified basis of low-income building. Multiply line 16 by line 17, (b) Building 2",
+          "text": "4,978"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.19_applicable_percentage_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Applicable percentage. See General Information B, (a) Building 1",
+          "text": "T-3LF4R"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.19_applicable_percentage_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 19. Applicable percentage. See General Information B, (b) Building 2",
+          "text": "T-A012G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.20_qualified_basis_times_percentage_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (a) Building 1",
+          "text": "2,284"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.20_qualified_basis_times_percentage_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (b) Building 2",
+          "text": "4,987"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3521.1.line.20_qualified_basis_times_percentage_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 20. Multiply line 18 by line 19. See Specific Line Instructions for Part I, line 2, (c) Total",
+          "text": "8,991"
+        }
+      ]
+    }
+  ]
+}

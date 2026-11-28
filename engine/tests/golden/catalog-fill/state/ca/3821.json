@@ -1,0 +1,132 @@
+{
+  "formId": "form-3821",
+  "fieldCount": 14,
+  "entries": [
+    {
+      "fieldId": "form-3821.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-1622I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "S S N or I T I N."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-1VVBS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State (S O S) file number (12 digits)",
+          "text": "T-7QCBA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.1_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 1. Credit amount. This credit amount is limited to $10,000",
+          "text": "6,319"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.2_pass_through_credit_k1",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Pass-through credit from Schedule K-1 (100S, 541, 565, or 568)",
+          "text": "4,377"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.3_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Credit carryover from prior year(s)",
+          "text": "7,124"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.4_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Total available credit. Add line 1 through line 3",
+          "text": "4,984"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.5a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 5a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. (Do not include any assigned credit claimed on form FTB 3544, Part B.)",
+          "text": "4,715"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.5b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 5b. Total credit assigned. Enter the total amount from form FTB 3544, Part A, column (g). If you are not a corporation, enter 0",
+          "text": "5,206"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.5c_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 5c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "8,655"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.6_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Credit carryover available for future years. Add lines 5a, 5b, and 5c, subtract the result from line 4",
+          "text": "5,616"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.a_business_name_on_license",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line A. Business name as it appears on the license issued by the California Department of Cannabis Control (D C C)",
+          "text": "T-D7Z1X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3821.0.line.b_dcc_license_number",
+      "widgets": [
+        {
+          "widgetName": "Line B. License number",
+          "text": "T-MBL78"
+        }
+      ]
+    }
+  ]
+}

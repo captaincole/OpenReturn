@@ -1,0 +1,966 @@
+{
+  "form": {
+    "formId": "form-4197",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "Information on Tax Expenditure Items"
+  },
+  "fields": [
+    {
+      "fieldId": "form-4197.0.header.id_number_type",
+      "label": "Type of identification number: SSN or ITIN, CA corporation no., or FEIN",
+      "labelSource": "vision",
+      "category": "personal_info",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "Select Entity type",
+      "position": {
+        "page": 0,
+        "x": 424.141,
+        "y": 699.44
+      },
+      "options": [
+        {
+          "value": "ssn_or_itin",
+          "radioOption": "S S N or I T I N.",
+          "label": "SSN or ITIN"
+        },
+        {
+          "value": "ca_corporation_number",
+          "radioOption": "C A Corporation number.",
+          "label": "CA corporation no."
+        },
+        {
+          "value": "fein",
+          "radioOption": "F E I N.",
+          "label": "FEIN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-4197.0.header.id_number",
+      "label": "SSN or I T I N. CA corporation number. F E I N (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "S S N or I T I N, C A corporation number, F E I N (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 421.906,
+        "y": 683.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.header.name_on_return",
+      "label": "Name(s) as shown on your California tax return.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Name(s) as shown on your California tax return",
+      "position": {
+        "page": 0,
+        "x": 35.9646,
+        "y": 659.441
+      }
+    },
+    {
+      "fieldId": "form-4197.0.header.sos_file_number",
+      "label": "California Secretary of State (S O S ) file number (12 digits).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "California Secretary of State (S O S ) file number (12 digits)",
+      "position": {
+        "page": 0,
+        "x": 421.903,
+        "y": 659.441
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_expenditure_code_col_a",
+      "label": "Part I, Line 1. (a) Code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part I, Line 1. (a) Code",
+      "position": {
+        "page": 0,
+        "x": 66.4036,
+        "y": 580.148
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_deductions_claimed_col_b",
+      "label": "Line 1. (b) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 133.238,
+        "y": 580.148
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_credits_generated_col_c",
+      "label": "Line 1. (c) Credits generated this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Credits generated this year",
+      "position": {
+        "page": 0,
+        "x": 211.497,
+        "y": 580.148
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_credits_claimed_used_col_d",
+      "label": "Line 1. (d) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (d) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 289.265,
+        "y": 580.148
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_exclusions_col_e",
+      "label": "Line 1. (e) Exclusions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (e) Exclusions",
+      "position": {
+        "page": 0,
+        "x": 367.375,
+        "y": 580.148
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.1_other_amount_col_g",
+      "label": "Line 1. (g) Other.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (g) Other",
+      "position": {
+        "page": 0,
+        "x": 519.427,
+        "y": 580.148
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_expenditure_code_col_a",
+      "label": "Line 2. (a) Code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (a) Code",
+      "position": {
+        "page": 0,
+        "x": 66.4036,
+        "y": 556.159
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_deductions_claimed_col_b",
+      "label": "Line 2. (b) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (b) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 133.238,
+        "y": 556.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_credits_generated_col_c",
+      "label": "Line 2. (c) Credits generated this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (c) Credits generated this year",
+      "position": {
+        "page": 0,
+        "x": 211.497,
+        "y": 556.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_credits_claimed_used_col_d",
+      "label": "Line 2. (d) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (d) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 289.265,
+        "y": 556.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_exclusions_col_e",
+      "label": "Line 2. (e) Exclusions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (e) Exclusions",
+      "position": {
+        "page": 0,
+        "x": 367.375,
+        "y": 556.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.2_other_amount_col_g",
+      "label": "Line 2. (g) Other.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (g) Other",
+      "position": {
+        "page": 0,
+        "x": 519.427,
+        "y": 556.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_expenditure_code_col_a",
+      "label": "Line 3. (a) Code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (a) Code",
+      "position": {
+        "page": 0,
+        "x": 66.4036,
+        "y": 532.159
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_deductions_claimed_col_b",
+      "label": "Line 3. (b) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (b) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 133.238,
+        "y": 532.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_credits_generated_col_c",
+      "label": "Line 3. (c) Credits generated this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (c) Credits generated this year",
+      "position": {
+        "page": 0,
+        "x": 211.497,
+        "y": 532.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_credits_claimed_used_col_d",
+      "label": "Line 3. (d) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (d) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 289.265,
+        "y": 532.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_exclusions_col_e",
+      "label": "Line 3. (e) Exclusions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (e) Exclusions",
+      "position": {
+        "page": 0,
+        "x": 367.375,
+        "y": 532.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.3_other_amount_col_g",
+      "label": "Line 3. (g) Other.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (g) Other",
+      "position": {
+        "page": 0,
+        "x": 519.427,
+        "y": 532.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_expenditure_code_col_a",
+      "label": "Line 4. (a) Code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (a) Code",
+      "position": {
+        "page": 0,
+        "x": 66.4036,
+        "y": 508.159
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_deductions_claimed_col_b",
+      "label": "Line 4. (b) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (b) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 133.238,
+        "y": 508.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_credits_generated_col_c",
+      "label": "Line 4. (c) Credits generated this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (c) Credits generated this year",
+      "position": {
+        "page": 0,
+        "x": 211.497,
+        "y": 508.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_credits_claimed_used_col_d",
+      "label": "Line 4. (d) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (d) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 289.265,
+        "y": 508.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_exclusions_col_e",
+      "label": "Line 4. (e) Exclusions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (e) Exclusions",
+      "position": {
+        "page": 0,
+        "x": 367.375,
+        "y": 508.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.4_other_amount_col_g",
+      "label": "Line 4. (g) Other.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (g) Other",
+      "position": {
+        "page": 0,
+        "x": 519.427,
+        "y": 508.159
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_expenditure_code_col_a",
+      "label": "Line 5. (a) Code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (a) Code",
+      "position": {
+        "page": 0,
+        "x": 66.4036,
+        "y": 484.146
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_deductions_claimed_col_b",
+      "label": "Line 5. (b) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (b) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 133.238,
+        "y": 484.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_credits_generated_col_c",
+      "label": "Line 5. (c) Credits generated this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (c) Credits generated this year",
+      "position": {
+        "page": 0,
+        "x": 211.497,
+        "y": 484.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_credits_claimed_used_col_d",
+      "label": "Line 5. (d) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (d) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 289.265,
+        "y": 484.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_exclusions_col_e",
+      "label": "Line 5. (e) Exclusions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (e) Exclusions",
+      "position": {
+        "page": 0,
+        "x": 367.375,
+        "y": 484.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part1.5_other_amount_col_g",
+      "label": "Line 5. (g) Other.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (g) Other",
+      "position": {
+        "page": 0,
+        "x": 519.427,
+        "y": 484.146
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_pte_code_col_a",
+      "label": "Part II, Line 1. (a) P T E code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Part II, Line 1. (a) P T E code",
+      "position": {
+        "page": 0,
+        "x": 65.8036,
+        "y": 404.18
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_deductions_from_pte_col_b",
+      "label": "Line 1. (b) Deductions from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (b) Deductions from P T E",
+      "position": {
+        "page": 0,
+        "x": 133.047,
+        "y": 404.18
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_deductions_claimed_col_c",
+      "label": "Line 1. (c) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (c) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 210.72,
+        "y": 404.18
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_credits_from_pte_col_d",
+      "label": "Line 1. (d) Credits from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (d) Credits from P T E",
+      "position": {
+        "page": 0,
+        "x": 288.829,
+        "y": 404.18
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.1_credits_claimed_used_col_e",
+      "label": "Line 1. (e) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 1. (e) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 367.047,
+        "y": 404.18
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_pte_code_col_a",
+      "label": "Line 2. (a) P T E code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (a) P T E code",
+      "position": {
+        "page": 0,
+        "x": 65.8036,
+        "y": 380.201
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_deductions_from_pte_col_b",
+      "label": "Line 2. (b) Deductions from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (b) Deductions from P T E",
+      "position": {
+        "page": 0,
+        "x": 133.047,
+        "y": 380.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_deductions_claimed_col_c",
+      "label": "Line 2. (c) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (c) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 210.72,
+        "y": 380.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_credits_from_pte_col_d",
+      "label": "Line 2. (d) Credits from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (d) Credits from P T E",
+      "position": {
+        "page": 0,
+        "x": 288.829,
+        "y": 380.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.2_credits_claimed_used_col_e",
+      "label": "Line 2. (e) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 2. (e) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 367.047,
+        "y": 380.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_pte_code_col_a",
+      "label": "Line 3. (a) P T E code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (a) P T E code",
+      "position": {
+        "page": 0,
+        "x": 65.8036,
+        "y": 356.201
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_deductions_from_pte_col_b",
+      "label": "Line 3. (b) Deductions from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (b) Deductions from P T E",
+      "position": {
+        "page": 0,
+        "x": 133.047,
+        "y": 356.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_deductions_claimed_col_c",
+      "label": "Line 3. (c) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (c) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 210.72,
+        "y": 356.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_credits_from_pte_col_d",
+      "label": "Line 3. (d) Credits from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (d) Credits from P T E",
+      "position": {
+        "page": 0,
+        "x": 288.829,
+        "y": 356.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.3_credits_claimed_used_col_e",
+      "label": "Line 3. (e) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 3. (e) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 367.047,
+        "y": 356.201
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_pte_code_col_a",
+      "label": "Line 4. (a) P T E code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (a) P T E code",
+      "position": {
+        "page": 0,
+        "x": 65.8036,
+        "y": 332.191
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_deductions_from_pte_col_b",
+      "label": "Line 4. (b) Deductions from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (b) Deductions from P T E",
+      "position": {
+        "page": 0,
+        "x": 133.047,
+        "y": 332.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_deductions_claimed_col_c",
+      "label": "Line 4. (c) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (c) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 210.72,
+        "y": 332.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_credits_from_pte_col_d",
+      "label": "Line 4. (d) Credits from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (d) Credits from P T E",
+      "position": {
+        "page": 0,
+        "x": 288.829,
+        "y": 332.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.4_credits_claimed_used_col_e",
+      "label": "Line 4. (e) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 4. (e) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 367.047,
+        "y": 332.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_pte_code_col_a",
+      "label": "Line 5. (a) P T E code.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (a) P T E code",
+      "position": {
+        "page": 0,
+        "x": 65.8036,
+        "y": 308.191
+      }
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_deductions_from_pte_col_b",
+      "label": "Line 5. (b) Deductions from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (b) Deductions from P T E",
+      "position": {
+        "page": 0,
+        "x": 133.047,
+        "y": 308.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_deductions_claimed_col_c",
+      "label": "Line 5. (c) Deductions claimed this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (c) Deductions claimed this year",
+      "position": {
+        "page": 0,
+        "x": 210.72,
+        "y": 308.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_credits_from_pte_col_d",
+      "label": "Line 5. (d) Credits from P T E.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (d) Credits from P T E",
+      "position": {
+        "page": 0,
+        "x": 288.829,
+        "y": 308.191
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-4197.0.part2.5_credits_claimed_used_col_e",
+      "label": "Line 5. (e) Credits claimed/used this year.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "Line 5. (e) Credits claimed/used this year",
+      "position": {
+        "page": 0,
+        "x": 367.047,
+        "y": 308.191
+      },
+      "maxLength": 12
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/4197/blank.pdf",
+    "ingestedAt": "2026-11-28T04:34:56.395Z",
+    "totalFields": 59,
+    "skipped": 0,
+    "catalogEntries": 59
+  }
+}

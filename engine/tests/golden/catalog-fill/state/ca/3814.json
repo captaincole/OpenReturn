@@ -1,0 +1,1077 @@
+{
+  "formId": "form-3814",
+  "fieldCount": 119,
+  "entries": [
+    {
+      "fieldId": "form-3814.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, CA Corporation number, F E I N (12 digits)",
+          "text": "T-DB3W5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-DXXKZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "C A Secretary of State (S O S) file number (12 digits)",
+          "text": "T-1JQ91"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.2_total_qualified_value",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Total qualified value. Add the amounts in column (e). Enter total here and on Part II, line 1",
+          "text": "1,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (d) Location by county",
+          "text": "T-D5TAK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1a. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (b) Type of donated product",
+          "text": "T-16OFU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (e) Qualified value",
+          "text": "1,945"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row1_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (c) Quantity donated",
+          "text": "T-12KG8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (d) Location by county",
+          "text": "T-XGNW9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (b) Type of donated product",
+          "text": "T-UT7CT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (e) Qualified value",
+          "text": "4,280"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row10_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (c) Quantity donated",
+          "text": "T-JPFRZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (d) Location by county",
+          "text": "T-1RAQ3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (b) Type of donated product",
+          "text": "T-4709C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (e) Qualified value",
+          "text": "8,630"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row11_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1k. (c) Quantity donated",
+          "text": "T-1PEQB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (d) Location by county",
+          "text": "T-1NP0H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (b) Type of donated product",
+          "text": "T-JTHEV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (e) Qualified value",
+          "text": "3,352"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row12_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1l. (c) Quantity donated",
+          "text": "T-1Q1WO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (d) Location by county",
+          "text": "T-1FPZ0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (b) Type of donated product",
+          "text": "T-1CDHB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (e) Qualified value",
+          "text": "2,198"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row13_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1m. (c) Quantity donated",
+          "text": "T-1K0K5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (d) Location by county",
+          "text": "T-7AUF7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (b) Type of donated product",
+          "text": "T-N1ZRA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (e) Qualified value",
+          "text": "4,642"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row14_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1n. (c) Quantity donated",
+          "text": "T-YZF4Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (d) Location by county",
+          "text": "T-193QC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (b) Type of donated product",
+          "text": "T-1KJVZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (e) Qualified value",
+          "text": "3,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row15_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1o. (c) Quantity donated",
+          "text": "T-1Y5E5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (d) Location by county",
+          "text": "T-8I71K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (b) Type of donated product",
+          "text": "T-1V5XE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (e) Qualified value",
+          "text": "4,708"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row16_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1p. (c) Quantity donated",
+          "text": "T-1IJZP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (d) Location by county",
+          "text": "T-MCNI8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (b) Type of donated product",
+          "text": "T-BLLPY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (e) Qualified value",
+          "text": "6,653"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row17_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1q. (c) Quantity donated",
+          "text": "T-V7RYG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (d) Location by county",
+          "text": "T-1SXWP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (b) Type of donated product",
+          "text": "T-15HHY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (e) Qualified value",
+          "text": "1,188"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row18_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1r. (c) Quantity donated",
+          "text": "T-DIPI3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (d) Location by county",
+          "text": "T-1VKWT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (b) Type of donated product",
+          "text": "T-RXZPF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (e) Qualified value",
+          "text": "1,069"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row19_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1s. (c) Quantity donated",
+          "text": "T-2TBJX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (d) Location by county",
+          "text": "T-18DE7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (b) Type of donated product",
+          "text": "T-1VH9T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (e) Qualified value",
+          "text": "8,080"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row2_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (c) Quantity donated",
+          "text": "T-1G1AU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (d) Location by county",
+          "text": "T-S9LA4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (b) Type of donated product",
+          "text": "T-XSM38"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (e) Qualified value",
+          "text": "2,078"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row20_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1t. (c) Quantity donated",
+          "text": "T-5CSDE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (d) Location by county",
+          "text": "T-9YXGL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (b) Type of donated product",
+          "text": "T-R8TEC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (e) Qualified value",
+          "text": "4,226"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row21_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1u. (c) Quantity donated",
+          "text": "T-1D2XY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (d) Location by county",
+          "text": "T-1GSWM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (b) Type of donated product",
+          "text": "T-5PUT3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (e) Qualified value",
+          "text": "5,738"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row3_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (c) Quantity donated",
+          "text": "T-WD0Q3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (d) Location by county",
+          "text": "T-122QU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (b) Type of donated product",
+          "text": "T-P862W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (e) Qualified value",
+          "text": "2,384"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row4_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (c) Quantity donated",
+          "text": "T-SYXGS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (d) Location by county",
+          "text": "T-1VD4I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (b) Type of donated product",
+          "text": "T-2APQ2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (e) Qualified value",
+          "text": "6,744"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row5_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (c) Quantity donated",
+          "text": "T-1FYXI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (d) Location by county",
+          "text": "T-OQLJ6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (b) Type of donated product",
+          "text": "T-17AJN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (e) Qualified value",
+          "text": "8,225"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row6_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (c) Quantity donated",
+          "text": "T-17C3B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (d) Location by county",
+          "text": "T-VLRXX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (b) Type of donated product",
+          "text": "T-MNPBA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (e) Qualified value",
+          "text": "4,539"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row7_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (c) Quantity donated",
+          "text": "T-WHUWX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (d) Location by county",
+          "text": "T-1WWNC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (b) Type of donated product",
+          "text": "T-1Q0QW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (e) Qualified value",
+          "text": "5,448"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row8_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (c) Quantity donated",
+          "text": "T-1YDBO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_county_location_col_d",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (d) Location by county",
+          "text": "T-16TH9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_donation_date_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (a) Date of donation (mm/dd/yyyy)",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_product_type_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (b) Type of donated product",
+          "text": "T-4DU9C"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_qualified_value_col_e",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (e) Qualified value",
+          "text": "7,242"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part1.row9_quantity_donated_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (c) Quantity donated",
+          "text": "T-1BPZJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.1_qualified_donation_value",
+      "widgets": [
+        {
+          "widgetName": "Part II, Line 1. Qualified value of donated fresh fruits, vegetables, or other qualified donation items. See instructions",
+          "text": "6,219"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.2_credit_at_15_percent",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Multiply line 1 by 15% (.15)",
+          "text": "5,087"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.3_pass_through_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Credit received from pass-through entities. See instructions",
+          "text": "2,959"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.4_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Credit carryover from prior year",
+          "text": "9,658"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.5_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 5. Total available credit. Add line 2, line 3, and line 4",
+          "text": "3,614"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.6a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 6a. Enter the amount of the credit claimed on the current year tax return. See instructions. Do not include any assigned credit claimed on form F T B 3544, Part B",
+          "text": "7,428"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.6b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 6b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+          "text": "7,868"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.6c_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 6c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "7,155"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3814.0.part2.7_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 7. Credit carryover available for future years. Add lines 6a, 6b, and 6c, subtract the result from line 5",
+          "text": "5,741"
+        }
+      ]
+    }
+  ]
+}

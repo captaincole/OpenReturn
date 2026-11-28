@@ -1,0 +1,2038 @@
+{
+  "form": {
+    "formId": "form-540-2ez",
+    "taxYear": 2025,
+    "jurisdiction": "state-ca",
+    "title": "California Resident Income Tax Return"
+  },
+  "fields": [
+    {
+      "fieldId": "form-540-2ez.0.header.is_amended_return",
+      "label": "Check here if this is an AMENDED return.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "540 2EZ Form 1001 CB",
+      "position": {
+        "page": 0,
+        "x": 37.016,
+        "y": 698
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.first_name",
+      "label": "Your first name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1002",
+      "position": {
+        "page": 0,
+        "x": 36.54,
+        "y": 666.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.middle_initial",
+      "label": "Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1003",
+      "position": {
+        "page": 0,
+        "x": 180.5,
+        "y": 666.52
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.last_name",
+      "label": "Last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1004",
+      "position": {
+        "page": 0,
+        "x": 203.28,
+        "y": 666.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.suffix",
+      "label": "Suffix.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1005",
+      "position": {
+        "page": 0,
+        "x": 385.5,
+        "y": 666.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.ssn",
+      "label": "Your Social Security Number or Individual Taxpayer Identification Number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1006",
+      "position": {
+        "page": 0,
+        "x": 432.54,
+        "y": 666.5
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_first_name",
+      "label": "If joint tax return, spouse’s or Registered Domestic Partner’s first name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1007",
+      "position": {
+        "page": 0,
+        "x": 36.54,
+        "y": 636.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_middle_initial",
+      "label": "Spouse’s or Registered Domestic Partner’s Middle Initial.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1008",
+      "position": {
+        "page": 0,
+        "x": 180.5,
+        "y": 636.5
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_last_name",
+      "label": "Spouse’s or Registered Domestic Partner’s Last name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1009",
+      "position": {
+        "page": 0,
+        "x": 203.25,
+        "y": 636.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_suffix",
+      "label": "Spouse’s or Registered Domestic Partner’s Suffix.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1010",
+      "position": {
+        "page": 0,
+        "x": 385.5,
+        "y": 636.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_ssn",
+      "label": "Spouse’s or Registered Domestic Partner’s Social Security Number or Individual Taxpayer Identification Number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1011",
+      "position": {
+        "page": 0,
+        "x": 432.6,
+        "y": 636.5
+      },
+      "maxLength": 11
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.additional_information",
+      "label": "Additional information (see instructions).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1012",
+      "position": {
+        "page": 0,
+        "x": 36.54,
+        "y": 605.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.home_address",
+      "label": "Street address (number and street) or Post Office box.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1013",
+      "position": {
+        "page": 0,
+        "x": 36.5,
+        "y": 576.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.apartment",
+      "label": "Apartment number or suite number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1014",
+      "position": {
+        "page": 0,
+        "x": 388.44,
+        "y": 576.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.private_mailbox",
+      "label": "PMB/private mailbox.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1015",
+      "position": {
+        "page": 0,
+        "x": 466.5,
+        "y": 576.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.city",
+      "label": "City (If you have a foreign address, see instructions.)",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1016",
+      "position": {
+        "page": 0,
+        "x": 36.468,
+        "y": 546.46
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.state",
+      "label": "State. Enter two letter State abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1017",
+      "position": {
+        "page": 0,
+        "x": 401.52,
+        "y": 546.46
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.zip",
+      "label": "Zip code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1018",
+      "position": {
+        "page": 0,
+        "x": 430.5,
+        "y": 546.46
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.foreign_country_name",
+      "label": "Foreign country name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1019",
+      "position": {
+        "page": 0,
+        "x": 36.5,
+        "y": 516.46
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.foreign_province_state_county",
+      "label": "Foreign province/state/county.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1020",
+      "position": {
+        "page": 0,
+        "x": 254.48,
+        "y": 516.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.foreign_postal_code",
+      "label": "Foreign postal code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1021",
+      "position": {
+        "page": 0,
+        "x": 462.5,
+        "y": 516.46
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.date_of_birth",
+      "label": "Date Of Birth. Your Date Of Birth. Enter date as a mm/dd/yyyy.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1022",
+      "position": {
+        "page": 0,
+        "x": 81.66,
+        "y": 465.88
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_date_of_birth",
+      "label": "Spouse’s or Registered Domestic Partner’s Date of Birth. Enter date as a mm/dd/yyyy.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1023",
+      "position": {
+        "page": 0,
+        "x": 325.972,
+        "y": 465.753
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.prior_name",
+      "label": "Prior Name. Your prior name (See instructions).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1024",
+      "position": {
+        "page": 0,
+        "x": 80.2718,
+        "y": 416.98
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_prior_name",
+      "label": "Spouse’s or Registered Domestic Partner’s prior name (see instructions).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1025",
+      "position": {
+        "page": 0,
+        "x": 324.72,
+        "y": 416.98
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.county_at_filing",
+      "label": "Principal Residence. Enter your county at time of filing (see instructions).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1026",
+      "position": {
+        "page": 0,
+        "x": 80.28,
+        "y": 369.4
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.mailing_same_as_residence",
+      "label": "If your address above is the same as your principal/physical residence address at the time of filing, check this box.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "540 2EZ Form 1027 CBa",
+      "position": {
+        "page": 0,
+        "x": 556.5,
+        "y": 357.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_street_address",
+      "label": "Principal/Physical Residence street address (number and street). (If foreign address, see instructions.)",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1028",
+      "position": {
+        "page": 0,
+        "x": 80.34,
+        "y": 309.52
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_apartment",
+      "label": "Principal/Physical Residence apartment number or suite number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1029",
+      "position": {
+        "page": 0,
+        "x": 407.58,
+        "y": 309.46
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_city",
+      "label": "Principal/Physical Residence city.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1030",
+      "position": {
+        "page": 0,
+        "x": 80.35,
+        "y": 273.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_state",
+      "label": "Principal/Physical Residence state. Enter two letter State abbreviation.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1031",
+      "position": {
+        "page": 0,
+        "x": 408.3,
+        "y": 273.7
+      },
+      "maxLength": 2
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.residence_zip",
+      "label": "Principal/Physical Residence ZIP Code.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "zip",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1032",
+      "position": {
+        "page": 0,
+        "x": 458,
+        "y": 273.46
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.ca_filing_status_differs_from_federal",
+      "label": "Filing Status. If your California filing status is different from your federal filing status, check the box here",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "540 2EZ Form 1033 CB",
+      "position": {
+        "page": 0,
+        "x": 506.88,
+        "y": 237.1
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.filing_status",
+      "label": "Filing status. Check the box for your filing status. Check only one. See instructions.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "540 2EZ Form 1034 RB",
+      "position": {
+        "page": 0,
+        "x": 66.4182,
+        "y": 200.274
+      },
+      "options": [
+        {
+          "value": "single",
+          "radioOption": " Line 1 . Single.",
+          "label": "1 Single"
+        },
+        {
+          "value": "married_rdp_filing_jointly",
+          "radioOption": "Line 2 . Married/Registered Domestic Partner filing jointly (even if only one spouse/Registered Domestic Partner had income).",
+          "label": "2 Married/RDP filing jointly (even if only one spouse/RDP had income)"
+        },
+        {
+          "value": "head_of_household",
+          "radioOption": "Line 4 . Head of household. STOP! See instructions.",
+          "label": "4 Head of household. STOP! See instructions."
+        },
+        {
+          "value": "qualifying_surviving_spouse_rdp",
+          "radioOption": "Line 5 . Qualifying surviving spouse or Registered Domestic Partner.",
+          "label": "5 Qualifying surviving spouse/RDP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.spouse_rdp_year_of_death",
+      "label": "Line 5 . Enter 4 digit year spouse or Registered Domestic Partner died.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1038",
+      "position": {
+        "page": 0,
+        "x": 536.64,
+        "y": 201.64
+      },
+      "maxLength": 4
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.qualifying_surviving_spouse_instructions_ref",
+      "label": "See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 1039",
+      "position": {
+        "page": 0,
+        "x": 398.04,
+        "y": 177.7
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.0.header.claimed_as_dependent",
+      "label": "Line 6 . If someone can claim you (or your spouse or RDP) as a dependent , check the box here. See instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "540 2EZ Form 1040 CB",
+      "position": {
+        "page": 0,
+        "x": 552.12,
+        "y": 117.28
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.header.taxpayer_name",
+      "label": "Your name:",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2001",
+      "position": {
+        "page": 1,
+        "x": 83.9496,
+        "y": 705.4
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.header.taxpayer_ssn",
+      "label": "Your Social Security Number or Individual Taxpayer Identification Number.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2002",
+      "position": {
+        "page": 1,
+        "x": 415.5,
+        "y": 705.46
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.7_senior_exemption_count",
+      "label": "Exemptions. Line 7 . Senior: If you (or your spouse or Registered Domestic Partner) are 65 or older, enter 1 . If both are 65 or older, enter 2 . See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2003",
+      "position": {
+        "page": 1,
+        "x": 545.28,
+        "y": 681.34
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.8_dependent_exemption_count",
+      "label": "Line 8 . Dependents: (Do not include yourself or your spouse or Registered Domestic Partner.) Enter number of dependents here.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "count",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2004",
+      "position": {
+        "page": 1,
+        "x": 545.04,
+        "y": 657.635
+      },
+      "maxLength": 1
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep1_first_name",
+      "label": "Line 8 . Dependent 1 . First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2005",
+      "position": {
+        "page": 1,
+        "x": 132.72,
+        "y": 621.4
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep2_first_name",
+      "label": "Line 8 . Dependent 2 . First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2009",
+      "position": {
+        "page": 1,
+        "x": 288.09,
+        "y": 620.256
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep3_first_name",
+      "label": "Line 8 . Dependent 3 . First Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2013",
+      "position": {
+        "page": 1,
+        "x": 444.84,
+        "y": 621.4
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep1_last_name",
+      "label": "Line 8 . Dependent 1 . Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2006",
+      "position": {
+        "page": 1,
+        "x": 132.72,
+        "y": 597.579
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep2_last_name",
+      "label": "Line 8 . Dependent 2 . Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2010",
+      "position": {
+        "page": 1,
+        "x": 288.09,
+        "y": 597.579
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep3_last_name",
+      "label": "Line 8 . Dependent 3 . Last Name.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2014",
+      "position": {
+        "page": 1,
+        "x": 444.84,
+        "y": 597.28
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep1_ssn",
+      "label": "Line 8 . Dependent 1 . Social Security Number (see instructions).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2007",
+      "position": {
+        "page": 1,
+        "x": 132.72,
+        "y": 573.16
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep2_ssn",
+      "label": "Line 8 . Dependent 2 . Social Security Number (see instructions).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2011",
+      "position": {
+        "page": 1,
+        "x": 288.09,
+        "y": 573.16
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep3_ssn",
+      "label": "Line 8 . Dependent 3 . Social Security Number (see instructions).",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "ssn",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2015",
+      "position": {
+        "page": 1,
+        "x": 444.84,
+        "y": 573.28
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep1_relationship",
+      "label": "Line 8 . Dependent 1 . Dependent’s relationship to you.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2008",
+      "position": {
+        "page": 1,
+        "x": 132.72,
+        "y": 549.579
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep2_relationship",
+      "label": "Line 8 . Dependent 2 . Dependent’s relationship to you.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2012",
+      "position": {
+        "page": 1,
+        "x": 288.508,
+        "y": 549.579
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.dependents.dep3_relationship",
+      "label": "Line 8 . Dependent 3 . Dependent’s relationship to you.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2016",
+      "position": {
+        "page": 1,
+        "x": 444.84,
+        "y": 549.579
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.9_total_wages",
+      "label": "Taxable Income and Credits. Line 9 . Total wages (federal Form W-2, box 16) . See instructions. Whole dollars only.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2017",
+      "position": {
+        "page": 1,
+        "x": 444,
+        "y": 513.3
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.10_total_interest_income",
+      "label": "Line 10 . Total interest income (federal Form 1099-INT, box 1) . See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2018",
+      "position": {
+        "page": 1,
+        "x": 444,
+        "y": 489.27
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.11_total_dividend_income",
+      "label": "Line 11 . Total dividend income (federal Form 1099-DIV, box 1a). See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2019",
+      "position": {
+        "page": 1,
+        "x": 444,
+        "y": 465.21
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.12_total_pension_income",
+      "label": "Line 12 . Total pension income.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2020",
+      "position": {
+        "page": 1,
+        "x": 162.12,
+        "y": 441.36
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.12_taxable_pension_amount",
+      "label": "Line 12 . See instructions. Taxable amount.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2021",
+      "position": {
+        "page": 1,
+        "x": 444,
+        "y": 441.39
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.13_capital_gains_distributions",
+      "label": "Line 13 . Total capital gains distributions from mutual funds (federal Form 1099-DIV, box 2a). See instructions.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2022",
+      "position": {
+        "page": 1,
+        "x": 444,
+        "y": 417.21
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.16_total_income",
+      "label": "Line 16 . Add line 9, line 10, line 11, line 12, and line 13.",
+      "labelSource": "tu",
+      "category": "income",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2023",
+      "position": {
+        "page": 1,
+        "x": 444,
+        "y": 393.33
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.17_tax_from_2ez_table",
+      "label": "Line 17 . Using the 2EZ Table for your filing status, enter the tax for the amount on line 16 . Caution: If you checked the box on line 6, STOP. See instructions for completing the Dependent Tax Worksheet.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2024",
+      "position": {
+        "page": 1,
+        "x": 486.932,
+        "y": 357.3
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.18_senior_exemption_amount",
+      "label": "Line 18 . Senior exemption. See instructions. If you are 65 or older and entered 1 in the box on line 7, enter $153 . If you entered 2 in the box on line 7, enter $306.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2025",
+      "position": {
+        "page": 1,
+        "x": 513.94,
+        "y": 333.45
+      },
+      "maxLength": 3
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.19_renters_credit",
+      "label": "Line 19 . Nonrefundable renter’s credit. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2026",
+      "position": {
+        "page": 1,
+        "x": 513.9,
+        "y": 309.21
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.20_total_credits",
+      "label": "Line 20 . Credits. Add line 18 and line 19.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2027",
+      "position": {
+        "page": 1,
+        "x": 513.84,
+        "y": 285.3
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.21_tax_after_credits",
+      "label": "Line 21 . Tax. Subtract line 20 from line 17 . If zero or less, enter 0.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2028",
+      "position": {
+        "page": 1,
+        "x": 492.75,
+        "y": 261.25
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.22_total_tax_withheld",
+      "label": "Line 22 . Total tax withheld (federal Form W-2, box 17 or federal Form 1099-R, box 14).",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2029",
+      "position": {
+        "page": 1,
+        "x": 478.55,
+        "y": 237.3
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.23a_eitc",
+      "label": "Line 23 a. Earned Income Tax Credit (EITC). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2030",
+      "position": {
+        "page": 1,
+        "x": 501.48,
+        "y": 213.21
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.23b_young_child_tax_credit",
+      "label": "Line 23 b. Young Child Tax Credit (YCTC). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2031",
+      "position": {
+        "page": 1,
+        "x": 501.48,
+        "y": 189.45
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.23c_foster_youth_tax_credit",
+      "label": "Line 23 c. Foster Youth Tax Credit (FYTC). See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2032",
+      "position": {
+        "page": 1,
+        "x": 501.48,
+        "y": 166.47
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.25_total_payments",
+      "label": "Line 25 . Total payments. Add line 22, line 23a, line 23b, and line 23c.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2033",
+      "position": {
+        "page": 1,
+        "x": 478.56,
+        "y": 142.17
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.26_use_tax",
+      "label": "Use Tax Line 26 . Use tax. Do not leave blank. See instructions. Whole dollars only.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 2034",
+      "position": {
+        "page": 1,
+        "x": 332.904,
+        "y": 118.152
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.1.line.26_no_use_tax_owed",
+      "label": "Line 26 — If line 26 is zero, check if: No use tax is owed, or you paid your use tax obligation directly to CDTFA.",
+      "labelSource": "vision",
+      "category": "filing_scope",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "540 2EZ Form 2036 RB",
+      "position": {
+        "page": 1,
+        "x": 203.406,
+        "y": 93.4512
+      },
+      "options": [
+        {
+          "value": "no_use_tax_owed",
+          "radioOption": "No use tax is owed. ",
+          "label": "No use tax is owed."
+        },
+        {
+          "value": "paid_directly_to_cdtfa",
+          "radioOption": "You paid your use tax obligation directly to  the California Department of Tax and Fee Administration.",
+          "label": "You paid your use tax obligation directly to CDTFA."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.27_full_year_health_coverage",
+      "label": "ISR Penalty. Line 27 . If you and your household had full-year health care coverage, check the box. See instructions. Medicare Part A or C coverage is qualifying health care coverage. If you did not check the box, see instructions.",
+      "labelSource": "tu",
+      "category": "filing_scope",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "540 2EZ Form 3001 CB",
+      "position": {
+        "page": 2,
+        "x": 557.16,
+        "y": 670.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.27_isr_penalty",
+      "label": "Line 27 . Individual Shared Responsibility (ISR) Penalty. See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3002",
+      "position": {
+        "page": 2,
+        "x": 444,
+        "y": 646.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.28_payments_balance",
+      "label": "Overpaid Tax or Tax Due. Line 28 . Payments balance. If line 25 is more than line 26, subtract line 26 from line 25 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3003",
+      "position": {
+        "page": 2,
+        "x": 444,
+        "y": 621.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.29_use_tax_balance",
+      "label": "Line 29 . Use Tax balance. If line 26 is more than line 25, subtract line 25 from line 26.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3004",
+      "position": {
+        "page": 2,
+        "x": 444,
+        "y": 597.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.30_payments_after_isr_penalty",
+      "label": "Line 30 . Payments after Individual Shared Responsibility Penalty. If line 28 is more than line 27, subtract line 27 from line 28.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3005",
+      "position": {
+        "page": 2,
+        "x": 444,
+        "y": 573.54
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.31_isr_penalty_balance",
+      "label": "Line 31 . Individual Shared Responsibility Penalty balance. If line 27 is more than line 28, subtract line 28 from line 27.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3006",
+      "position": {
+        "page": 2,
+        "x": 444,
+        "y": 549.66
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.32_overpaid_tax",
+      "label": "Line 32 . Overpaid tax. If line 30 is more than line 21, subtract line 21 from line 30.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3007",
+      "position": {
+        "page": 2,
+        "x": 444,
+        "y": 525.42
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.33_tax_due",
+      "label": "Line 33 . Tax due. If line 30 is less than line 21, subtract line 30 from line 21 . See instructions.",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3008",
+      "position": {
+        "page": 2,
+        "x": 444,
+        "y": 501.66
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_400_ca_seniors_special_fund",
+      "label": "Contributions. Code 400 . California Seniors Special Fund. See instructions.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3009",
+      "position": {
+        "page": 2,
+        "x": 441.42,
+        "y": 466.4
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_401_alzheimers_fund",
+      "label": "Code 401 . Alzheimer’s Disease and Related Dementia Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3010",
+      "position": {
+        "page": 2,
+        "x": 441.36,
+        "y": 440.94
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_403_rare_endangered_species_fund",
+      "label": "Code 403 . Rare and Endangered Species Preservation Voluntary Tax Contribution Program.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3011",
+      "position": {
+        "page": 2,
+        "x": 441.42,
+        "y": 417.52
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_405_breast_cancer_research_fund",
+      "label": "Code 405 . California Breast Cancer Research Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3012",
+      "position": {
+        "page": 2,
+        "x": 441.36,
+        "y": 393.55
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_406_firefighters_memorial_fund",
+      "label": "Code 406 . California Firefighters' Memorial Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3013",
+      "position": {
+        "page": 2,
+        "x": 441.36,
+        "y": 369.84
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_407_emergency_food_for_families_fund",
+      "label": "Code 407 . Emergency Food for Families Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3014",
+      "position": {
+        "page": 2,
+        "x": 441.42,
+        "y": 345.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_408_peace_officer_memorial_fund",
+      "label": "Code 408 . California Peace Officer Memorial Foundation Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3015",
+      "position": {
+        "page": 2,
+        "x": 441.36,
+        "y": 321.55
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_413_ca_cancer_research_fund",
+      "label": "Code 413 . California Cancer Research Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3017",
+      "position": {
+        "page": 2,
+        "x": 441.42,
+        "y": 298.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_422_school_supplies_homeless_children_fund",
+      "label": "Code 422 . School Supplies for Homeless Children Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3018",
+      "position": {
+        "page": 2,
+        "x": 441.36,
+        "y": 275.2
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_423_state_parks_protection_fund",
+      "label": "Code 423 . State Parks Protection Fund/Parks Pass Purchase.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3019",
+      "position": {
+        "page": 2,
+        "x": 441.42,
+        "y": 250.9
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_424_protect_our_coast_and_oceans_fund",
+      "label": "Code 424 . Protect Our Coast and Oceans Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3020",
+      "position": {
+        "page": 2,
+        "x": 441.36,
+        "y": 226.66
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_431_prevention_animal_homelessness_fund",
+      "label": "Code 431 . Prevention of Animal Homelessness and Cruelty Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3022",
+      "position": {
+        "page": 2,
+        "x": 441.11,
+        "y": 202.42
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_438_senior_citizen_advocacy_fund",
+      "label": "Code 438 . California Senior Citizen Advocacy Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3023",
+      "position": {
+        "page": 2,
+        "x": 441.06,
+        "y": 177.479
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.2.line.contrib_439_native_ca_wildlife_rehabilitation_fund",
+      "label": "Code 439 . Native California Wildlife Rehabilitation Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 3024",
+      "position": {
+        "page": 2,
+        "x": 441,
+        "y": 153.479
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.contrib_445_mental_health_crisis_prevention_fund",
+      "label": "Code 445 . Mental Health Crisis Prevention Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4001",
+      "position": {
+        "page": 3,
+        "x": 443,
+        "y": 681.16
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.contrib_447_ca_als_research_network_fund",
+      "label": "Code 447 . California A L S Research Network Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4002",
+      "position": {
+        "page": 3,
+        "x": 442.5,
+        "y": 657.12
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.contrib_448_ca_pediatric_cancer_research_fund",
+      "label": "Code 448 . California Pediatric Cancer Research Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4003",
+      "position": {
+        "page": 3,
+        "x": 443.28,
+        "y": 633.95
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.contrib_449_parkinsons_disease_research_fund",
+      "label": "Code 449. Parkinson's Disease Research Voluntary Tax Contribution Fund.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4004",
+      "position": {
+        "page": 3,
+        "x": 443.28,
+        "y": 611.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.34_total_contributions",
+      "label": "Line 34 . Add amounts in code 400 through code 449 . This is your total contribution.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4008",
+      "position": {
+        "page": 3,
+        "x": 443.28,
+        "y": 588.6
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.35_amount_you_owe",
+      "label": "AMOUNT YOU OWE Line 35 . AMOUNT YOU OWE. Add line 29, line 31, line 33, and line 34 . See instructions. Do not send cash. Mail to: FRANCHISE TAX BOARD, PO BOX 942867, SACRAMENTO CA 94267-0001 .",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4004 ",
+      "position": {
+        "page": 3,
+        "x": 440.57,
+        "y": 525.76
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.36_refund_or_no_amount_due",
+      "label": "Direct Deposit (Refund Only). Line 36 . REFUND OR NO AMOUNT DUE. Subtract line 34 from line 32 . See instructions. Mail to: FRANCHISE TAX BOARD, P O BOX 942840, SACRAMENTO CA 94240-0001",
+      "labelSource": "tu",
+      "category": "deductions_credits",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4005",
+      "position": {
+        "page": 3,
+        "x": 440.57,
+        "y": 454.33
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.37_account_type",
+      "label": "Line 37 — Account type. Check only one box.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "540 2EZ Form 4008 RB",
+      "position": {
+        "page": 3,
+        "x": 193.68,
+        "y": 381.84
+      },
+      "options": [
+        {
+          "value": "checking",
+          "radioOption": "Checking",
+          "label": "Checking"
+        },
+        {
+          "value": "savings",
+          "radioOption": "Savings",
+          "label": "Savings"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.37_routing_number",
+      "label": "Line 37. First Account. Routing number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4007",
+      "position": {
+        "page": 3,
+        "x": 71.5,
+        "y": 369.58
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.37_account_number",
+      "label": "Line 37 . First Account number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4009",
+      "position": {
+        "page": 3,
+        "x": 259.5,
+        "y": 369.58
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.37_direct_deposit_amount",
+      "label": "Line 37. First Account Direct deposit amount.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4006",
+      "position": {
+        "page": 3,
+        "x": 440.64,
+        "y": 369.28
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.38_secondary_account_type",
+      "label": "Line 38 — Secondary account type. Check only one box.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "540 2EZ Form 4012 RB",
+      "position": {
+        "page": 3,
+        "x": 193.68,
+        "y": 309.65
+      },
+      "options": [
+        {
+          "value": "checking",
+          "radioOption": "Checking",
+          "label": "Checking"
+        },
+        {
+          "value": "savings",
+          "radioOption": "Savings",
+          "label": "Savings"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.38_secondary_routing_number",
+      "label": "Line 38. Second Account Routing number",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4011",
+      "position": {
+        "page": 3,
+        "x": 71.52,
+        "y": 285.5
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.38_secondary_account_number",
+      "label": "Line 38. Second Account number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4013",
+      "position": {
+        "page": 3,
+        "x": 259.5,
+        "y": 285.46
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.3.line.38_secondary_direct_deposit_amount",
+      "label": "Line 38. Second Account. Direct deposit amount.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "numeric",
+      "valueTypeRich": "money",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 4010",
+      "position": {
+        "page": 3,
+        "x": 440.64,
+        "y": 285.28
+      },
+      "maxLength": 12
+    },
+    {
+      "fieldId": "form-540-2ez.3.signing.voter_registration_info_request",
+      "label": "Voter Information. For voter registration information, check the box and go to sos.ca.gov/elections. See instructions.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "540 2EZ Form 4014 CB",
+      "position": {
+        "page": 3,
+        "x": 557,
+        "y": 249.28
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.3.signing.wants_health_care_coverage_info",
+      "label": "Do you want information on no-cost or low-cost health care coverage? By checking the \"Yes\" box, you authorize the Franchise Tax Board to share limited information from your tax return with Covered California.",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "540 2EZ Form 4015 RB",
+      "position": {
+        "page": 3,
+        "x": 456.12,
+        "y": 177.9
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.organ_donor_primary_taxpayer",
+      "label": "Organ Donor Election. By checking the applicable box you authorize written consent for Donate Life California to enroll you in the Donate Life California Organ and Tissue Donor Registry — Primary taxpayer",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "540 2EZ Form 5002 CB",
+      "position": {
+        "page": 4,
+        "x": 451.864,
+        "y": 649.305
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.organ_donor_spouse_rdp",
+      "label": "Spouse/RDP  (if joint tax return)",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "boolean",
+      "valueTypeRich": "boolean",
+      "pdfFieldKind": "checkbox",
+      "pdfWidgetName": "540 2EZ Form 5003 CB",
+      "position": {
+        "page": 4,
+        "x": 452.864,
+        "y": 609.285
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.date_signed",
+      "label": "Date signed. Enter date as a mm/dd/yyyy.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "date",
+      "valueTypeRich": "date",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5003",
+      "position": {
+        "page": 4,
+        "x": 259.08,
+        "y": 462.756
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.taxpayer_email",
+      "label": "Your email address. Enter only one email address.",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "email",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5004",
+      "position": {
+        "page": 4,
+        "x": 110.5,
+        "y": 426.776
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.taxpayer_phone",
+      "label": "Preferred phone number",
+      "labelSource": "tu",
+      "category": "personal_info",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5005",
+      "position": {
+        "page": 4,
+        "x": 425.5,
+        "y": 426.776
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_name",
+      "label": "Print paid preparer’s name",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5005A",
+      "position": {
+        "page": 4,
+        "x": 110.52,
+        "y": 392.696
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_phone",
+      "label": "Paid preparer’s phone number",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5005B",
+      "position": {
+        "page": 4,
+        "x": 440.94,
+        "y": 392.756
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_firm_name",
+      "label": "Firm’s name (or yours, if self-employed).",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5006",
+      "position": {
+        "page": 4,
+        "x": 110.52,
+        "y": 320.696
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_ptin",
+      "label": "Preparer's Taxpayer Identification Number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5007",
+      "position": {
+        "page": 4,
+        "x": 440.94,
+        "y": 320.756
+      },
+      "maxLength": 9
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_firm_address",
+      "label": "Firm's address.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5008",
+      "position": {
+        "page": 4,
+        "x": 110.52,
+        "y": 284.776
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.preparer_firm_ein",
+      "label": "Firm's Federal Employer Identification Number.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5009",
+      "position": {
+        "page": 4,
+        "x": 440.94,
+        "y": 284.836
+      },
+      "maxLength": 10
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.third_party_designee_authorized",
+      "label": "Do you want to allow another person to discuss this tax return with us?",
+      "labelSource": "vision",
+      "category": "other",
+      "valueType": "single_select",
+      "valueTypeRich": "single_select",
+      "pdfFieldKind": "radio",
+      "pdfWidgetName": "540 2EZ Form 5010 RBc",
+      "position": {
+        "page": 4,
+        "x": 456.2,
+        "y": 260.797
+      },
+      "options": [
+        {
+          "value": "yes",
+          "radioOption": "Yes",
+          "label": "Yes"
+        },
+        {
+          "value": "no",
+          "radioOption": "No",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.third_party_designee_name",
+      "label": "Print Third Party Designee’s Name.",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "text",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5011",
+      "position": {
+        "page": 4,
+        "x": 110.52,
+        "y": 224.776
+      }
+    },
+    {
+      "fieldId": "form-540-2ez.4.signing.third_party_designee_phone",
+      "label": "Telephone Number",
+      "labelSource": "tu",
+      "category": "other",
+      "valueType": "text",
+      "valueTypeRich": "phone",
+      "pdfFieldKind": "text",
+      "pdfWidgetName": "540 2EZ Form 5012",
+      "position": {
+        "page": 4,
+        "x": 425.28,
+        "y": 224.836
+      }
+    }
+  ],
+  "_meta": {
+    "sourcePdf": "2025/forms/state/ca/540-2ez/blank.pdf",
+    "ingestedAt": "2026-11-28T04:36:00.952Z",
+    "totalFields": 125,
+    "skipped": 0,
+    "catalogEntries": 125
+  }
+}

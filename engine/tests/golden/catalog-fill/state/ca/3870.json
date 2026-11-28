@@ -1,0 +1,330 @@
+{
+  "formId": "form-3870",
+  "fieldCount": 36,
+  "entries": [
+    {
+      "fieldId": "form-3870.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-1S7WV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select Entity type",
+          "text": "Social Security Number (S S N) or Individual Taxpayer Identification Numbers (I T I N)."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-1TE3G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State (S O S) file number (12 digits)",
+          "text": "T-QATDL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1a_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (b) Credit code",
+          "text": "T-1CM69"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1a_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (a) Credit name",
+          "text": "T-U8A4T"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1a_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1a. (c) Credit amount to be elected as a refundable credit",
+          "text": "3,929"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1b_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (b) Credit code",
+          "text": "T-1O20K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1b_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (a) Credit name",
+          "text": "T-18CF0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1b_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1b. (c) Credit amount to be elected as a refundable credit",
+          "text": "3,591"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1c_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (b) Credit code",
+          "text": "T-8YH1W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1c_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (a) Credit name",
+          "text": "T-EFAL5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1c_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1c. (c) Credit amount to be elected as a refundable credit",
+          "text": "8,780"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1d_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (b) Credit code",
+          "text": "T-1KIFG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1d_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (a) Credit name",
+          "text": "T-1DJ08"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1d_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1d. (c) Credit amount to be elected as a refundable credit",
+          "text": "2,346"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1e_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (b) Credit code",
+          "text": "T-1X8IO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1e_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (a) Credit name",
+          "text": "T-15LGW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1e_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1e. (c) Credit amount to be elected as a refundable credit",
+          "text": "8,843"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1f_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (b) Credit code",
+          "text": "T-5R5MG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1f_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (a) Credit name",
+          "text": "T-RLSZT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1f_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1f. (c) Credit amount to be elected as a refundable credit",
+          "text": "4,243"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1g_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (b) Credit code",
+          "text": "T-ZZSW8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1g_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (a) Credit name",
+          "text": "T-17Z66"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1g_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1g. (c) Credit amount to be elected as a refundable credit",
+          "text": "6,120"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1h_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (b) Credit code",
+          "text": "T-1VT0S"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1h_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (a) Credit name",
+          "text": "T-WL4ZO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1h_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1h. (c) Credit amount to be elected as a refundable credit",
+          "text": "5,119"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1i_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (b) Credit code",
+          "text": "T-SIQ3D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1i_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (a) Credit name",
+          "text": "T-O0KKW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1i_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1i. (c) Credit amount to be elected as a refundable credit",
+          "text": "8,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1j_credit_code_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (b) Credit code",
+          "text": "T-C95FB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1j_credit_name_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (a) Credit name",
+          "text": "T-1MXQU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.1j_refundable_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1j. (c) Credit amount to be elected as a refundable credit",
+          "text": "9,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.2_election_refundable_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Election for refundable credit amount. Enter the total of line 1, column (c) See instructions",
+          "text": "6,074"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3870.0.line.3_annual_refundable_credit_amount",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Annual refundable credit amount. Multiply line 2 by 20% (.20) See instructions",
+          "text": "7,342"
+        }
+      ]
+    }
+  ]
+}

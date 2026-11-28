@@ -6,13 +6,25 @@
 import { fixtureFileSchema } from "../../catalog.js";
 import { makeFormSpec, type FormSpec } from "../../formSpec.js";
 import { register as registerForm3461 } from "./3461/bindings.js";
+import { register as registerForm3503 } from "./3503/bindings.js";
+import { register as registerForm3504 } from "./3504/bindings.js";
 import { register as registerForm3506 } from "./3506/bindings.js";
 import { register as registerForm3507 } from "./3507/bindings.js";
 import { register as registerForm3510 } from "./3510/bindings.js";
 import { register as registerForm3514 } from "./3514/bindings.js";
+import { register as registerForm3521 } from "./3521/bindings.js";
+import { register as registerForm3523 } from "./3523/bindings.js";
 import { register as registerForm3526 } from "./3526/bindings.js";
+import { register as registerForm3531 } from "./3531/bindings.js";
 import { register as registerForm3532 } from "./3532/bindings.js";
+import { register as registerForm3540 } from "./3540/bindings.js";
 import { register as registerForm3541 } from "./3541/bindings.js";
+import { register as registerForm3547 } from "./3547/bindings.js";
+import { register as registerForm3548 } from "./3548/bindings.js";
+import { register as registerForm3554 } from "./3554/bindings.js";
+import { register as registerForm3568 } from "./3568/bindings.js";
+import { register as registerForm3592 } from "./3592/bindings.js";
+import { register as registerForm3596 } from "./3596/bindings.js";
 import { register as registerForm3800Ca } from "./3800-ca/bindings.js";
 import { register as registerForm3801CR } from "./3801-cr/bindings.js";
 import { register as registerForm3801 } from "./3801/bindings.js";
@@ -24,11 +36,21 @@ import { register as registerForm3805p } from "./3805p/bindings.js";
 import { register as registerForm3805V } from "./3805v/bindings.js";
 import { register as registerForm3805Z } from "./3805z/bindings.js";
 import { register as registerForm3807 } from "./3807/bindings.js";
+import { register as registerForm3808 } from "./3808/bindings.js";
 import { register as registerForm3809 } from "./3809/bindings.js";
+import { register as registerForm3814 } from "./3814/bindings.js";
+import { register as registerForm3820 } from "./3820/bindings.js";
+import { register as registerForm3821 } from "./3821/bindings.js";
+import { register as registerForm3831 } from "./3831/bindings.js";
+import { register as registerForm3835 } from "./3835/bindings.js";
 import { register as registerForm3840 } from "./3840/bindings.js";
 import { register as registerForm3853 } from "./3853/bindings.js";
+import { register as registerForm3870 } from "./3870/bindings.js";
+import { register as registerForm3872 } from "./3872/bindings.js";
 import { register as registerForm3885A } from "./3885a/bindings.js";
 import { register as registerForm3913 } from "./3913/bindings.js";
+import { register as registerForm4197 } from "./4197/bindings.js";
+import { register as registerForm540TwoEZ } from "./540-2ez/bindings.js";
 import { register as registerForm540 } from "./540/bindings.js";
 import { register as registerForm540NR } from "./540nr/bindings.js";
 import { register as registerForm5805 } from "./5805/bindings.js";
@@ -43,17 +65,30 @@ import { register as registerScheduleDCa } from "./schedule-d-ca/bindings.js";
 import { register as registerScheduleG1 } from "./schedule-g-1/bindings.js";
 import { register as registerScheduleP540NR } from "./schedule-p-540nr/bindings.js";
 import { register as registerScheduleP } from "./schedule-p/bindings.js";
+import { register as registerScheduleRCa } from "./schedule-r-ca/bindings.js";
 import { register as registerScheduleS } from "./schedule-s/bindings.js";
 import { register as registerScheduleX } from "./schedule-x/bindings.js";
 
 import form3461CatalogJson from "./3461/catalog.json";
+import form3503CatalogJson from "./3503/catalog.json";
+import form3504CatalogJson from "./3504/catalog.json";
 import form3506CatalogJson from "./3506/catalog.json";
 import form3507CatalogJson from "./3507/catalog.json";
 import form3510CatalogJson from "./3510/catalog.json";
 import form3514CatalogJson from "./3514/catalog.json";
+import form3521CatalogJson from "./3521/catalog.json";
+import form3523CatalogJson from "./3523/catalog.json";
 import form3526CatalogJson from "./3526/catalog.json";
+import form3531CatalogJson from "./3531/catalog.json";
 import form3532CatalogJson from "./3532/catalog.json";
+import form3540CatalogJson from "./3540/catalog.json";
 import form3541CatalogJson from "./3541/catalog.json";
+import form3547CatalogJson from "./3547/catalog.json";
+import form3548CatalogJson from "./3548/catalog.json";
+import form3554CatalogJson from "./3554/catalog.json";
+import form3568CatalogJson from "./3568/catalog.json";
+import form3592CatalogJson from "./3592/catalog.json";
+import form3596CatalogJson from "./3596/catalog.json";
 import form3800CaCatalogJson from "./3800-ca/catalog.json";
 import form3801CRCatalogJson from "./3801-cr/catalog.json";
 import form3801CatalogJson from "./3801/catalog.json";
@@ -64,11 +99,21 @@ import form3805pCatalogJson from "./3805p/catalog.json";
 import form3805VCatalogJson from "./3805v/catalog.json";
 import form3805ZCatalogJson from "./3805z/catalog.json";
 import form3807CatalogJson from "./3807/catalog.json";
+import form3808CatalogJson from "./3808/catalog.json";
 import form3809CatalogJson from "./3809/catalog.json";
+import form3814CatalogJson from "./3814/catalog.json";
+import form3820CatalogJson from "./3820/catalog.json";
+import form3821CatalogJson from "./3821/catalog.json";
+import form3831CatalogJson from "./3831/catalog.json";
+import form3835CatalogJson from "./3835/catalog.json";
 import form3840CatalogJson from "./3840/catalog.json";
 import form3853CatalogJson from "./3853/catalog.json";
+import form3870CatalogJson from "./3870/catalog.json";
+import form3872CatalogJson from "./3872/catalog.json";
 import form3885aCatalogJson from "./3885a/catalog.json";
 import form3913CatalogJson from "./3913/catalog.json";
+import form4197CatalogJson from "./4197/catalog.json";
+import form540TwoEZCatalogJson from "./540-2ez/catalog.json";
 import form540CatalogJson from "./540/catalog.json";
 import form540NRCatalogJson from "./540nr/catalog.json";
 import form5805CatalogJson from "./5805/catalog.json";
@@ -82,6 +127,7 @@ import scheduleDCaCatalogJson from "./schedule-d-ca/catalog.json";
 import scheduleG1CatalogJson from "./schedule-g-1/catalog.json";
 import scheduleP540NRCatalogJson from "./schedule-p-540nr/catalog.json";
 import schedulePCatalogJson from "./schedule-p/catalog.json";
+import scheduleRCaCatalogJson from "./schedule-r-ca/catalog.json";
 import scheduleSCatalogJson from "./schedule-s/catalog.json";
 import scheduleXCatalogJson from "./schedule-x/catalog.json";
 
@@ -124,6 +170,29 @@ export const CA_CATALOGS = [
   fixtureFileSchema.parse(scheduleD1CatalogJson),
   fixtureFileSchema.parse(scheduleD540NRCatalogJson),
   fixtureFileSchema.parse(scheduleP540NRCatalogJson),
+  fixtureFileSchema.parse(form3503CatalogJson),
+  fixtureFileSchema.parse(form3504CatalogJson),
+  fixtureFileSchema.parse(form3521CatalogJson),
+  fixtureFileSchema.parse(form3523CatalogJson),
+  fixtureFileSchema.parse(form3531CatalogJson),
+  fixtureFileSchema.parse(form3540CatalogJson),
+  fixtureFileSchema.parse(form3547CatalogJson),
+  fixtureFileSchema.parse(form3548CatalogJson),
+  fixtureFileSchema.parse(form3554CatalogJson),
+  fixtureFileSchema.parse(form3568CatalogJson),
+  fixtureFileSchema.parse(form3592CatalogJson),
+  fixtureFileSchema.parse(form3596CatalogJson),
+  fixtureFileSchema.parse(form3808CatalogJson),
+  fixtureFileSchema.parse(form3814CatalogJson),
+  fixtureFileSchema.parse(form3820CatalogJson),
+  fixtureFileSchema.parse(form3821CatalogJson),
+  fixtureFileSchema.parse(form3831CatalogJson),
+  fixtureFileSchema.parse(form3835CatalogJson),
+  fixtureFileSchema.parse(form3870CatalogJson),
+  fixtureFileSchema.parse(form3872CatalogJson),
+  fixtureFileSchema.parse(form4197CatalogJson),
+  fixtureFileSchema.parse(form540TwoEZCatalogJson),
+  fixtureFileSchema.parse(scheduleRCaCatalogJson),
 ];
 
 export const CA_FORMS: FormSpec[] = [
@@ -436,5 +505,166 @@ export const CA_FORMS: FormSpec[] = [
     displayName: "Schedule P (540NR)",
     relativeDir: "state/ca/schedule-p-540nr",
     register: registerScheduleP540NR,
+  }),
+  makeFormSpec({
+    formId: "form-3503",
+    shortId: "3503",
+    displayName: "FTB 3503",
+    relativeDir: "state/ca/3503",
+    register: registerForm3503,
+  }),
+  makeFormSpec({
+    formId: "form-3504",
+    shortId: "3504",
+    displayName: "FTB 3504",
+    relativeDir: "state/ca/3504",
+    register: registerForm3504,
+  }),
+  makeFormSpec({
+    formId: "form-3521",
+    shortId: "3521",
+    displayName: "FTB 3521",
+    relativeDir: "state/ca/3521",
+    register: registerForm3521,
+  }),
+  makeFormSpec({
+    formId: "form-3523",
+    shortId: "3523",
+    displayName: "FTB 3523",
+    relativeDir: "state/ca/3523",
+    register: registerForm3523,
+  }),
+  makeFormSpec({
+    formId: "form-3531",
+    shortId: "3531",
+    displayName: "FTB 3531",
+    relativeDir: "state/ca/3531",
+    register: registerForm3531,
+  }),
+  makeFormSpec({
+    formId: "form-3540",
+    shortId: "3540",
+    displayName: "FTB 3540",
+    relativeDir: "state/ca/3540",
+    register: registerForm3540,
+  }),
+  makeFormSpec({
+    formId: "form-3547",
+    shortId: "3547",
+    displayName: "FTB 3547",
+    relativeDir: "state/ca/3547",
+    register: registerForm3547,
+  }),
+  makeFormSpec({
+    formId: "form-3548",
+    shortId: "3548",
+    displayName: "FTB 3548",
+    relativeDir: "state/ca/3548",
+    register: registerForm3548,
+  }),
+  makeFormSpec({
+    formId: "form-3554",
+    shortId: "3554",
+    displayName: "FTB 3554",
+    relativeDir: "state/ca/3554",
+    register: registerForm3554,
+  }),
+  makeFormSpec({
+    formId: "form-3568",
+    shortId: "3568",
+    displayName: "FTB 3568",
+    relativeDir: "state/ca/3568",
+    register: registerForm3568,
+  }),
+  makeFormSpec({
+    formId: "form-3592",
+    shortId: "3592",
+    displayName: "FTB 3592",
+    relativeDir: "state/ca/3592",
+    register: registerForm3592,
+  }),
+  makeFormSpec({
+    formId: "form-3596",
+    shortId: "3596",
+    displayName: "FTB 3596",
+    relativeDir: "state/ca/3596",
+    register: registerForm3596,
+  }),
+  makeFormSpec({
+    formId: "form-3808",
+    shortId: "3808",
+    displayName: "FTB 3808",
+    relativeDir: "state/ca/3808",
+    register: registerForm3808,
+  }),
+  makeFormSpec({
+    formId: "form-3814",
+    shortId: "3814",
+    displayName: "FTB 3814",
+    relativeDir: "state/ca/3814",
+    register: registerForm3814,
+  }),
+  makeFormSpec({
+    formId: "form-3820",
+    shortId: "3820",
+    displayName: "FTB 3820",
+    relativeDir: "state/ca/3820",
+    register: registerForm3820,
+  }),
+  makeFormSpec({
+    formId: "form-3821",
+    shortId: "3821",
+    displayName: "FTB 3821",
+    relativeDir: "state/ca/3821",
+    register: registerForm3821,
+  }),
+  makeFormSpec({
+    formId: "form-3831",
+    shortId: "3831",
+    displayName: "FTB 3831",
+    relativeDir: "state/ca/3831",
+    register: registerForm3831,
+  }),
+  makeFormSpec({
+    formId: "form-3835",
+    shortId: "3835",
+    displayName: "FTB 3835",
+    relativeDir: "state/ca/3835",
+    register: registerForm3835,
+  }),
+  makeFormSpec({
+    formId: "form-3870",
+    shortId: "3870",
+    displayName: "FTB 3870",
+    relativeDir: "state/ca/3870",
+    register: registerForm3870,
+  }),
+  makeFormSpec({
+    formId: "form-3872",
+    shortId: "3872",
+    displayName: "FTB 3872",
+    relativeDir: "state/ca/3872",
+    register: registerForm3872,
+  }),
+  makeFormSpec({
+    formId: "form-4197",
+    shortId: "4197",
+    displayName: "FTB 4197",
+    relativeDir: "state/ca/4197",
+    register: registerForm4197,
+  }),
+  makeFormSpec({
+    formId: "form-540-2ez",
+    shortId: "540-2ez",
+    displayName: "Form 540 2EZ",
+    relativeDir: "state/ca/540-2ez",
+    register: registerForm540TwoEZ,
+  }),
+  makeFormSpec({
+    formId: "schedule-r-ca",
+    shortId: "schedule-r-ca",
+    displayName: "Schedule R (California)",
+    relativeDir: "state/ca/schedule-r-ca",
+    register: registerScheduleRCa,
   }),
 ];

@@ -1,0 +1,708 @@
+{
+  "formId": "form-3831",
+  "fieldCount": 78,
+  "entries": [
+    {
+      "fieldId": "form-3831.0.header.a_tentative_credit_reservation",
+      "widgets": [
+        {
+          "widgetName": "Line A. Did the business receive a tentative credit reservation for each claimed eligible individual?",
+          "text": "Yes."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.generating_taxpayer_id_number",
+      "widgets": [
+        {
+          "widgetName": "Taxpayer, S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-9465M"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.generating_taxpayer_id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Taxpayer, Select entity type",
+          "text": "S S N or I T I N."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.generating_taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "Name of taxpayer generating the credit. See instructions",
+          "text": "T-VW9QY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.generating_taxpayer_sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "Taxpayer, California Secretary of State (S O S) file number (12 digits)",
+          "text": "T-RLJD2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.id_number",
+      "widgets": [
+        {
+          "widgetName": "S S N or I T I N, C A Corporation number, F E I N (12 digits)",
+          "text": "T-CKQ8Y"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.id_number_type",
+      "widgets": [
+        {
+          "widgetName": "Select entity type",
+          "text": "S S N or I T I N."
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.name_on_return",
+      "widgets": [
+        {
+          "widgetName": "Name(s) as shown on your California tax return",
+          "text": "T-K7FYA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.header.sos_file_number",
+      "widgets": [
+        {
+          "widgetName": "California Secretary of State (S O S) file number (12 digits)",
+          "text": "T-SC077"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.1_credit_from_worksheet_1",
+      "widgets": [
+        {
+          "widgetName": "Part I, Line 1. Enter the credit amount from Worksheet 1. This credit amount is limited to $30,000. See instructions",
+          "text": "5,331"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.2_pass_through_credit_k1",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Pass-through credit from Schedule K-1 (100S, 541, 565 or 568). See instructions",
+          "text": "3,590"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.3_credit_carryover_prior_year",
+      "widgets": [
+        {
+          "widgetName": "Line 3. Credit carryover from prior year(s). See Instructions",
+          "text": "1,905"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.4_total_available_credit",
+      "widgets": [
+        {
+          "widgetName": "Line 4. Total available credit. Add line 1 through line 3",
+          "text": "5,293"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.5a_credit_claimed",
+      "widgets": [
+        {
+          "widgetName": "Line 5a. Credit claimed. Enter the amount of the credit claimed on the current year tax return. See instructions. (Do not include any assigned credit claimed on form F T B 3544, Part B.)",
+          "text": "9,085"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.5b_total_credit_assigned",
+      "widgets": [
+        {
+          "widgetName": "Line 5b. Total credit assigned. Enter the total amount from form F T B 3544, Part A, column (g). If you are not a corporation, enter 0. See instructions",
+          "text": "1,340"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.5c_credit_elected_refundable",
+      "widgets": [
+        {
+          "widgetName": "Line 5c. Credit amount to be elected as refundable in future years. See instructions",
+          "text": "5,188"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.0.line.6_credit_carryover_future_years",
+      "widgets": [
+        {
+          "widgetName": "Line 6. Credit carryover available for future years. Add lines 5a, 5b, and 5c, subtract the result from line 4",
+          "text": "8,445"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row1_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (1)",
+          "text": "8,927"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row1_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Worksheet 1, Line 1. (a) Eligible Individual (1)",
+          "text": "T-1HB7U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row1_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (1)",
+          "text": "3,734"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row10_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (10)",
+          "text": "3,877"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row10_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (10)",
+          "text": "T-FWNMP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row10_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (10)",
+          "text": "7,226"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row11_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (11)",
+          "text": "1,619"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row11_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (11)",
+          "text": "T-UXM4U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row11_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (11)",
+          "text": "9,161"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row12_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (12)",
+          "text": "7,762"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row12_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (12)",
+          "text": "T-8BUHH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row12_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (12)",
+          "text": "1,792"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row13_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (13)",
+          "text": "5,781"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row13_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (13)",
+          "text": "T-1Y8U7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row13_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (13)",
+          "text": "3,542"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row14_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (14)",
+          "text": "3,265"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row14_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (14)",
+          "text": "T-LCN27"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row14_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (14)",
+          "text": "4,721"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row15_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (15)",
+          "text": "6,231"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row15_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (15)",
+          "text": "T-1GCE3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row15_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (15)",
+          "text": "8,523"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row16_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (16)",
+          "text": "2,302"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row16_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (16)",
+          "text": "T-DXVHP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row16_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (16)",
+          "text": "1,995"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row17_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (17)",
+          "text": "6,045"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row17_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (17)",
+          "text": "T-8FV1E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row17_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (17)",
+          "text": "2,398"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row18_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (18)",
+          "text": "8,721"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row18_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (18)",
+          "text": "T-1N32F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row18_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (18)",
+          "text": "8,765"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row19_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (19)",
+          "text": "9,577"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row19_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (19)",
+          "text": "T-UA88X"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row19_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (19)",
+          "text": "4,941"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row2_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (2)",
+          "text": "6,151"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row2_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (2)",
+          "text": "T-NH0JG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row2_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (2)",
+          "text": "2,768"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row20_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (20)",
+          "text": "8,239"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row20_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (20)",
+          "text": "T-KI19P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row20_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (20)",
+          "text": "4,692"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row3_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (3)",
+          "text": "1,579"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row3_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (3)",
+          "text": "T-1ASSR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row3_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (3)",
+          "text": "4,287"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row4_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (4)",
+          "text": "9,194"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row4_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (4)",
+          "text": "T-17TP9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row4_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (4)",
+          "text": "6,623"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row5_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (5)",
+          "text": "3,967"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row5_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (5)",
+          "text": "T-1JLHA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row5_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (5)",
+          "text": "3,547"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row6_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (6)",
+          "text": "7,278"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row6_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (6)",
+          "text": "T-1JGX7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row6_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (6)",
+          "text": "3,931"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row7_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (7)",
+          "text": "1,675"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row7_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (7)",
+          "text": "T-EDKKW"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row7_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (7)",
+          "text": "1,667"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row8_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (8)",
+          "text": "9,506"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row8_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (8)",
+          "text": "T-1IK6P"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row8_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (8)",
+          "text": "8,079"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row9_credit_amount_col_c",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (c) Amount of Credit (See chart above to determine the amount) (9)",
+          "text": "8,982"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row9_eligible_individual_col_a",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (a) Eligible Individual (9)",
+          "text": "T-1RF0H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.1_row9_hours_worked_col_b",
+      "widgets": [
+        {
+          "widgetName": "Line 1. (b) Actual Hours Worked (in the taxable year) (9)",
+          "text": "2,660"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-3831.2.worksheet1.2_total_hhtc",
+      "widgets": [
+        {
+          "widgetName": "Line 2. Total H H T C. Add the amounts in column (c). Enter the smaller of the sum or $30,000 here and on form F T B 3831, Part I, line 1",
+          "text": "2,334"
+        }
+      ]
+    }
+  ]
+}
