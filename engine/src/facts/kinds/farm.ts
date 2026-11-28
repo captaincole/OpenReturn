@@ -12,6 +12,7 @@
 
 import { atLeast, sum } from "../../money.js";
 import { isAtRiskAmounts, type AtRiskAmounts } from "./atRisk.js";
+import { differentialWageCreditByActivity } from "./differentialWage.js";
 import { empowermentZoneFigures } from "./empowermentZone.js";
 import { reducedExpenses, smallEmployerPlanReductions } from "./smallEmployerPlan.js";
 import { workOpportunityCreditByActivity } from "./workOpportunity.js";
@@ -151,9 +152,9 @@ export interface FarmFactValue {
   conservation?: FarmConservation;
   /*
    * Line 22: the credits of Forms 5884, 8844, 8932 and 8994 for the farm's
-   * labor that no employee fact figures. farmsOnReturn adds the Form 5884 and
-   * Form 8844 credits of the farm's employee facts (FARM_LABOR_CREDITS); a
-   * credit those facts figure is not stated here.
+   * labor that no employee fact figures. farmsOnReturn adds the Form 5884,
+   * Form 8844 and Form 8932 credits of the farm's employee facts
+   * (FARM_LABOR_CREDITS); a credit those facts figure is not stated here.
    */
   employmentCredits?: number;
   /* Line 15: the Form 8941 credit for the farm's employee health insurance. */
@@ -290,16 +291,19 @@ export function farmOwnerOf(farm: FarmFactValue): FarmOwner {
 /*
  * Schedule F line 22: "Reduce your deduction by the amounts claimed on the
  * following. • Form 5884, Work Opportunity Credit. • Form 8844, Empowerment
- * Zone Employment Credit." (irs-1040sf-inst-2025::sec::line-22::b01). The
- * credits the engine figures from the farm's own employees, by farm key: Form
- * 5884 line 2 (workOpportunity.ts) and the farm's share of Form 8844 line 2
- * (empowermentZone.ts). A new credit form adds one entry.
+ * Zone Employment Credit. • Form 8932, Credit for Employer Differential Wage
+ * Payments" (irs-1040sf-inst-2025::sec::line-22::b01). The credits the engine
+ * figures from the farm's own employees, by farm key: Form 5884 line 2
+ * (workOpportunity.ts), the farm's share of Form 8844 line 2
+ * (empowermentZone.ts) and the farm's share of Form 8932 line 2
+ * (differentialWage.ts). A new credit form adds one entry.
  */
 const FARM_LABOR_CREDITS: ReadonlyArray<
   (facts: ReadonlyArray<FactRow>, joint: boolean) => ReadonlyMap<string, number>
 > = [
   (facts) => workOpportunityCreditByActivity(facts),
   (facts, joint) => empowermentZoneFigures(facts, joint).creditByEmployer,
+  differentialWageCreditByActivity,
 ];
 
 /* Each farm's figured labor credits, added. */

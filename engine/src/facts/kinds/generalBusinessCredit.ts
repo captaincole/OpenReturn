@@ -212,12 +212,18 @@ export const isOwnStatedWageCredit = (value: GeneralBusinessCreditFactValue): bo
 /*
  * Each Schedule C business's own stated wage credits, rounded as Form 3800
  * prints them, by the business fact key. A credit that names no business is
- * a gap on its Form 3800 line (3800/sources.ts), not a reduction here.
+ * a gap on its Form 3800 line (3800/sources.ts), not a reduction here. The
+ * source forms the engine figures on this return (figuredForms) lower
+ * nothing as stated: the figured credit takes their place (differentialWage.ts).
  */
-export function statedWageCreditsByBusiness(facts: ReadonlyArray<FactRow>): Map<string, number> {
+export function statedWageCreditsByBusiness(
+  facts: ReadonlyArray<FactRow>,
+  figuredForms: ReadonlyArray<string> = [],
+): Map<string, number> {
   const out = new Map<string, number>();
   for (const { value } of getGeneralBusinessCreditFacts(facts)) {
     if (!isOwnStatedWageCredit(value) || value.businessKey === undefined) continue;
+    if (figuredForms.includes(value.sourceForm)) continue;
     out.set(value.businessKey, sum(out.get(value.businessKey), roundDollars(value.amount)));
   }
   return out;

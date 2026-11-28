@@ -11,6 +11,10 @@
 
 import type { BusinessCreditReduction } from "../../facts/kinds/activitiesOnReturn.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "../../facts/kinds/business.js";
+import {
+  DIFFERENTIAL_WAGE_SOURCE_FORM,
+  differentialWageCreditOf,
+} from "../../facts/kinds/differentialWage.js";
 import { getGeneralBusinessCreditFacts } from "../../facts/kinds/generalBusinessCredit.js";
 import {
   readOrphanDrugCreditFact,
@@ -39,15 +43,32 @@ export interface OrphanDrugFigures {
   missing: string[];
 }
 
-/* Form 3800 Part III line 1w takes Form 8932 (3800/rows.ts). */
-const FORM_8932 = "8932";
-
-/* The return's own Form 8932 credit (a stated credit no pass-through entity allocated); undefined with none. */
-function ownDifferentialWageCredit(facts: ReadonlyArray<FactRow>): number | undefined {
+/*
+ * The return's own Form 8932 credit on the business's wages; undefined with
+ * none. With employee facts, Form 8932 figures it (facts/kinds/differentialWage.ts):
+ * line 2's part for the business, or the answers it waits on. Without them, a
+ * stated credit no pass-through entity allocated. The figured credit takes
+ * the place of the stated one, so line 2b is never checked against both.
+ */
+function ownDifferentialWageCredit(
+  facts: ReadonlyArray<FactRow>,
+  joint: boolean,
+  businessKey: string,
+): { amount?: number; waitingOn: string[] } {
+  const figured = differentialWageCreditOf(facts, joint);
+  if (figured !== undefined) {
+    if ("waitingOn" in figured) return { waitingOn: figured.waitingOn };
+    const part = figured.byActivity.get(businessKey);
+    return { amount: part === undefined || part === 0 ? undefined : part, waitingOn: [] };
+  }
   const own = getGeneralBusinessCreditFacts(facts).filter(
-    ({ value }) => value.sourceForm === FORM_8932 && value.passThroughEin === undefined,
+    ({ value }) =>
+      value.sourceForm === DIFFERENTIAL_WAGE_SOURCE_FORM && value.passThroughEin === undefined,
   );
-  return own.length === 0 ? undefined : sum(...own.map(({ value }) => value.amount));
+  return {
+    amount: own.length === 0 ? undefined : sum(...own.map(({ value }) => value.amount)),
+    waitingOn: [],
+  };
 }
 
 /* Why line 2b cannot be placed; undefined when it can. */
@@ -55,7 +76,7 @@ function line2bGap(fact: OrphanDrugCreditFact, credit8932: number | undefined): 
   const stated = fact.value.differentialWageCreditOnSameWages;
   if (stated === undefined || stated === 0) return undefined;
   if (credit8932 === undefined) {
-    return "Line 2b is the part of the Form 8932 credit on wages also used for line 2a (irs-8820-form-2025::sec::line-2b::b01), and the return states no Form 8932 credit of its own.";
+    return "Line 2b is the part of the Form 8932 credit on wages also used for line 2a (irs-8820-form-2025::sec::line-2b::b01), and the return has no Form 8932 credit of its own on the business's wages.";
   }
   if (roundDollars(stated) > roundDollars(credit8932)) {
     return `Line 2b ($${roundDollars(stated)}) is more than the Form 8932 credit the return states ($${roundDollars(credit8932)}), of which it is a part (irs-8820-form-2025::sec::line-2b::b01).`;
@@ -101,7 +122,9 @@ export function orphanDrugFigures(
       gap: `The orphan drug credit names ${fact.value.businessKey}, which is not a Schedule C business on this return: the credit reduces that business's deduction for the expenses (irs-8820-form-2025::sec::line-2a::b02).`,
     };
   }
-  const credit8932 = ownDifferentialWageCredit(facts);
+  const own8932 = ownDifferentialWageCredit(facts, joint, fact.value.businessKey);
+  if (own8932.waitingOn.length > 0) return { ...base, missing: own8932.waitingOn };
+  const credit8932 = own8932.amount;
   const gap = line2bGap(fact, credit8932);
   if (gap !== undefined) return { ...base, gap };
   const missing = missingOf(fact, credit8932);

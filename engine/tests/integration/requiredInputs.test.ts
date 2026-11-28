@@ -89,6 +89,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 5884 lists the fact again while it is malformed",
   ],
   [
+    /^differential_wage_employee\.[^.]+$/,
+    "each fact is a whole employee the taxpayer claims the credit for employer differential " +
+      "wage payments for (Form 8932); whether one exists is Cade's question, as for a business " +
+      "fact. Form 8932 lists the fact again while it is malformed",
+  ],
+  [
     /^small_employer_plan\.[^.]+$/,
     "each fact is the whole retirement plan of the taxpayer's own business or farm that claims " +
       "the Form 8881 credits; whether one exists is Cade's question, as for a business fact. " +

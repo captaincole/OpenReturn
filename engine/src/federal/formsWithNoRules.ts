@@ -30,8 +30,6 @@ import type { Form8908FilingInfo } from "./8908/filingInfo.js";
 import { resolve8908Info } from "./8908/resolveInfo.js";
 import type { Form8911ScheduleAFilingInfo } from "./8911-schedule-a/filingInfo.js";
 import { resolve8911ScheduleAInfo } from "./8911-schedule-a/resolveInfo.js";
-import type { Form8932FilingInfo } from "./8932/filingInfo.js";
-import { resolve8932Info } from "./8932/resolveInfo.js";
 import type { Form8933ScheduleAFilingInfo } from "./8933-schedule-a/filingInfo.js";
 import { resolve8933ScheduleAInfo } from "./8933-schedule-a/resolveInfo.js";
 import type { Form8933ScheduleBFilingInfo } from "./8933-schedule-b/filingInfo.js";
@@ -67,7 +65,6 @@ export type FederalFormsWithNoRulesFilingInfo = Form5471FilingInfo &
   Form8900FilingInfo &
   Form8906FilingInfo &
   Form8908FilingInfo &
-  Form8932FilingInfo &
   Form8941FilingInfo &
   Form8994FilingInfo &
   Form8911ScheduleAFilingInfo &
@@ -95,7 +92,6 @@ export const FEDERAL_FORMS_WITH_NO_RULES_RESOLVERS: ReadonlyArray<
   resolve8900Info,
   resolve8906Info,
   resolve8908Info,
-  resolve8932Info,
   resolve8941Info,
   resolve8994Info,
   resolve8911ScheduleAInfo,
