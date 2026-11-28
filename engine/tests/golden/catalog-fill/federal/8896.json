@@ -1,0 +1,114 @@
+{
+  "formId": "form-8896",
+  "fieldCount": 12,
+  "entries": [
+    {
+      "fieldId": "form-8896.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_2[0]",
+          "text": "T-ZY8V6"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_1[0]",
+          "text": "T-10518"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.1_low_sulfur_diesel_gallons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_3[0]",
+          "text": "2,719"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.10_cooperative_net_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "2,537"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.2_gallons_times_rate",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_4[0]",
+          "text": "7,147"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.3_qualified_costs_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_5[0]",
+          "text": "6,794"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.4_prior_year_credits_allowed",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_6[0]",
+          "text": "1,819"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.5_remaining_costs_limitation",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_7[0]",
+          "text": "5,842"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.6_smaller_of_line_5_or_2",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_8[0]",
+          "text": "8,189"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.7_pass_through_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_9[0]",
+          "text": "9,511"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.8_total_credit",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "3,210"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8896.0.line.9_allocated_to_patrons",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "5,848"
+        }
+      ]
+    }
+  ]
+}

@@ -57,16 +57,16 @@ const isStatedOwn = (source: CreditSource) =>
   source.credit.line === FORM_3800_LINE && source.credit.ein === undefined;
 
 /*
- * The stated Form 3800 sources with each facility's line 3 added, when Form
- * 7218 files, and the facilities that wait on an answer (no source while one
- * waits). A stated line 1q credit with no entity becomes a gap then.
+ * When Form 7218 files: the stated Form 3800 sources, where a stated line 1q
+ * credit with no entity becomes a gap; each facility's line 3 as a source of
+ * its own; and the facilities that wait on an answer (no source while one waits).
  */
 export function withForm7218(
   inputs: ResolverInputs,
   stated: CreditSource[],
-): { sources: CreditSource[]; missing: string[] } {
+): { stated: CreditSource[]; sources: CreditSource[]; missing: string[] } {
   const copies = filedForm7218Copies(inputs).filter((copy) => copy.key !== PASS_THROUGH_COPY);
-  if (copies.length === 0) return { sources: stated, missing: [] };
+  if (copies.length === 0) return { stated, sources: [], missing: [] };
   const kept = stated.map((source) =>
     isStatedOwn(source)
       ? { ...source, credit: { ...source.credit, amount: gap(STATED_TWICE_GAP) } }
@@ -79,5 +79,5 @@ export function withForm7218(
     return source ? [source] : [];
   });
   const missing = copies.filter((copy) => copy.waiting).map((copy) => copy.key);
-  return { sources: [...kept, ...own], missing };
+  return { stated: kept, sources: own, missing };
 }

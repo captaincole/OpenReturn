@@ -4,7 +4,7 @@ Form 7218 figures the section 45Z clean fuel production credit, one form for eac
 
 ## Two texts conflict
 
-### 1. Column (f) and the registration date (decided: docs/rule-decisions.md row A110)
+### 1. Column (f) and the registration date (decided: docs/rule-decisions.md row A130)
 
 - Column (f): "Enter the number of gallons or gallon equivalents of fuel sold in the calendar year" (`irs-7218-inst-2025::sec::part-iii-clean-aviation-and::b03`).
 - Line 5b: no credit "for any transportation fuel produced and sold by the taxpayer before June 30, 2025" with a letter of that date (`line-5b::b01`).
@@ -47,11 +47,12 @@ Form 7218 figures the section 45Z clean fuel production credit, one form for eac
 - Section 87 puts the alcohol fuel, biodiesel and SAF credits of sections 40, 40A and 40B in gross income (`usc-26-2025::sec::s87::text` to `::3`). It does not name section 45Z, and no other text found says the credit is income or reduces a deduction.
 - No line of another form changes. The cash for a credit sold under section 6418 is not income either (section 6418(b)); Schedule C does not include it.
 
-### 8. How Form 7218 must connect to Forms 6478 and 8864 (not now: both have no rules on this branch)
+### 8. How Form 7218 connects to Forms 6478 and 8864
 
 - Form 6478: "Don't claim the credit for fuel sold or used after 2024" (`irs-6478-inst-2025::sec::what-s-new::b01`). Form 7218 takes fuel produced and sold after 2024 (`irs-7218-inst-2025::sec::purpose-of-form::b01`). For a 2025 calendar-year return no gallon can be on both forms, so no check is needed.
 - Form 8864: the biodiesel, renewable diesel and SAF credits ended for fuel sold after 2024 (`irs-8864-inst-2025::sec::what-s-new::b02`). The small agri-biodiesel producer credit continues, and "For fuel sold or used after June 30, 2025, the section 40A credit is determined in addition to any credit determined under section 45Z" (`irs-7218-inst-2025::sec::emissions-factor::b05`; `usc-26-2025::sec::s40a::b-4-D`). So a gallon sold after June 30, 2025 earns both credits.
 - Open: a gallon of agri-biodiesel sold from January 1 to June 30, 2025 (Form 8864 line 7, `irs-8864-inst-2025::sec::line-7::b01`). No text in the corpus says whether it can also earn the section 45Z credit. When Form 8864 gets rules, the rule that checks both forms belongs in it: it reads the clean fuel facility facts (`facts/kinds/cleanFuelFacility.ts`), and a gallon on Form 8864 line 7 that a facility also counts should be a gap there until a person decides.
+- Done, as a gap: Form 8864 now has rules. While the return has Form 8864 line 7 gallons and a Form 7218 facility that sold biodiesel and was in service before July 1, 2025, Form 8864 lines 7 to 9 are a gap that names both blocks (`TWO_CREDITS_GAP` in `8864/figures.ts`). The engine does not decide the tax question; a person does.
 - Changes dollars: possibly, only for agri-biodiesel sold in the first half of 2025.
 
 ### 9. Form 7220 (not now: the engine has no Form 7220)

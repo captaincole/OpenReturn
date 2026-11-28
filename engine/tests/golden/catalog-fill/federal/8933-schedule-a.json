@@ -1,0 +1,204 @@
+{
+  "formId": "form-8933-schedule-a",
+  "fieldCount": 22,
+  "entries": [
+    {
+      "fieldId": "form-8933-schedule-a.0.header.a_eor_project_owner",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.header.a_geological_disposal_site_owner",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-13QMF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-1DRQC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.1_owner_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_03[0]",
+          "text": "T-1H4MK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.10_contract_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_10[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.11_qualified_tons_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_11[0]",
+          "text": "T-1QQVZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.12_qualified_tons_received_stored",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_12[0]",
+          "text": "T-1I9XS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.13_nonqualified_tons_received",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_13[0]",
+          "text": "T-LEZYJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.14_nonqualified_tons_stored",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_14[0]",
+          "text": "T-EBIT1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.15_total_tons_injected",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_15[0]",
+          "text": "T-L2O6J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.16_total_tons_stored",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_16[0]",
+          "text": "T-53WF0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.17_supplier_election_attested",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.2_owner_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_04[0]",
+          "text": "T-NL4BR"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.3_owner_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_05[0]",
+          "text": "T-1WHR4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.4_supplier_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_06[0]",
+          "text": "T-WTJ94"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.5_supplier_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_07[0]",
+          "text": "T-P3I7F"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.6_supplier_facility_name_location",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_08[0]",
+          "text": "T-CI2YE"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.7_industrial_facility_type",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_09[0]",
+          "text": "T-1VMB1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.8_you_were_a_supplier",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.9_binding_contract_attested_no",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[1]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-a.0.line.9_binding_contract_attested_yes",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}

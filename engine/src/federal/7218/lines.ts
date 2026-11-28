@@ -96,7 +96,7 @@ const BEFORE_REGISTRATION_GAP =
  * agrees, usc-26-2025::sec::s45z::f-1-A). The engine enters only the gallons
  * registered at production, because column (h) multiplies column (f) and the
  * form has no other line that takes the unregistered gallons out.
- * QUESTIONS.md item 1; docs/rule-decisions.md row A110.
+ * QUESTIONS.md item 1; docs/rule-decisions.md row A130.
  */
 export function qualifiedGallonsOf(
   sale: CleanFuelSale,

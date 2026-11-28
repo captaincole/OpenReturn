@@ -1,0 +1,1005 @@
+{
+  "formId": "form-8933-schedule-b",
+  "fieldCount": 111,
+  "entries": [
+    {
+      "fieldId": "form-8933-schedule-b.0.header.identifying_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_02[0]",
+          "text": "T-BL003"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.header.taxpayer_name",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_01[0]",
+          "text": "T-VY8Y7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_a_disposal_site_owner",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row1[0].f1_03[0]",
+          "text": "T-I4JDH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_a_operating_interest_pct",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row1[0].f1_06[0]",
+          "text": "T-1GXYM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_a_owner_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row1[0].f1_04[0]",
+          "text": "T-1OXK2"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_a_owner_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row1[0].f1_05[0]",
+          "text": "T-UVURO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_b_disposal_site_owner",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row2[0].f1_07[0]",
+          "text": "T-1PZ7N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_b_operating_interest_pct",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row2[0].f1_10[0]",
+          "text": "T-1I44I"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_b_owner_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row2[0].f1_08[0]",
+          "text": "T-AXQ0B"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_b_owner_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row2[0].f1_09[0]",
+          "text": "T-AQOQT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_c_disposal_site_owner",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row3[0].f1_11[0]",
+          "text": "T-QQ8YZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_c_operating_interest_pct",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row3[0].f1_14[0]",
+          "text": "T-1A9GI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_c_owner_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row3[0].f1_12[0]",
+          "text": "T-1F2MM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_c_owner_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row3[0].f1_13[0]",
+          "text": "T-1RQ39"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_d_disposal_site_owner",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row4[0].f1_15[0]",
+          "text": "T-1HW7J"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_d_operating_interest_pct",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row4[0].f1_18[0]",
+          "text": "T-9TDCN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_d_owner_address",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row4[0].f1_16[0]",
+          "text": "T-1024V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.1_row_d_owner_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table_Part1[0].Row4[0].f1_17[0]",
+          "text": "T-K79LY"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.2_disposal_site_name_location",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_19[0]",
+          "text": "T-1WY8L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.3_site_operator_name_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_20[0]",
+          "text": "T-13AOP"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.4_other_operator_companies_purpose",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_21[0]",
+          "text": "T-KMB1Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.5a_irs_registration_numbers",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_22[0]",
+          "text": "T-44F3V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.5b_epa_eggrt_id_numbers",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_23[0]",
+          "text": "T-1XQQA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.6_injection_start_date",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].f1_24[0]",
+          "text": "01/15/2025"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.7_figures_consistent_with_epa_mrv",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].c1_1[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_capture_facility_name_location",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_27[0]",
+          "text": "T-F5TN0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_carbon_oxide_supplier",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_25[0]",
+          "text": "T-9QD78"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_epa_eggrt_id",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_29[0]",
+          "text": "T-DEKSV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_28[0]",
+          "text": "T-1ADDT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_supplied_nonqualified_carbon_oxide",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].c1_2[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_a_supplier_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row1[0].f1_26[0]",
+          "text": "T-KSA56"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_capture_facility_name_location",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_32[0]",
+          "text": "T-50K4Z"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_carbon_oxide_supplier",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_30[0]",
+          "text": "T-1YIZH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_epa_eggrt_id",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_34[0]",
+          "text": "T-XV1LJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_33[0]",
+          "text": "T-W5VFU"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_supplied_nonqualified_carbon_oxide",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].c1_3[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_b_supplier_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row2[0].f1_31[0]",
+          "text": "T-IA0T1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_capture_facility_name_location",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_37[0]",
+          "text": "T-R8WPF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_carbon_oxide_supplier",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_35[0]",
+          "text": "T-ZP0ZK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_epa_eggrt_id",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_39[0]",
+          "text": "T-DGF2E"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_irs_registration_number",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_38[0]",
+          "text": "T-3RX8N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_supplied_nonqualified_carbon_oxide",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].c1_4[0]",
+          "checked": true
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.0.line.9_row_c_supplier_ein",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page1[0].Table1[0].Row3[0].f1_36[0]",
+          "text": "T-UWA4D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_all_suppliers_delivered_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_42[0]",
+          "text": "T-16I6O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_all_suppliers_stored_col_m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_43[0]",
+          "text": "T-1A0P5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_disposal_site_owner_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_04[0]",
+          "text": "T-HPUGM"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_nonqualified_delivered_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_40[0]",
+          "text": "T-1P7ZV"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_nonqualified_stored_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_41[0]",
+          "text": "T-1SE66"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_qualified_delivered_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_38[0]",
+          "text": "T-15LW9"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_qualified_stored_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowA[0].f2_39[0]",
+          "text": "T-W9ONB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_i_delivered_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_05[0]",
+          "text": "T-4SSBD"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_i_stored_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_06[0]",
+          "text": "T-1TBEB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_ii_delivered_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_07[0]",
+          "text": "T-1BRSK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_ii_stored_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_08[0]",
+          "text": "T-CGIN5"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_iii_delivered_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_09[0]",
+          "text": "T-G9JTF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_a_supplier_iii_stored_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowA[0].f2_10[0]",
+          "text": "T-1VZYZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_all_suppliers_delivered_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_48[0]",
+          "text": "T-S2J3V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_all_suppliers_stored_col_m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_49[0]",
+          "text": "T-MQ872"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_disposal_site_owner_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_11[0]",
+          "text": "T-19SVJ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_nonqualified_delivered_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_46[0]",
+          "text": "T-1V61G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_nonqualified_stored_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_47[0]",
+          "text": "T-1L4GZ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_qualified_delivered_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_44[0]",
+          "text": "T-R1U3V"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_qualified_stored_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowB[0].f2_45[0]",
+          "text": "T-CO16W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_i_delivered_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_12[0]",
+          "text": "T-QE47K"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_i_stored_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_13[0]",
+          "text": "T-WVR5Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_ii_delivered_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_14[0]",
+          "text": "T-9VVW7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_ii_stored_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_15[0]",
+          "text": "T-17VTB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_iii_delivered_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_16[0]",
+          "text": "T-DVVFH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_b_supplier_iii_stored_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowB[0].f2_17[0]",
+          "text": "T-1WPKX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_all_suppliers_delivered_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_54[0]",
+          "text": "T-RV71Q"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_all_suppliers_stored_col_m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_55[0]",
+          "text": "T-UOTQ8"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_disposal_site_owner_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_18[0]",
+          "text": "T-1G5PS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_nonqualified_delivered_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_52[0]",
+          "text": "T-YAVV3"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_nonqualified_stored_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_53[0]",
+          "text": "T-KCPFH"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_qualified_delivered_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_50[0]",
+          "text": "T-1KRB1"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_qualified_stored_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowC[0].f2_51[0]",
+          "text": "T-D4KI7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_i_delivered_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_19[0]",
+          "text": "T-KG0S0"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_i_stored_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_20[0]",
+          "text": "T-108HO"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_ii_delivered_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_21[0]",
+          "text": "T-GZELS"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_ii_stored_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_22[0]",
+          "text": "T-13O8W"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_iii_delivered_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_23[0]",
+          "text": "T-EHLYB"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_c_supplier_iii_stored_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowC[0].f2_24[0]",
+          "text": "T-1DO8G"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_all_suppliers_delivered_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_60[0]",
+          "text": "T-1A5F7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_all_suppliers_stored_col_m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_61[0]",
+          "text": "T-ZGMPQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_disposal_site_owner_col_a",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_25[0]",
+          "text": "T-19Q2N"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_nonqualified_delivered_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_58[0]",
+          "text": "T-1AJOG"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_nonqualified_stored_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_59[0]",
+          "text": "T-18F34"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_qualified_delivered_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_56[0]",
+          "text": "T-11S3H"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_qualified_stored_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowD[0].f2_57[0]",
+          "text": "T-7KQUT"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_i_delivered_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_26[0]",
+          "text": "T-L2ZQL"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_i_stored_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_27[0]",
+          "text": "T-4U2RK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_ii_delivered_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_28[0]",
+          "text": "T-YLXO4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_ii_stored_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_29[0]",
+          "text": "T-3PME7"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_iii_delivered_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_30[0]",
+          "text": "T-1QWYQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_row_d_supplier_iii_stored_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowD[0].f2_31[0]",
+          "text": "T-1Y6M4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_supplier_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_01[0]",
+          "text": "T-P4IYC"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_supplier_ii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_02[0]",
+          "text": "T-192DK"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_supplier_iii",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].f2_03[0]",
+          "text": "T-16S8U"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_all_suppliers_delivered_col_l",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_66[0]",
+          "text": "T-10KKI"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_all_suppliers_stored_col_m",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_67[0]",
+          "text": "T-1WB8L"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_nonqualified_delivered_col_j",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_64[0]",
+          "text": "T-1HAF4"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_nonqualified_stored_col_k",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_65[0]",
+          "text": "T-HA8XX"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_qualified_delivered_col_h",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_62[0]",
+          "text": "T-1F23D"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_qualified_stored_col_i",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColH-M[0].RowTotal[0].f2_63[0]",
+          "text": "T-M41RQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_i_delivered_col_b",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_32[0]",
+          "text": "T-1CUEN"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_i_stored_col_c",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_33[0]",
+          "text": "T-IY8MQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_ii_delivered_col_d",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_34[0]",
+          "text": "T-MO2YQ"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_ii_stored_col_e",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_35[0]",
+          "text": "T-8ZLIF"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_iii_delivered_col_f",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_36[0]",
+          "text": "T-1NH5O"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.10_total_supplier_iii_stored_col_g",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].Table_Part3_ColA-G[0].RowTotal[0].f2_37[0]",
+          "text": "T-1TJUA"
+        }
+      ]
+    },
+    {
+      "fieldId": "form-8933-schedule-b.1.line.11_attest_conforms_epa_filings",
+      "widgets": [
+        {
+          "widgetName": "topmostSubform[0].Page2[0].c2_1[0]",
+          "checked": true
+        }
+      ]
+    }
+  ]
+}

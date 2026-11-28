@@ -89,6 +89,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "Form 5884 lists the fact again while it is malformed",
   ],
   [
+    /^small_employer_plan\.[^.]+$/,
+    "each fact is the whole retirement plan of the taxpayer's own business or farm that claims " +
+      "the Form 8881 credits; whether one exists is Cade's question, as for a business fact. " +
+      "Form 8881 lists the fact again while it is malformed",
+  ],
+  [
     /^casualty\.[^.]+$/,
     "each fact is a whole casualty event (Form 4684); whether one happened is Cade's question",
   ],
@@ -107,6 +113,22 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^investment_credit\.(property|cooperative)\.[^.]+$/,
     "each fact is one whole Form 3468 property, or one cooperative's unused credits; whether " +
       "one exists is Cade's question, and Form 3468 lists a property fact whose answers are missing",
+  ],
+  [
+    /^clean_electricity\.facility\.[^.]+$/,
+    "each fact is one whole Form 7211 facility; whether one exists is Cade's question, and " +
+      "Form 7211 lists a facility fact whose answers are missing",
+  ],
+  [
+    /^renewable_electricity\.facility\.[^.]+$/,
+    "each fact is one whole facility on its own Form 8835; whether one exists is Cade's " +
+      "question, and Form 8835 lists a facility fact whose answers are missing",
+  ],
+  [
+    /^nuclear_facility\.[^.]+$/,
+    "each fact is one whole nuclear power facility the taxpayer owns (one Form 7213 each); " +
+      "whether one exists is Cade's question, and Form 7213 lists a facility fact whose ZEC " +
+      "answer (Part II line 6) is missing",
   ],
   [
     /^clean_fuel_facility\.[^.]+$/,
@@ -184,10 +206,46 @@ const OPTIONAL: Array<[RegExp, string]> = [
     "each fact is a whole Armed Forces move (Form 3903); whether one happened is Cade's question",
   ],
   [
+    /^disabled_access\.[^.]+$/,
+    "each fact is one group of a business's eligible access expenditures (Form 8826 line 1); " +
+      "whether a business paid any is Cade's question. Form 8826 lists the fact again while it " +
+      "is malformed, and asks the prior-year answers once one exists",
+  ],
+  [
+    /^clean_hydrogen\.facility\.[^.]+$/,
+    "each fact is one whole Form 7210 facility; whether the taxpayer owns a clean hydrogen " +
+      "production facility is Cade's question, and Form 7210 lists the fact again while its " +
+      "section 45Q, section 48(a)(15) or line 5 answers are missing",
+  ],
+  [
     /^tip_credit\.[^.]+$/,
     "each fact is one whole business's payroll tip records (Form 8846 lines 1 to 4); whether a " +
       "business had tipped employees is Cade's question. Form 8846 lists the fact again while " +
       "its Medicare-only tips are missing",
+  ],
+  [
+    /^research_credit$/,
+    "the fact is the whole of the taxpayer's own research for Form 6765 (Sections A to G); " +
+      "whether the business did qualified research is Cade's question. Form 6765 asks for it when " +
+      "the decision files the form without one",
+  ],
+  [
+    /^childcare_expenditure\.[^.]+$/,
+    "each fact is one whole childcare expenditure the business claims the credit for (Form " +
+      "8882 lines 1 and 3); whether one exists is Cade's question. Form 8882 lists the fact " +
+      "again while it is malformed",
+  ],
+  [
+    /^agri_biodiesel\.[^.]+$/,
+    "each fact is one whole business's agri-biodiesel production records (Form 8864 lines 7 to " +
+      "9); whether a business produced the fuel is Cade's question. Form 8864 lists the fact " +
+      "again while it is malformed",
+  ],
+  [
+    /^orphan_drug_credit$/,
+    "the fact is the whole orphan drug credit of the taxpayer's own business (Form 8820 lines 1 " +
+      "to 2b and Part II); whether the business paid for clinical testing of an orphan drug is " +
+      "Cade's question. Form 8820 lists the fact again while Part II or line 2b is missing",
   ],
   [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
@@ -582,6 +640,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
     /^prior_year\.ca_tax$/,
     "KNOWN GAP: decides whether FTB 5805 files. Needed only when the CA balance due is " +
       "$500 or more, which the resolver cannot see before evaluation.",
+  ],
+  [
+    /^decisions\.scope\.must_file_6478$/,
+    "a choice: a pass-through biofuel producer credit goes on Form 6478 line 3 or straight to " +
+      "Form 3800 line 4c (K-1 instructions, box 15 code I); without the decision Form 3800 " +
+      "takes the same credit and no other value changes",
   ],
 ];
 

@@ -52,3 +52,5 @@ The K-1 is a PDF in `docs/`, made by `generate-docs.ts` from the existing Schedu
 | 6251 line 9 | 26% × (155,495 − 88,100) | 17,523 |
 | 3800 line 16, 38 | 26,386 − 17,523 | 8,863 |
 | Schedule 3 line 6a | 3800 line 38 | 8,863 |
+
+Part V lists the K-1's line 1q row before the two facilities, as for every form added after Form 8820 (`3800/sources.ts`), and uses the limit in that order: the K-1 takes $3,200 and Hereford $5,663 (8,863 − 3,200), so Hereford carries $46,015 forward and Cedar Hollow $6,080.
