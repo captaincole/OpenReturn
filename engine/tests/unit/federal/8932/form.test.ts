@@ -326,3 +326,26 @@ describe("Form 8932: gaps and other branches", () => {
     expect(none.files("form-8932")).toBe(false);
   });
 });
+
+/*
+ * Section 280C(a) takes the credit off the wage deduction, and California does
+ * not apply it (ca-rtc-2025::sec::s17270::b), so Schedule CA column B gives
+ * back the wages line 2 took off: line 3 for a business, line 6 for a farm.
+ */
+describe("Form 8932: California gives the wage reduction back", () => {
+  const asCaResident = (base: Scenario) =>
+    base.decisions.map((each) =>
+      each.decisionKey === "decisions.scope.must_file_ca_540"
+        ? { ...each, decision: true }
+        : each.decisionKey === "decisions.scope.ca_residency"
+          ? { ...each, decision: "full_year_resident" }
+          : each,
+    );
+
+  it("on Schedule CA line 3 for a business (basel) and line 6 for a farm (cilia)", () => {
+    const business = evaluate(basel, basel.facts, asCaResident(basel));
+    expect(business.value("schedule-ca", "0.line.b3_subtractions")).toBe(5_690);
+    const farm = evaluate(cilia, cilia.facts, asCaResident(cilia));
+    expect(farm.value("schedule-ca", "0.line.b6_subtractions")).toBe(3_650);
+  });
+});

@@ -181,3 +181,4 @@ These looked like conflicts and change no dollars, or at most $1. Each is in its
 
 - Form 6198: who files with a profit; how an allowed loss is split among items (the engine matches the example in the instructions); cents on five lines.
 - FTB 3801: what the form does after line 3 shows income; who files with a federal loss and a California gain.
+- Form 8932: line 3 (Rev. December 2021) names K-1 code P, and the 2025 K-1 instructions use code AV for the same credit; the engine reads code AV.

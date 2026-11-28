@@ -381,8 +381,8 @@ export function farmsOnReturn(
 }
 
 /*
- * The figured part of the farms' line 22 reductions (Forms 5884 and 8844;
- * Schedule CA line 6): the farms' figured credits in total, and the labor
+ * The figured part of the farms' line 22 reductions (Forms 5884, 8844 and
+ * 8932; Schedule CA line 6): the farms' figured credits in total, and the labor
  * hired they took off, at most each farm's stated labor hired, so the two
  * credits of one farm take no dollar twice.
  */

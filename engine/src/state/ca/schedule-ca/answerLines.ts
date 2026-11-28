@@ -174,8 +174,8 @@ const FARM_DEPRECIATION_GAP =
  * differ (ca-540-sched-ca-inst-2025::sec::business-deductions-related-to::b01).
  * The farm's stated employmentCredits add the credits no employee fact
  * figures (Forms 5884, 8844, 8932, 8994) and do not say which, so the
- * California amount is not known. The Form 5884 and Form 8844 parts that the
- * employee facts figure are known (caFarmLaborCredits).
+ * California amount is not known. The Form 5884, Form 8844 and Form 8932 parts
+ * that the employee facts figure are known (caFarmLaborCredits).
  */
 const FARM_WAGE_CREDIT_GAP =
   "A stated federal wage credit (Forms 5884, 8844, 8932, 8994 on Schedule F line 22, or Form 8941 on line 15) reduced the farm's deduction, and California's business deductions differ for the Work Opportunity Credit and the Small Employer Health Insurance Credit (ca-540-sched-ca-inst-2025::sec::business-deductions-related-to::b01); the farm fact does not split those credits by form.";
@@ -187,9 +187,9 @@ const FARM_WAGE_CREDIT_GAP =
  * (ca-540-sched-ca-inst-2025::sec::line-6-farm-income-or-loss::b01). A farm with
  * no depreciation and no federal wage credit has none of these on line 34:
  * blank. With depreciation or a stated wage credit the California amount is
- * not known (a gap). The labor hired that the Form 5884 and Form 8844
- * credits of the farms' own employees took off goes in column B, once for
- * both: "Enter the amount of the federal Work Opportunity Credit that reduced
+ * not known (a gap). The labor hired that the Form 5884, Form 8844 and Form
+ * 8932 credits of the farms' own employees took off goes in column B, once
+ * for all:"Enter the amount of the federal Work Opportunity Credit that reduced
  * the federal deduction for wages on Schedule CA (540), Part I ... line 3,
  * line 5, or line 6, column B"
  * (ftb-pub-1001-2025::sec::enter-on-schedule-ca-540-part-i-or-7::b07), and
