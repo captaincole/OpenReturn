@@ -4,7 +4,7 @@ Form 8874 (Rev. November 2021) holds its own instructions (`irs-8874-form-2025`)
 
 ## Two texts conflict
 
-- **Line 2 rounding (decided, A122).** Each K-1's code AD amount rounds to whole dollars before line 2 adds them. The Form 1040 instructions say to round only the total; Form 3800 Part V lists one amount for each K-1, so line 3 equals Form 3800 line 1i. The `DECISION` comment is above `k1NewMarketsCreditOf` in `resolveInfo.ts`; the row is A122 in `docs/rule-decisions.md`. Changes dollars: at most $1 for each K-1 with cents.
+- **Line 2 rounding (decided, A133).** Each K-1's code AD amount rounds to whole dollars before line 2 adds them. The Form 1040 instructions say to round only the total; Form 3800 Part V lists one amount for each K-1, so line 3 equals Form 3800 line 1i. The `DECISION` comment is above `k1NewMarketsCreditOf` in `resolveInfo.ts`; the row is A133 in `docs/rule-decisions.md`. Changes dollars: at most $1 for each K-1 with cents.
 
 ## Should we do this now
 
@@ -37,7 +37,7 @@ Form 8874 (Rev. November 2021) holds its own instructions (`irs-8874-form-2025`)
 
 ## Second opinions
 
-- **Blind fill (2026-11-27).** A preparer filled 14 cases from the blank form and its instructions only. Every line 1 rate and credit, line 2 and line 3 matches the engine, blank lines included. The preparer's dollar doubts are items 1, 2 and 7 above and decision A122 (line 2 rounding). On item 2 the preparer made the same choice: a sale on the credit allowance date keeps that date's credit.
+- **Blind fill (2026-11-27).** A preparer filled 14 cases from the blank form and its instructions only. Every line 1 rate and credit, line 2 and line 3 matches the engine, blank lines included. The preparer's dollar doubts are items 1, 2 and 7 above and decision A133 (line 2 rounding). On item 2 the preparer made the same choice: a sale on the credit allowance date keeps that date's credit.
 - **PolicyEngine-US 2.154.2 (commit c1fea42a38).** It does not model the new markets credit. `general_business_credit` is a bare input with no formula, so it has no constant or formula to compare.
 - **Other projects.** The repository names no other reference implementation for this form.
 
@@ -52,6 +52,6 @@ Form 8874 (Rev. November 2021) holds its own instructions (`irs-8874-form-2025`)
 | Line 1 column (f) | published example with numbers (ATG Examples 1 and 2) |
 | Row 6 with more than six investments | unsupported (no statement) |
 | A recapture event in 2025 | unsupported (Schedule 2 line 17a) |
-| Line 2 (K-1 code AD) | stated rule; rounding is decision A122 |
+| Line 2 (K-1 code AD) | stated rule; rounding is decision A133 |
 | Line 3 | stated rule |
 | Passive answer | own reading (stated by the holder) |

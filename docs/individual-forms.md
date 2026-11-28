@@ -15,7 +15,7 @@ This page lists each form that an individual income tax return can hold, and wha
 
 Source: [Tax year 2025 accepted forms and schedules for individual tax returns and extensions](https://www.irs.gov/pub/irs-efile/tax-year-2025-accepted-forms-schedules-individual-tax-returns-extensions.xlsx), IRS, dated 2025-11-18.
 
-The list has 225 rows, and 197 are forms and schedules to compute. The engine has 103 of them, and 90 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
+The list has 225 rows, and 197 are forms and schedules to compute. The engine has 128 of them, and 109 have rules. Of the 43 tier 1 forms, the engine has 43, and 43 have rules.
 
 | Form | Title | Tier 1 | Engine | Copies |
 | --- | --- | --- | --- | --- |
@@ -67,7 +67,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 2441 | Child and Dependent Care Expenses | Yes | Rules | 1 |
 | Form 2555 | Foreign Earned Income |  | Rules | 2 |
 | Form 3115 | Application for Change in Accounting Method |  | Not in the engine | unbounded |
-| Form 3468 | Investment Credit |  | No rules yet | unbounded |
+| Form 3468 | Investment Credit |  | Rules | unbounded |
 | Form 3800 | General Business Credit | Yes | Rules | 1 |
 | Form 3903 | Moving Expenses |  | Rules | 2 |
 | Form 4136 | Credit For Federal Tax Paid On Fuels |  | Rules | 1 |
@@ -104,23 +104,23 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 5713 Schedule A | International Boycott Factor (Section 999(c)(1)) |  | Not in the engine | unbounded |
 | Form 5713 Schedule B | Specifically Attributable Taxes and Income (Section 999(c)(2)) |  | Not in the engine | unbounded |
 | Form 5713 Schedule C | Tax Effect of the International Boycott Provisions |  | Not in the engine | unbounded |
-| Form 5884 | Work Opportunity Credit |  | No rules yet | unbounded |
+| Form 5884 | Work Opportunity Credit |  | Rules | unbounded |
 | Form 6198 | At-Risk Limitations | Yes | Rules | unbounded |
 | Form 6251 | Alternative Minimum Tax-Individuals | Yes | Rules | 1 |
 | Form 6252 | Installment Sale Income | Yes | Rules | unbounded |
-| Form 6478 | Biofuel Producer Credit |  | Not in the engine | unbounded |
-| Form 6765 | Credit for Increasing Research Activities |  | No rules yet | unbounded |
+| Form 6478 | Biofuel Producer Credit |  | Rules | unbounded |
+| Form 6765 | Credit for Increasing Research Activities |  | Rules | unbounded |
 | Form 6781 | Gains and Losses From Section 1256 Contracts and Straddles | Yes | Rules | unbounded |
 | Form 7203 | S Corporation Shareholder Stock and Debt Basis Limitations | Yes | Rules | unbounded |
 | Form 7204 | Consent To Extend the Time To Assess Tax Related to Contested Foreign Income Taxes- Provisional Foreign Tax Credit Agreement |  | Not in the engine | unbounded |
 | Form 7205 | Energy Efficient Commercial Buildings Deduction |  | Not in the engine | unbounded |
 | Form 7206 | Self-Employed Health Insurance Deduction |  | Rules | unbounded |
-| Form 7207 | Advanced Manufacturing Production Credit |  | Not in the engine | unbounded |
-| Form 7210 | Clean Hydrogen Production Credit |  | Not in the engine | unbounded |
-| Form 7211 | Clean Electricity Production Credit |  | Not in the engine | unbounded |
-| Form 7213 | Nuclear Power Production Credit |  | Not in the engine | 3 |
+| Form 7207 | Advanced Manufacturing Production Credit |  | Rules | unbounded |
+| Form 7210 | Clean Hydrogen Production Credit |  | Rules | unbounded |
+| Form 7211 | Clean Electricity Production Credit |  | Rules | unbounded |
+| Form 7213 | Nuclear Power Production Credit |  | Rules | 3 |
 | Form 7217 | Partner's Report of Property Distributed by a Partnership |  | Not in the engine | unbounded |
-| Form 7218 | Clean Fuel Production Credit |  | Not in the engine | unbounded |
+| Form 7218 | Clean Fuel Production Credit |  | Rules | unbounded |
 | Form 8082 | Notice of Inconsistent Treatment or Administrative Adjustment Request (AAR) |  | Not in the engine | unbounded |
 | Form 8275 | Disclosure Statement |  | Not in the engine | 2 |
 | Form 8275R | Regulation Disclosure Statement |  | Not in the engine | 2 |
@@ -131,10 +131,10 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8396 | Mortgage Interest Credit |  | Rules | 1 |
 | Form 8582 | Passive Activity Loss Limitations | Yes | Rules | 1 |
 | Form 8582CR | Passive Activity Credit Limitations | Yes | Rules | 1 |
-| Form 8586 | Low-Income Housing Credit |  | No rules yet | unbounded |
+| Form 8586 | Low-Income Housing Credit |  | Rules | unbounded |
 | Form 8594 | Asset Acquisition Statement Under Section 1060 |  | Not in the engine | unbounded |
 | Form 8606 | Nondeductible IRAs | Yes | Rules | 25 |
-| Form 8609A | Annual Statement for Low-Income Housing Credit |  | No rules yet | unbounded |
+| Form 8609A | Annual Statement for Low-Income Housing Credit |  | Rules | unbounded |
 | Form 8611 | Recapture of Low-Income Housing Credit |  | Rules | unbounded |
 | Form 8615 | Tax for Certain Children Who Have Unearned Income |  | Rules | 1 |
 | Form 8621 | Return By Shareholder of a Passive Foreign Investment Company or Qualified Electing Fund | Yes | Rules | unbounded |
@@ -144,23 +144,23 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8805 | Foreign Partner's Information Statement of Section 1446 Withholding tax |  | Not a form: a document |  |
 | Form 8814 | Parents' Election to Report Child's Interest and Dividends | Yes | Rules | 10 |
 | Form 8815 | Exclusion of Interest From Series EE and I U.S. Savings Bonds Issued after 1989 |  | Rules | 1 |
-| Form 8820 | Orphan Drug Credit |  | Not in the engine | unbounded |
+| Form 8820 | Orphan Drug Credit |  | Rules | unbounded |
 | Form 8824 | Like-Kind Exchanges | Yes | Rules | unbounded |
 | Form 8825 | Rental Real Estate Income and Expenses of a Partnership or an S Corporation |  | Not in the engine | unbounded |
-| Form 8826 | Disabled Access Credit |  | No rules yet | unbounded |
+| Form 8826 | Disabled Access Credit |  | Rules | unbounded |
 | Form 8828 | Recapture of Federal Mortgage Subsidy |  | Rules | 1 |
 | Form 8829 | Expenses for Business Use of Your Home |  | Rules | 32 |
 | Form 8833 | Treaty-Based Return Position Disclosure Under Section 6114 or 7701(b) |  | Rules | unbounded |
 | Form 8834 | Qualified Electric Vehicle Credit |  | Rules | unbounded |
-| Form 8835 | Renewable Electricity, Refined Coal, and Indian Coal Production Credit |  | Not in the engine | unbounded |
+| Form 8835 | Renewable Electricity, Refined Coal, and Indian Coal Production Credit |  | Rules | unbounded |
 | Form 8838 | Consent to Extend the Time To Assess Tax Under Section 367-Gain Recognition Agreement |  | Not in the engine | unbounded |
 | Form 8838P | Consent To Extend the Time To Assess Tax Pursuant to the Gain Deferral Method (Section 721(c)) |  | Not in the engine | unbounded |
 | Form 8839 | Qualified Adoption Expenses |  | Rules | 1 |
 | Form 8840 | Closer Connection Exception Statement for Aliens |  | Not in the engine |  |
 | Form 8843 | Statement for Exempt Individuals and Individuals With a Medical Condition |  | Not in the engine |  |
-| Form 8844 | Empowerment Zone and Renewal Community Employment Credit |  | No rules yet | unbounded |
+| Form 8844 | Empowerment Zone and Renewal Community Employment Credit |  | Rules | unbounded |
 | Form 8845 | (no title in IRS listing) |  | Not in the engine | unbounded |
-| Form 8846 | Credit for Employer Social Security and Medicare Taxes Paid on Certain Employee Tips |  | No rules yet | unbounded |
+| Form 8846 | Credit for Employer Social Security and Medicare Taxes Paid on Certain Employee Tips |  | Rules | unbounded |
 | Form 8853 | Archer MSAs and Long-Term Care Insurance Contracts |  | Rules | 1 |
 | Form 8854 | Initial and Annual Expatriation Information Statement |  | Not in the engine | 2 |
 | Form 8858 | Information Return of U.S. Persons With Respect To Foreign Disregarded Entities |  | Not in the engine | unbounded |
@@ -168,7 +168,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8859 | District of Columbia First-Time Homebuyer Credit |  | Rules | 1 |
 | Form 8862 | Information To Claim Earned Income Credit After Disallowance |  | Rules | 1 |
 | Form 8863 | Education Credits (American Opportunity and Lifetime Learning Credits) |  | Rules | 1 |
-| Form 8864 | Biodiesel and Renewable Diesel Fuels Credit |  | Not in the engine | unbounded |
+| Form 8864 | Biodiesel and Renewable Diesel Fuels Credit |  | Rules | unbounded |
 | Form 8865 | Return of U.S. Persons With Respect to Certain Foreign Partnerships |  | Not in the engine | unbounded |
 | Form 8865 Schedule G | Statement of Application of the Gain Deferral Method Under Section 721(c) |  | Not in the engine | unbounded |
 | Form 8865 Schedule H | Acceleration Events and Exceptions Reporting Relating to Gain Deferral Method Under Section 721(c) |  | Not in the engine | unbounded |
@@ -180,37 +180,37 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8866 | Interest Computation Under the Look-Back Method for Property Depreciated Under the Income Forecast Method |  | Not in the engine | 5 |
 | Form 8867 | Paid Preparer's Due Diligence Checklist |  | Not in the engine | 4 |
 | Form 8873 | Extraterritorial Income Exclusion |  | Not in the engine | unbounded |
-| Form 8874 | New Markets Credit |  | Not in the engine | unbounded |
+| Form 8874 | New Markets Credit |  | No rules yet | unbounded |
 | Form 8880 | Credit for Qualified Retirement Savings Contributions |  | Rules | 1 |
-| Form 8881 | Credit for Small Employer Pension Plan Startup Costs |  | No rules yet | unbounded |
-| Form 8882 | Credit for Employer-Provided Childcare Facilities and Services |  | No rules yet | unbounded |
+| Form 8881 | Credit for Small Employer Pension Plan Startup Costs |  | Rules | unbounded |
+| Form 8882 | Credit for Employer-Provided Childcare Facilities and Services |  | Rules | unbounded |
 | Form 8883 | Asset Allocation Statement Under Section 338 |  | Not in the engine | unbounded |
 | Form 8886 | Reportable Transaction Disclosure Statement |  | Not in the engine | unbounded |
 | Form 8888 | Allocation of Refund (Including Savings Bond Purchases) |  | Rules | 1 |
 | Form 8889 | Health Savings Accounts (HSAs) | Yes | Rules | 2 |
-| Form 8896 | Low Sulfur Diesel Fuel Production Credit |  | Not in the engine | unbounded |
-| Form 8900 | Qualified Railroad Track Maintenance Credit |  | Not in the engine | unbounded |
-| Form 8906 | Distilled Spirits Credit |  | Not in the engine | unbounded |
-| Form 8908 | Energy Efficient Home Credit |  | Not in the engine | unbounded |
+| Form 8896 | Low Sulfur Diesel Fuel Production Credit |  | No rules yet | unbounded |
+| Form 8900 | Qualified Railroad Track Maintenance Credit |  | No rules yet | unbounded |
+| Form 8906 | Distilled Spirits Credit |  | No rules yet | unbounded |
+| Form 8908 | Energy Efficient Home Credit |  | No rules yet | unbounded |
 | Form 8911 | Alternative Fuel Vehicle Refueling Property Credit |  | Rules | unbounded |
-| Form 8911 Schedule A | Alternative Fuel Vehicle Refueling Property |  | Not in the engine | unbounded |
+| Form 8911 Schedule A | Alternative Fuel Vehicle Refueling Property |  | No rules yet | unbounded |
 | Form 8912 | Credit to Holders of Tax Credit Bonds |  | Rules | unbounded |
 | Form 8915F | Qualified Disaster Retirement Plan Distributions and Repayments |  | Rules | 6 |
 | Form 8917 | Tuition and Fees Deduction |  | Not in the engine | 1 |
 | Form 8919 | Uncollected Social Security and Medicare Tax on Wages |  | Rules | 2 |
 | Form 8925 | Report of Employer-Owned Life Insurance Contracts |  | Not in the engine | 8 |
-| Form 8932 | Credit for Employer Differential Wage Payments |  | Not in the engine | 1 |
+| Form 8932 | Credit for Employer Differential Wage Payments |  | No rules yet | 1 |
 | Form 8933 | Carbon Dioxide Sequestration Credit |  | No rules yet | unbounded |
-| Form 8933 Schedule A | Disposal or Enhanced Oil Recovery Owner Certification |  | Not in the engine | unbounded |
-| Form 8933 Schedule B | Disposal Operator Certification |  | Not in the engine | unbounded |
-| Form 8933 Schedule C | Enhanced Oil Recovery Operator Certification |  | Not in the engine | unbounded |
-| Form 8933 Schedule D | Recapture Certification |  | Not in the engine | unbounded |
-| Form 8933 Schedule E | Election Certification |  | Not in the engine | unbounded |
-| Form 8933 Schedule F | Utilization Certification |  | Not in the engine | unbounded |
+| Form 8933 Schedule A | Disposal or Enhanced Oil Recovery Owner Certification |  | No rules yet | unbounded |
+| Form 8933 Schedule B | Disposal Operator Certification |  | No rules yet | unbounded |
+| Form 8933 Schedule C | Enhanced Oil Recovery Operator Certification |  | No rules yet | unbounded |
+| Form 8933 Schedule D | Recapture Certification |  | No rules yet | unbounded |
+| Form 8933 Schedule E | Election Certification |  | No rules yet | unbounded |
+| Form 8933 Schedule F | Utilization Certification |  | No rules yet | unbounded |
 | Form 8936 | Qualified Plug-In Electric Drive Motor Vehicle Credit |  | Rules | 1 |
-| Form 8936 Schedule A | Clean Vehicle Credit Amount |  | Not in the engine | unbounded |
+| Form 8936 Schedule A | Clean Vehicle Credit Amount |  | No rules yet | unbounded |
 | Form 8938 | Statement of Foreign Financial Assets | Yes | Rules | 1 |
-| Form 8941 | Credit for Small Employer Health Insurance Premiums |  | Not in the engine | 2 |
+| Form 8941 | Credit for Small Employer Health Insurance Premiums |  | No rules yet | 2 |
 | Form 8949 | Sales and Other Dispositions of Capital Assets | Yes | Rules | unbounded |
 | Form 8958 | Allocation of Tax Amounts Between Certain Individuals in Community Property States |  | Rules | 1 |
 | Form 8959 | Additional Medicare Tax | Yes | Rules | 1 |
@@ -222,7 +222,7 @@ The list has 225 rows, and 197 are forms and schedules to compute. The engine ha
 | Form 8992 | Calculation of Net Controlled Foreign Corporation Tested Income (NCTI) |  | No rules yet | 2 |
 | Form 8992 Schedule A | Schedule of Controlled Foreign Corporation (CFC)/Foreign Controlled Foreign Corporation (FCFC)) Information to Compute Net CFC Tested Income (NCTI) |  | Not in the engine | 2 |
 | Form 8993 | Section 250 Deduction for Foreign Derived Intangible Income (FDII) and Global Intangible Low-Taxed Income (GILTI) |  | Not in the engine | 1 |
-| Form 8994 | Employer Credit for Paid Family and Medical Leave |  | Not in the engine | unbounded |
+| Form 8994 | Employer Credit for Paid Family and Medical Leave |  | No rules yet | unbounded |
 | Form 8995 | Qualified Business Income Deduction Simplified Computation | Yes | Rules | 1 |
 | Form 8995A | Qualified Business Income Deduction | Yes | Rules | 1 |
 | Form 8995A Schedule A | Specified Service Trades or Businesses |  | Not in the engine | 1 |

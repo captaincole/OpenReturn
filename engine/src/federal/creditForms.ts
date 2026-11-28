@@ -16,11 +16,18 @@
  * 6478, the biofuel producer credit a pass-through entity allocates from a tax
  * year that began in 2024; Form 7210, the clean hydrogen production credit of
  * each facility the taxpayer owns; Form 8864, the small agri-biodiesel
- * producer credit; Form 8820, the orphan drug credit; and Form 8874, the new
- * markets credit of each qualified equity investment. They are joined here,
- * in this order, and filingInfo.ts takes them as one, so that file stays under
- * its line limit. A new credit form adds its type and resolver here, not to
- * filingInfo.ts.
+ * producer credit; Form 8820, the orphan drug credit; Form 7211, the clean
+ * electricity production credit of each facility the taxpayer owns; and Form
+ * 8835, the renewable electricity production credit of each facility, which
+ * adds sources to Form 3800 lines 4e and 1f; Form 7213, the nuclear power
+ * production credit of each facility the taxpayer owns; Form 7218, the clean
+ * fuel production credit of each fuel facility, which adds a source to Form
+ * 3800 Part III line 1q; Form 7207, the advanced manufacturing production
+ * credit of each facility, which adds a source to Form 3800 Part III line 1b;
+ * and Form 8874, the new markets credit of each qualified equity investment.
+ * They are joined here, in this order, and filingInfo.ts takes them as one, so
+ * that file stays under its line limit. A new credit form adds its type and
+ * resolver here, not to filingInfo.ts.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";
@@ -35,8 +42,16 @@ import type { Form6478FilingInfo } from "./6478/filingInfo.js";
 import { resolve6478Info } from "./6478/resolveInfo.js";
 import type { Form6765FilingInfo } from "./6765/filingInfo.js";
 import { resolve6765Info } from "./6765/resolveInfo.js";
+import type { Form7207FilingInfo } from "./7207/filingInfo.js";
+import { resolve7207Info } from "./7207/resolveInfo.js";
 import type { Form7210FilingInfo } from "./7210/filingInfo.js";
 import { resolve7210Info } from "./7210/resolveInfo.js";
+import type { Form7211FilingInfo } from "./7211/filingInfo.js";
+import { resolve7211Info } from "./7211/resolveInfo.js";
+import type { Form7213FilingInfo } from "./7213/filingInfo.js";
+import { resolve7213Info } from "./7213/resolveInfo.js";
+import type { Form7218FilingInfo } from "./7218/filingInfo.js";
+import { resolve7218Info } from "./7218/resolveInfo.js";
 import type { Form8582CRFilingInfo } from "./8582-cr/filingInfo.js";
 import { resolve8582CRInfo } from "./8582-cr/resolveInfo.js";
 import type { Form8586FilingInfo } from "./8586/filingInfo.js";
@@ -49,6 +64,8 @@ import type { Form8826FilingInfo } from "./8826/filingInfo.js";
 import { resolve8826Info } from "./8826/resolveInfo.js";
 import type { Form8834FilingInfo } from "./8834/filingInfo.js";
 import { resolve8834Info } from "./8834/resolveInfo.js";
+import type { Form8835FilingInfo } from "./8835/filingInfo.js";
+import { resolve8835Info } from "./8835/resolveInfo.js";
 import type { Form8844FilingInfo } from "./8844/filingInfo.js";
 import { resolve8844Info } from "./8844/resolveInfo.js";
 import type { Form8846FilingInfo } from "./8846/filingInfo.js";
@@ -82,6 +99,11 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form7210FilingInfo &
   Form8864FilingInfo &
   Form8820FilingInfo &
+  Form7211FilingInfo &
+  Form8835FilingInfo &
+  Form7213FilingInfo &
+  Form7218FilingInfo &
+  Form7207FilingInfo &
   Form8874FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
@@ -103,5 +125,10 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve7210Info,
   resolve8864Info,
   resolve8820Info,
+  resolve7211Info,
+  resolve8835Info,
+  resolve7213Info,
+  resolve7218Info,
+  resolve7207Info,
   resolve8874Info,
 ];

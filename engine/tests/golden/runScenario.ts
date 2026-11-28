@@ -103,7 +103,17 @@ export async function evaluateScenarioForms(
   return { ...evaluateAllForms(formIds, ctx, catalog), catalog };
 }
 
-export async function runScenario(scenario: Scenario): Promise<RunResult> {
+/*
+ * With `pdf` false the check compares the engine's values with the expected
+ * values and fills no PDF: seconds for every scenario, so it runs before each
+ * commit. With `pdf` true it also fills each form, reads the boxes back and
+ * compares them with the scenario's golden PDF and its rendered checks; that
+ * is most of the time and it must pass before a pull request merges.
+ */
+export async function runScenario(
+  scenario: Scenario,
+  options: { pdf: boolean } = { pdf: true },
+): Promise<RunResult> {
   const t0 = Date.now();
   const failures: string[] = [];
   const notModeled: string[] | undefined = scenario.allowNotModeled ? [] : undefined;
@@ -128,6 +138,7 @@ export async function runScenario(scenario: Scenario): Promise<RunResult> {
       failures,
       notModeled,
       known,
+      options.pdf,
     );
   }
 
@@ -168,13 +179,8 @@ async function assertForm(
   failures: string[],
   notModeled?: string[],
   known?: { causes: Record<string, string>; hits: string[] },
+  pdf = true,
 ): Promise<void> {
-  const { rendered, warnings } = await fillFromCatalog({
-    blankPdfBytes: getBlankPdf(blankPdfPath),
-    form,
-    catalog,
-  });
-
   const prefix = sf.formId;
 
   if (notModeled) {
@@ -202,6 +208,13 @@ async function assertForm(
       failures.push(`[${prefix}] ${fieldId} now matches — remove it from knownMismatches.`);
     }
   }
+  if (!pdf) return;
+
+  const { rendered, warnings } = await fillFromCatalog({
+    blankPdfBytes: getBlankPdf(blankPdfPath),
+    form,
+    catalog,
+  });
   for (const [fieldId, expected] of Object.entries(sf.expected.renderedText)) {
     assertRenderedText(rendered, fieldId, expected, failures, prefix);
   }
