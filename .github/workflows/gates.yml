@@ -1,0 +1,142 @@
+# The gates a pull request must pass before it merges. Each job is one gate,
+# and the jobs run side by side on GitHub's runners. No job calls a model or
+# needs a secret: every test is offline.
+#
+# GitHub tests the pull request's head merged with its base, so a green run
+# means the gates pass "with main merged in" as of the last push or update.
+name: gates
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gates-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  HUSKY: "0"
+
+jobs:
+  static:
+    name: typecheck, lint, format
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm run format:check
+
+  values:
+    name: scenario values
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  pdf:
+    name: PDF fill
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run test:pdf
+
+  unit-engine:
+    name: unit tests, engine
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm -w @openreturn/engine run test:unit
+
+  unit-services:
+    name: unit tests, Canon, Cade and web
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            web/package-lock.json
+      - run: npm ci
+      - run: npm --prefix web ci
+      - run: npm -w canon run test:unit
+      - run: npm -w cade run test:unit
+      - run: npm --prefix web run test:unit
+
+  integration:
+    name: integration tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      # The required-inputs check has its own job, in four parts.
+      - run: npm -w @openreturn/engine run test:integration -- --exclude "**/requiredInputs.part*"
+      - run: npm -w cade run test:integration
+
+  inputs:
+    name: required inputs, full, part ${{ matrix.part }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [1, 2, 3, 4]
+    env:
+      REQUIRED_INPUTS_FULL: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx vitest run tests/integration/requiredInputs.part${{ matrix.part }}
+        working-directory: engine
+
+  # One check that is green only when every gate is: the one to watch or require.
+  gates:
+    name: all gates
+    if: always()
+    needs: [static, values, pdf, unit-engine, unit-services, integration, inputs]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo '${{ toJSON(needs) }}'
+          test "${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') || contains(needs.*.result, 'skipped') }}" = "false"
