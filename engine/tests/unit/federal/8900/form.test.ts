@@ -9,6 +9,8 @@ import { describe, expect, it } from "vitest";
 import {
   RAILROAD_TRACK_MAINTENANCE_KEY,
   makeGeneralBusinessCreditFactKey,
+  makeK1HoldingFactKey,
+  makeSCorporationK1FactKey,
   type BusinessFactValue,
   type RailroadTrackMaintenanceFactValue,
 } from "../../../../src/facts/index.js";
@@ -17,8 +19,10 @@ import { evaluateScenario } from "../../../../src/index.js";
 import { decisionRow } from "../../../helpers/fixtureBuilders.js";
 import {
   RAILROAD_KEY,
+  TERMINAL_ID,
   TRACK_ASSET,
   railroad,
+  terminalK1,
   trackMaintenance,
 } from "../../../scenarios/synthetic/nieda/facts.js";
 import { niedaScenario as nieda } from "../../../scenarios/synthetic/nieda/index.js";
@@ -129,6 +133,37 @@ describe("the nieda return: assignments both ways, a capitalized asset and a K-1
   it("Form 3800 line 4g equals line 7, the K-1 and the railroad", () => {
     expect(out.value("form-3800", COL_E)).toBe(166_075);
     expect(out.value("form-3800", "3.part3.4g_form_8900_col_a")).toBe(2);
+  });
+});
+
+describe("line 6 with two K-1s that show cents", () => {
+  const SECOND_ID = "second-grain-terminal";
+  const creditOnly = (amount: number) => [{ box: "13", code: "AJ", amount }];
+  const out = evaluate(
+    factsWith(
+      { [makeSCorporationK1FactKey(TERMINAL_ID)]: { ...terminalK1, boxes: creditOnly(1_200.4) } },
+      [
+        row("k1", makeSCorporationK1FactKey(SECOND_ID), {
+          ...terminalK1,
+          entityName: "Second Grain Terminal, Inc.",
+          entityEin: "00-0008901",
+          boxes: creditOnly(800.4),
+        }),
+        row("k1", makeK1HoldingFactKey(SECOND_ID), {
+          owner: "taxpayer",
+          materiallyParticipated: true,
+          allInvestmentAtRisk: true,
+          stockBasisAtStart: 120_000,
+          stockAcquiredAs: "purchased",
+        }),
+      ],
+    ),
+  );
+
+  it("rounds each K-1, then adds: $1,200 + $800, not $2,001 (docs/rule-decisions.md A122)", () => {
+    expect(out.line(L6)).toBe(2_000);
+    expect(out.line(L7)).toBe(163_625 + 2_000);
+    expect(out.value("form-3800", COL_E)).toBe(163_625 + 2_000);
   });
 });
 

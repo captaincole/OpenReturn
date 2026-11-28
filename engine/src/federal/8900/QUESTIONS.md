@@ -58,6 +58,24 @@ Form and instructions: Rev. December 2023, for tax years from 2023 (`irs-8900-in
 - An asset with a section 179 election, or not wholly business use, as for Form 8882.
 - The decision `decisions.scope.must_file_8900` false while the fact lowers a basis: Form 3800 line 4g is a gap until the two agree.
 
+## 10. The whole credit or a share of it lowers the basis
+
+- Source: "Use the amount of RTMC to reduce the basis ... The reduction is limited to the amount of QRTME capitalized for the asset" (`adjustments-to-basis::b01`). The text does not split the credit between the expenditures deducted and those capitalized; it cites Regulations section 1.45G-1(e)(2), which is not in the corpus.
+- Default: the whole of line 5 lowers the basis, up to the amount capitalized (`basisReductionOf`). The blind fill read it the same way.
+- Changes dollars: yes, when part of line 1 is deducted. In `nieda`, a share by the capitalized part ($210,000 of $412,500) would lower the basis by $83,300, not $163,625.
+
+## Blind fill (2026-11-27)
+
+A preparer filled 14 cases from the blank form and the instructions only. Every line matched the engine except one.
+
+- Case 7, line 6 and line 7: two K-1s of $1,200.40 and $800.40. The blind fill added the cents and rounded once ($2,001, Form 1040 rule, `irs-1040-inst-2025::sec::rounding-off-to-whole::b01`). The engine rounds each K-1 first ($2,000), so that line 7 equals Form 3800 line 4g, which lists each K-1 by its EIN (`irs-3800-inst-2025::sec::part-v-3::b01`). This is decision A122 in `docs/rule-decisions.md`, the rule of A96 for every K-1 credit line. The engine keeps it; `form.test.ts` pins it.
+- The blind doubts that change dollars are items 5 and 10. The others change no dollars (items 4 and 2, blank against 0 on lines 3b, 3c and 6) or follow the form's arithmetic (line 2 is 40% of line 1 as rounded).
+
+## Second opinions
+
+- PolicyEngine-US 2.154.2 (commit c1fea42a38, 2026-11-27): it does not model Form 8900 or section 45G. `general_business_credit` is a bare input with no formula, so it has no constant or formula to compare.
+- No other reference implementation the repository names (IRS Direct File) covers business credits.
+
 ## Proposals for a discussion
 
 - **Intangible assets.** `BusinessCreditReduction` (facts/kinds/activitiesOnReturn.ts) lowers a Schedule C line, a Part V expense or a 2025 asset's cost. A fourth kind, an amortized cost by its description, would let this credit lower an assignment payment that is capitalized and amortized. It changes the shape every credit's reduction uses, so it waits for a person.
