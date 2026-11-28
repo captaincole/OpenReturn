@@ -14,10 +14,11 @@
  * Form 8882, the credit for employer-provided childcare facilities and
  * services; Form 6765, the credit for increasing research activities; Form
  * 6478, the biofuel producer credit a pass-through entity allocates from a tax
- * year that began in 2024; and Form 7210, the clean hydrogen production credit
- * of each facility the taxpayer owns. They are joined here, in this order, and
- * filingInfo.ts takes them as one, so that file stays under its line limit. A
- * new credit form adds its type and resolver here, not to filingInfo.ts.
+ * year that began in 2024; Form 7210, the clean hydrogen production credit of
+ * each facility the taxpayer owns; and Form 8864, the small agri-biodiesel
+ * producer credit. They are joined here, in this order, and filingInfo.ts
+ * takes them as one, so that file stays under its line limit. A new credit
+ * form adds its type and resolver here, not to filingInfo.ts.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";
@@ -48,6 +49,8 @@ import type { Form8844FilingInfo } from "./8844/filingInfo.js";
 import { resolve8844Info } from "./8844/resolveInfo.js";
 import type { Form8846FilingInfo } from "./8846/filingInfo.js";
 import { resolve8846Info } from "./8846/resolveInfo.js";
+import type { Form8864FilingInfo } from "./8864/filingInfo.js";
+import { resolve8864Info } from "./8864/resolveInfo.js";
 import type { Form8881FilingInfo } from "./8881/filingInfo.js";
 import { resolve8881Info } from "./8881/resolveInfo.js";
 import type { Form8882FilingInfo } from "./8882/filingInfo.js";
@@ -70,7 +73,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form8882FilingInfo &
   Form6765FilingInfo &
   Form6478FilingInfo &
-  Form7210FilingInfo;
+  Form7210FilingInfo &
+  Form8864FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -89,4 +93,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve6765Info,
   resolve6478Info,
   resolve7210Info,
+  resolve8864Info,
 ];

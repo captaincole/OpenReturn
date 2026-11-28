@@ -34,8 +34,8 @@ export interface PartnershipK1Parties {
   /* Item C. */
   irsCenter: string;
   partner: K1Owner;
-  /* The header's tax year beginning and ending, for a partnership that is not on the calendar year. */
-  fiscalYear?: [string, string];
+  /* A fiscal-year partnership's tax year; the K-1 is then the form of the year it begins. */
+  fiscalYear?: { beginning: string; ending: string };
 }
 
 const one = (box: string, label: string) => ({ box, label, rows: 1 });

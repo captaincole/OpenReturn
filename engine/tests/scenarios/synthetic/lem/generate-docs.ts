@@ -24,7 +24,7 @@ const partnership = { street: "4100 N Cliff Avenue", cityStateZip: "Sioux Falls,
  * the year ends in Lem's 2025 tax year, the return that reports it.
  */
 const K1_FORM_YEAR = 2024;
-const FISCAL_YEAR: [string, string] = ["07/01/2024", "06/30/2025"];
+const FISCAL_YEAR = { beginning: "07/01/2024", ending: "06/30/2025" };
 
 async function main() {
   await mkdir(docsDir, { recursive: true });

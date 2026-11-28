@@ -22,8 +22,9 @@ interface K1CreditLine {
 
 const FORM_3468 =
   "The rehabilitation credit is figured on Form 3468 Part VII from the entity's statement (irs-1065k1-inst-2025::sec::box-15-credits::b03): state the building as an investment credit property that names this K-1 (k1Key).";
+// Never reached: sources.ts leaves code AC to Form 8864's own sources (8864/form3800.ts).
 const FORM_8864 =
-  "The biodiesel, renewable diesel, or sustainable aviation fuels credit is reported on Form 8864 first (irs-1065k1-inst-2025::sec::box-15-credits::b01, ::b09), which the engine does not have.";
+  "The biodiesel, renewable diesel, or sustainable aviation fuels credit is figured by Form 8864's sources (irs-1065k1-inst-2025::sec::box-15-credits::b09), not this table.";
 const STATEMENT =
   "The entity's statement names the credit and its Form 3800 line (irs-1065k1-inst-2025::sec::box-15-credits::b04, ::b12), and the K-1 fact does not hold it.";
 

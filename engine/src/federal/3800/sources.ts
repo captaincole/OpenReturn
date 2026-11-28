@@ -25,6 +25,8 @@ import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
+import { biodieselCreditSourcesOf } from "../8864/form3800.js";
+import { isBiodieselK1Credit } from "../8864/k1.js";
 import { smallEmployerPlanSources } from "../8881/sources.js";
 import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
@@ -195,6 +197,22 @@ const missingResearch = (source: CreditSource) =>
   source.attributableTaxableIncome === undefined;
 
 /* Every source of the return and the answers they wait on (fact keys). */
+/*
+ * The sources of the forms added after the ones above, in the order they were
+ * added, so the order of the others stays as it was:
+ * - Line 1g: Form 7210 line 10, the credit of each clean hydrogen facility the
+ *   taxpayer owns (7210/form3800.ts).
+ * - Lines 1l and 1ff: Form 8864 line 11, the taxpayer's own production and each
+ *   K-1 code AC (8864/form3800.ts).
+ */
+function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
+  const forms = [cleanHydrogenSourcesOf(inputs), biodieselCreditSourcesOf(inputs)];
+  return {
+    sources: forms.flatMap((form) => form.sources),
+    missing: forms.flatMap((form) => form.missing),
+  };
+}
+
 export function form3800SourcesOf(inputs: ResolverInputs): {
   sources: Form3800Sources;
   missing: string[];
@@ -202,6 +220,7 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
   const stated = getGeneralBusinessCreditFacts(inputs.facts).map(statedSource);
   const k1 = k1EntitiesWithRoute(inputs, "form_3800")
     .filter((received) => !figuredOnForm3468(inputs, received))
+    .filter((received) => !isBiodieselK1Credit(received))
     .map((received) => k1Source(inputs, received));
   const form3468 = form3468CreditSources(inputs);
   // Line 4b: Form 5884 line 2, the credit of the taxpayer's own employees (5884/sources.ts).
@@ -230,9 +249,8 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...research.sources.filter(missingResearch).map((source) => source.credit.key),
     ...research.missing,
   );
-  // Line 1g: Form 7210 line 10, the credit of each clean hydrogen facility the taxpayer owns (7210/form3800.ts).
-  const hydrogen = cleanHydrogenSourcesOf(inputs);
-  missing.push(...hydrogen.missing);
+  const later = laterFormSources(inputs);
+  missing.push(...later.missing);
   // Line 3: Form 8844 line 2, the empowerment zone credit of the taxpayer's own employees (8844/sources.ts).
   const zone = withForm8844(inputs, [
     ...stated,
@@ -244,7 +262,7 @@ export function form3800SourcesOf(inputs: ResolverInputs): {
     ...workOpportunity.sources,
     ...research.sources,
     ...disabledAccess.sources,
-    ...hydrogen.sources,
+    ...later.sources,
   ]);
   // Lines 1j, 1dd and 1ee: Form 8881 lines 8, 11 and 15 less the K-1s, the taxpayer's own plan (8881/sources.ts).
   const plan = smallEmployerPlanSources(inputs);

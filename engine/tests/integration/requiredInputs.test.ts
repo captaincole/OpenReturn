@@ -215,6 +215,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "again while it is malformed",
   ],
   [
+    /^agri_biodiesel\.[^.]+$/,
+    "each fact is one whole business's agri-biodiesel production records (Form 8864 lines 7 to " +
+      "9); whether a business produced the fuel is Cade's question. Form 8864 lists the fact " +
+      "again while it is malformed",
+  ],
+  [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
     "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
       "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +

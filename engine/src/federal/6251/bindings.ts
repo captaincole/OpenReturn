@@ -11,6 +11,7 @@ import { standardDeduction } from "../1040/deductions.js";
 import { qdcgInputsFromReturn } from "../1040/qdcgInputs.js";
 import { files2555 } from "../2555/results.js";
 import { withForm8814 } from "../8814/totals.js";
+import { amtSubtraction } from "../8864/receivers.js";
 import type { Form6251FilingInfo } from "./filingInfo.js";
 import { line10Of, line11Of, line8Of, line9Of } from "./foreignTaxCredit.js";
 import type { Form6251 } from "./types.js";
@@ -283,11 +284,22 @@ export function register(): void {
        * 16 (before the loss); that filer deducts no mortgage interest, and the other line 3
        * items are not modeled. Waits while Form 4684's totals do.
        */
+      /*
+       * MANUAL EDIT: plus the negative of Form 8864 line 9, the agri-biodiesel credit income
+       * (federal/8864/receivers.ts). A filer who does not itemize deducts no mortgage
+       * interest, so with that subtraction the line is a number; an itemizer keeps the gap.
+       */
       "0.line.3_other_adjustments": (_, info) => {
-        if (info.increasedStandardDeduction === undefined) return undefined;
-        return info.increasedStandardDeduction
-          ? standardDeduction(info)
-          : unsupported(LINE_3_UNSUPPORTED);
+        const biodiesel = amtSubtraction(info);
+        if (typeof biodiesel === "object") return biodiesel;
+        if (info.increasedStandardDeduction === undefined) return biodiesel;
+        if (!info.increasedStandardDeduction) {
+          return biodiesel === undefined || info.itemizesDeductions === true
+            ? unsupported(LINE_3_UNSUPPORTED)
+            : biodiesel;
+        }
+        const disaster = standardDeduction(info);
+        return biodiesel === undefined ? disaster : sum(disaster, biodiesel);
       },
       /*
        * MANUAL EDIT: combine lines 1b through 3 (each negative line holds its own sign), then
