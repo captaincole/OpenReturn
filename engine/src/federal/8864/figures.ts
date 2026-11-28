@@ -12,6 +12,7 @@ import {
   type AgriBiodieselProductionFact,
 } from "../../facts/kinds/agriBiodiesel.js";
 import { statedBusinessesOnReturn, type BusinessFactValue } from "../../facts/kinds/business.js";
+import { getCleanFuelFacilityFacts } from "../../facts/kinds/cleanFuelFacility.js";
 import { sum } from "../../money.js";
 import {
   PRODUCTIVE_CAPACITY_LIMIT_GALLONS,
@@ -74,6 +75,36 @@ const notOnReturnGap = (fact: AgriBiodieselProductionFact) =>
 const OVER_LIMIT_GAP =
   "The production facts state more than 15 million gallons: qualified agri-biodiesel production is at most 15 million gallons (irs-8864-inst-2025::sec::qualified-agri-biodiesel-production::b01), and the instructions do not say which gallons count. State the qualified gallons of each period.";
 
+/*
+ * One gallon, two credits. Agri-biodiesel sold from January 1 to June 30,
+ * 2025 is line 7 (irs-8864-inst-2025::sec::line-7::b01). A Form 7218 facility
+ * takes the section 45Z credit for fuel produced after 2024, and "For fuel
+ * sold or used after June 30, 2025, the section 40A credit is determined in
+ * addition to any credit determined under section 45Z"
+ * (irs-7218-inst-2025::sec::emissions-factor::b05). No text says whether a
+ * gallon sold before July 1 earns both (7218/QUESTIONS.md item 8), so a
+ * person decides: while the return has line 7 gallons and a clean fuel
+ * facility that sold biodiesel and was in service before July 1, 2025, lines
+ * 7 to 9 are a gap.
+ */
+export const TWO_CREDITS_GAP =
+  "Form 8864 line 7 holds agri-biodiesel sold from January 1 to June 30, 2025 (irs-8864-inst-2025::sec::line-7::b01), and a Form 7218 clean fuel facility of the taxpayer sold biodiesel and was in service in that period. Only fuel sold after June 30, 2025 earns the section 40A credit in addition to the section 45Z credit (irs-7218-inst-2025::sec::emissions-factor::b05); no text says whether a gallon of line 7 earns both. A person decides.";
+
+const FIRST_DAY_OF_LINE_8 = "2025-07-01";
+const BIODIESEL = "biodiesel";
+
+/* A Form 7218 facility that sold biodiesel and was in service before line 8's period began. */
+function cleanFuelBiodieselBeforeJuly(facts: ReadonlyArray<FactRow>): boolean {
+  return getCleanFuelFacilityFacts(facts).some(
+    ({ value }) =>
+      !value.otherFacilityCreditAllowed &&
+      value.placedInService < FIRST_DAY_OF_LINE_8 &&
+      value.sales.some(
+        (sale) => !sale.sustainableAviationFuel && sale.fuelType.toLowerCase().includes(BIODIESEL),
+      ),
+  );
+}
+
 export const COMBINED_LIMIT_GAP =
   "The return has agri-biodiesel from more than one source (its own production and K-1 statements), and together they pass 15 million gallons or 60 million gallons of productive capacity. The limits apply at the partner level too (irs-8864-inst-2025::sec::line-10::b01), and the instructions do not say how the sources are counted together.";
 
@@ -94,6 +125,7 @@ function combinedLimitsExceededOf(
 
 /* Why lines 7 to 9 cannot be figured; undefined when they can (or when there is no production). */
 function linesGap(
+  facts: ReadonlyArray<FactRow>,
   eligible: AgriBiodieselProductionFact[],
   businesses: ReadonlyMap<string, BusinessFactValue>,
   combinedLimitsExceeded: boolean,
@@ -104,7 +136,9 @@ function linesGap(
   if (sum(...eligible.map((fact) => gallonsOf(fact.value))) > QUALIFIED_PRODUCTION_LIMIT_GALLONS) {
     return OVER_LIMIT_GAP;
   }
-  return combinedLimitsExceeded ? COMBINED_LIMIT_GAP : undefined;
+  if (combinedLimitsExceeded) return COMBINED_LIMIT_GAP;
+  const line7Gallons = sum(...eligible.map((fact) => fact.value.gallonsBeforeJuly));
+  return line7Gallons > 0 && cleanFuelBiodieselBeforeJuly(facts) ? TWO_CREDITS_GAP : undefined;
 }
 
 /* Lines 7 to 9 for the return, and each business's part of line 9. */
@@ -125,7 +159,7 @@ export function agriBiodieselFigures(
     eligibleKeys: eligible.map((fact) => fact.key),
     combinedLimitsExceeded,
   };
-  const gap = linesGap(eligible, businesses, combinedLimitsExceeded);
+  const gap = linesGap(facts, eligible, businesses, combinedLimitsExceeded);
   const withBusiness = eligible.flatMap((fact) => {
     const business = businesses.get(fact.value.businessKey);
     return business === undefined

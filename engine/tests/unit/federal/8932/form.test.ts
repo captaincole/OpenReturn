@@ -174,7 +174,7 @@ describe("Form 8932: who files and what it waits on", () => {
     expect(result.value("form-3800", ROW_1W)).toBe(1_840);
   });
 
-  it("keeps the K-1 credit on line 3 under a final order (rule-decisions A123)", () => {
+  it("keeps the K-1 credit on line 3 under a final order (rule-decisions A138)", () => {
     const result = evaluate(
       basel,
       replaced(basel.facts, DIFFERENTIAL_WAGE_CREDIT_KEYS.underReemploymentOrder, true),
@@ -226,7 +226,7 @@ describe("Form 8932: the stated credit it replaces", () => {
     expect(result.value("form-3800", ROW_1W)).toBe(7_830);
   });
 
-  it("rounds each pass-through credit before the add (rule-decisions A122)", () => {
+  it("rounds each pass-through credit before the add (rule-decisions A137)", () => {
     const notice = (slug: string, ein: string) =>
       row(basel, "other", makeGeneralBusinessCreditFactKey(slug), {
         sourceForm: "8932",

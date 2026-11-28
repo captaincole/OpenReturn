@@ -30,7 +30,7 @@ Run `npm run form-engine -- form-status <form> --json`. It needs a catalog and `
 
 1. Run `npm -w @openreturn/engine run typecheck` and `npm -w @openreturn/engine run test:integration`. `requiredInputs.test.ts` fails when a form reads an answer that is not in `missingInputs`.
 2. Make the catalog-fill golden: from `engine/`, run `npx tsx tests/golden/catalogFill.ts --form-id=<formId> --update`. Read the PDF whose path it prints, and check that each value is in its box. A value in the wrong box means a wrong label: run `catalog-form-fields` again for that page.
-3. Run `npm test`.
+3. Run `npm run test:pdf -- catalog-fill:<formId>` (the catalog-fill checks run only with the PDF fill) and `npm test`.
 4. Commit with the subject `<Form>: wiring`.
 
 Next: `write-binding-rules <form>`.

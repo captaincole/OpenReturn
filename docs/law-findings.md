@@ -7,7 +7,7 @@ How to read it:
 - Each statute passage has its block id (`usc-26-2025::sec::s469::g-1` is section 469(g)(1)). `npm run corpus -- law read "<citation>"` prints it.
 - Each instruction passage has its corpus block id. `npm run corpus -- read <blockId>` prints it.
 - "Row" names a row of `docs/rule-decisions.md`. On the day of the check the library held the Code as of January 2026 only: no regulations, no California law and no statutory notes, so no effective date was checked. The regulations were added after it.
-- Checked on 2026-11-25.
+- Checked on 2026-11-25. The four entries for rows A87, A111, A113 and A119 were added on 2026-11-27 from the checks their authors made; a person has not read them.
 - Deferred on 2026-11-26: no finding on this page changes an engine rule yet. A person decides each one later, and each engine rule stays as its `DECISION` comment says until then.
 
 ## The form or its instructions disagree with the statute
@@ -47,6 +47,37 @@ How to read it:
 - Engine: `engine/src/federal/2555/lines.ts`.
 - Dollars: 306 days give $108,940 with 0.838, against $108,986 by the day: $46 less exclusion (made-up taxpayer `romanda`).
 - Status: decided by the author on 2026-11-25, row A28, waiting for a person.
+
+### Form 2210-F line 16: an underpayment paid in two parts (row A87)
+
+- Form: "Enter the date the amount on line 13 was paid or April 15, 2026, whichever is earlier", and line 16 is one product, "Underpayment on line 13 × Number of days on line 15 / 365 × 0.07" (`irs-2210f-face-2025::sec::face-part-iii::b01`).
+- Statute, section 6654(b)(2)(B): the period ends "with respect to any portion of the underpayment, the date on which such portion is paid". The Form 2210 instructions say the same: "make a separate computation for each payment" (`irs-2210-inst-2025::sec::line-4::b01`).
+- Engine: the form's one count of days (`engine/src/federal/2210-f/lines.ts`).
+- Dollars: a $9,008 underpayment, $3,000 paid February 5 and the rest April 10, 2026: $147 (engine) against $110 with a count for each part.
+- Status: decided by the author on 2026-11-26, row A87. Added to this page on 2026-11-27; a person has not read it.
+
+### Form 8881 line 6c: the third-year amount for each employee (row A111)
+
+- Instructions: "If this is treated as the third year of the plan, do not include contributions of more than $1,334 per employee" (`irs-8881-inst-2025::sec::line-6c::b01`). $1,334 × 75% = $1,000.50.
+- Statute, section 45E(f)(2)(A): the amount for an employee "shall not exceed $1,000". The same instruction block also says the credit "is subject to a $1,000 limit per employee after taking into account the percentage that applies on Line 6g".
+- Engine: the printed $1,334 (`engine/src/federal/8881/lines.ts`).
+- Dollars: 50 cents for each third-year employee whose contributions reach $1,334; $1 after rounding for one employee.
+- Status: decided by the author on 2026-11-27, row A111. A person has not read it.
+
+### Form 8820 line 2a: the deduction the orphan drug credit takes away (row A119)
+
+- Instructions, line 2a: "reduce your otherwise allowable deduction for qualified clinical testing expenses by the amount of the credit on this line" (`irs-8820-form-2025::sec::line-2a::b02`).
+- Statute, section 280C(b)(1): no deduction for the part "equal to the amount of the credit allowable for the taxable year under section 45C" (`usc-26-2025::sec::s280c::b-1`). Section 45P(c) reduces the credit otherwise allowable by the Form 8932 credit on the same wages (`usc-26-2025::sec::s45p::c`), which is line 2b. So the statute reads as line 2c.
+- Engine: line 2a (`engine/src/federal/8820/lines.ts`).
+- Dollars: only when line 2b holds an amount. Line 2a $50,000 and line 2b $900: the deduction falls $50,000 (engine) against $49,100.
+- Status: decided by the author on 2026-11-27, row A119. A person has not read it.
+
+### Two rates where the library's text is newer than the 2025 form (row A113, and Form 8864 line 7)
+
+The library holds the Code as amended and no effective-date notes, so these are not confirmed disagreements. Each needs the effective date of the amendment.
+
+- Form 8882: the form and the 2025 Form 3800 instructions give "25% of the qualified childcare facility expenditures plus 10% of the qualified childcare resource and referral expenditures ... limited to $150,000 per tax year" (`irs-8882-form-2025::sec::how-to-figure-the-credit::b01`, `irs-3800-inst-2025::sec::line-1k::b01`). Section 45F(a) and (b) read "40 percent (50 percent in the case of an eligible small business)" and "shall not exceed $500,000 ($600,000 in the case of an eligible small business)" (`usc-26-2025::sec::s45f::a`, `::b`). Engine: the form's rates (`engine/src/federal/8882/lines.ts`). Dollars: $251,000 of facility expenditures give $62,750 (engine) against $100,400.
+- Form 8864 line 7: the instructions give "$.10 per gallon from January 1, 2025, through June 30, 2025" (`irs-8864-inst-2025::sec::line-7::b01`). Section 40A(b)(4)(A) reads "20 cents for each gallon of qualified agri-biodiesel production" (`usc-26-2025::sec::s40a::b-4-A`). Engine: $.10 on line 7 and $.20 on line 8, as the form prints (`engine/src/federal/8864/`). Dollars: $.10 for each gallon of line 7.
 
 ## The statute supports a decision made between two instructions
 

@@ -48,7 +48,7 @@ Never change a value in `expected.ts` to match the engine. When the key and the 
 
 ## 6. Finish
 
-1. When every line matches, remove `skip: true`. Then write the goldens: `npx tsx scripts/renderScenario.ts --scenario=<scenario> --golden` (from `engine/`), and point each form's `goldenPdfPath` at its PDF. Read the PDFs.
+1. When every line matches, remove `skip: true`. Then write the goldens: `npx tsx scripts/renderScenario.ts --scenario=<scenario> --golden` (from `engine/`), and point each form's `goldenPdfPath` at its PDF. Read the PDFs. Run `npm run test:pdf -- <scenario>`: `npm test` checks values only, and this run compares the filled forms with the goldens.
 2. Run `verify-form` for each form you changed. No other scenario's golden may change.
 3. Add new input documents to `docs/testing-with-your-return.md` ("What OpenReturn supports") and `engine/scripts/compareFiled/support.ts`.
 4. Commit each step on its own: the documents, the facts, the scenario, then each form.

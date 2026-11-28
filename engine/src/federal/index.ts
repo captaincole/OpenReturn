@@ -1323,6 +1323,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7207",
     relativeDir: "federal/7207",
     register: registerForm7207,
+    // One Form 7207 for each facility, and one for the pass-through credits (7207/copies.ts).
+    copies: {
+      count: (info) => info?.form7207Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form7207CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-7210",
@@ -1342,6 +1347,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7211",
     relativeDir: "federal/7211",
     register: registerForm7211,
+    // One form for each facility, and one for the pass-through credits (7211/copies.ts).
+    copies: {
+      count: (info) => info?.form7211Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form7211CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-7213",
@@ -1349,6 +1359,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7213",
     relativeDir: "federal/7213",
     register: registerForm7213,
+    // One Form 7213 for each facility, and one for the K-1 credits (7213/copies.ts).
+    copies: {
+      count: (info) => info?.form7213Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form7213CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-7218",
@@ -1356,6 +1371,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 7218",
     relativeDir: "federal/7218",
     register: registerForm7218,
+    // One Form 7218 for each facility, and one for the pass-through credits (7218/copies.ts).
+    copies: {
+      count: (info) => info?.form7218Copies?.length ?? 1,
+      select: (info, index) => info && { ...info, form7218CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8820",
@@ -1376,6 +1396,11 @@ export const FEDERAL_FORMS: FormSpec[] = [
     displayName: "Form 8835",
     relativeDir: "federal/8835",
     register: registerForm8835,
+    // One Form 8835 for each facility, and one for the pass-through credits (8835/copies.ts).
+    copies: {
+      count: (info) => Math.max(1, info?.form8835Copies?.length ?? 1),
+      select: (info, index) => info && { ...info, form8835CopyIndex: index },
+    },
   }),
   makeFormSpec({
     formId: "form-8864",

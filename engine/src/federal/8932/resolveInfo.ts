@@ -47,7 +47,7 @@ const wagesGap = (name: string, part: number) =>
  *
  * DECISION (2026-11-27, by the author): each K-1 or notice rounds before the
  * add, the rule of Form 8846 line 5 and Form 8820 line 3 (docs/rule-decisions.md
- * A96, A122). Text A, the Form 1040 instructions: "include cents when adding
+ * A96, A137). Text A, the Form 1040 instructions: "include cents when adding
  * the amounts and round off only the total" (irs-1040-inst-2025::sec::rounding-off-to-whole::b01).
  * Text B, line 4: "All others, stop here and report this amount on Form 3800,
  * Part III, line 1w" (irs-8932-form-2025::sec::face-page-1::b01), where an
@@ -113,7 +113,7 @@ export function form8932LinesOf(inputs: ResolverInputs): Form8932Lines {
  *
  * DECISION (2026-11-27, by the author): a final order against the taxpayer
  * disallows only the credit on the taxpayer's own employees (lines 1 and 2);
- * a K-1 credit stays on Form 3800 line 1w (docs/rule-decisions.md A123).
+ * a K-1 credit stays on Form 3800 line 1w (docs/rule-decisions.md A138).
  * Text A: "No credit will be allowed to a taxpayer for: Any tax year in which
  * the taxpayer is under a final order ..." (disallowance-for-failure-to-comply-with::b01),
  * which can read as every credit the taxpayer receives. Text B: "Partnerships,
