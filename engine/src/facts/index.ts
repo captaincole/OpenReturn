@@ -139,6 +139,7 @@ export * from "./kinds/section1256.js";
 export * from "./kinds/section179Recapture.js";
 export * from "./kinds/section965.js";
 export * from "./kinds/selfEmployedHealthPlan.js";
+export * from "./kinds/smallEmployerHealthCredit.js";
 export * from "./kinds/smallEmployerPlan.js";
 export * from "./kinds/socialSecurity.js";
 export * from "./kinds/spouse.js";

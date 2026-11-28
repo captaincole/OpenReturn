@@ -273,6 +273,12 @@ const OPTIONAL: Array<[RegExp, string]> = [
       "miles is Cade's question. Form 8900 lists the fact again while it is malformed or line 3a is missing",
   ],
   [
+    /^small_employer_health_credit$/,
+    "the fact is the whole Form 8941 of the taxpayer's own employees (lines A to C and " +
+      "Worksheets 1 to 4); whether the business paid health insurance premiums for its " +
+      "employees is Cade's question. Form 8941 lists the fact again while it is malformed",
+  ],
+  [
     /^section_965\.(inclusion|other_liability|s_corporation|deferred)\.[^.]+$/,
     "each fact is one whole line of last year's Form 965-A (Part I with its Part II line, a " +
       "Part III row or a Part IV row); whether one exists is Cade's question. Form 965-A lists " +

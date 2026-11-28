@@ -39,6 +39,7 @@ import { newMarketsCreditSourcesOf } from "../8874/form3800.js";
 import { smallEmployerPlanSources } from "../8881/sources.js";
 import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import { trackMaintenanceSourcesOf } from "../8900/form3800.js";
+import { smallEmployerHealthSourcesOf } from "../8941/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { gap, type Cell } from "./cells.js";
@@ -233,6 +234,7 @@ const missingResearch = (source: CreditSource) =>
  * - Line 1b: Form 7207 line 8a of each facility the taxpayer operates (7207/form3800.ts).
  * - Line 1i: Form 8874 line 1, the qualified equity investments held directly (8874/form3800.ts).
  * - Line 4g: Form 8900 line 5, the taxpayer's own track maintenance (8900/form3800.ts).
+ * - Line 4h: Form 8941 line 12, the premiums of the taxpayer's own employees (8941/form3800.ts).
  */
 function laterFormSources(
   inputs: ResolverInputs,
@@ -250,6 +252,7 @@ function laterFormSources(
     { sources: form7207CreditSources(inputs), missing: [] },
     newMarketsCreditSourcesOf(inputs),
     trackMaintenanceSourcesOf(inputs),
+    smallEmployerHealthSourcesOf(inputs),
   ];
   return {
     stated: cleanFuel.stated,

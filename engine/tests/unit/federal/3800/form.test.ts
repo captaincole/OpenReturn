@@ -130,7 +130,8 @@ describe("who files Form 3800", () => {
 
   it("only specified credits: Form 6251 does not file, line 14 is a gap and line 38 still computes", () => {
     const facts = factsWith({}, [
-      stated("health", { sourceForm: "8941", line: "4h", amount: 2_000, passive: false }),
+      // Line 4h is Form 8941's, which the engine figures (3800/rows.ts), so a stated line 4z credit.
+      stated("specified", { sourceForm: "other", line: "4z", amount: 2_000, passive: false }),
     ]);
     const run = evaluate([
       ...noCredits(),
