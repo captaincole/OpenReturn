@@ -9,7 +9,8 @@ are in `cade/tests/`; the corpus tests are in `canon/tests/`.
 | Folder | Kind | Command (repo root) |
 | --- | --- | --- |
 | `unit/` | One module, its own small inputs. The same folders as `src/` and `scripts/`. | `npm run test:unit` |
-| `integration/` | The whole engine over every scenario. | `npm run test:integration` |
+| `integration/` | The whole engine over every scenario. The required-inputs check removes an answer that 20 or more scenarios share from a sample of 10 of them (`helpers/sharedAnswers.ts`). | `npm run test:integration` |
+| `integration/requiredInputs` in full | The same check with every answer removed from every scenario. Minutes, so it does not run before a commit: it must pass before a pull request merges. | `npm run test:inputs` |
 | `golden/` | Every scenario against its locked values. | `npm test` |
 | `golden/` with `--pdf` | The same, and each form filled and compared with the scenario's golden PDF, and the catalog-fill check of each form. Minutes, so it does not run before a commit: it must pass before a pull request merges. | `npm run test:pdf` |
 | `scenarios/` | The scenario data. Each folder with an `index.ts` is a scenario; `scenarios/index.ts` finds them. `scenarios/synthetic/` holds the taxpayers we made up with no outside source (its README). | — |
