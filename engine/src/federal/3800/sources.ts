@@ -9,6 +9,8 @@ import {
   GENERAL_BUSINESS_CREDIT_KEYS,
   getCreditCarryoverFacts,
   getGeneralBusinessCreditFacts,
+  isBusinessFactKey,
+  isOwnStatedWageCredit,
   type CreditCarryoverFact,
   type GeneralBusinessCreditFact,
   type K1ResearchCreditAnswer,
@@ -22,6 +24,7 @@ import { statedOwnBiofuelGap } from "../6478/form3800.js";
 import { researchCreditSources } from "../6765/form3800.js";
 import { cleanHydrogenSourcesOf } from "../7210/form3800.js";
 import { lowIncomeHousingSourcesOf } from "../8586/form3800.js";
+import { orphanDrugCreditSourcesOf } from "../8820/form3800.js";
 import { disabledAccessSourcesOf } from "../8826/form3800.js";
 import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
@@ -63,6 +66,12 @@ function statedGap(value: GeneralBusinessCreditFact["value"]): string | undefine
   // Line 4c: no 2025 biofuel producer credit of the taxpayer's own production (6478/form3800.ts).
   const ownBiofuel = statedOwnBiofuelGap(value);
   if (ownBiofuel) return ownBiofuel;
+  if (
+    isOwnStatedWageCredit(value) &&
+    (value.businessKey === undefined || !isBusinessFactKey(value.businessKey))
+  ) {
+    return `A Form ${value.sourceForm} credit of the taxpayer's own employees also lowers the wages deduction of the business that paid them (irs-1040sc-inst-2025::sec::line-26::b01): the engine lowers it only for a Schedule C business the credit names (businessKey).`;
+  }
   if (value.transfer && !TRANSFER_LINES.includes(value.line)) {
     return `The credit of line ${value.line} cannot be transferred under section 6418 (column (f) is shaded).`;
   }
@@ -204,9 +213,14 @@ const missingResearch = (source: CreditSource) =>
  *   taxpayer owns (7210/form3800.ts).
  * - Lines 1l and 1ff: Form 8864 line 11, the taxpayer's own production and each
  *   K-1 code AC (8864/form3800.ts).
+ * - Line 1h: Form 8820 line 2c, the taxpayer's own clinical testing (8820/form3800.ts).
  */
 function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
-  const forms = [cleanHydrogenSourcesOf(inputs), biodieselCreditSourcesOf(inputs)];
+  const forms = [
+    cleanHydrogenSourcesOf(inputs),
+    biodieselCreditSourcesOf(inputs),
+    orphanDrugCreditSourcesOf(inputs),
+  ];
   return {
     sources: forms.flatMap((form) => form.sources),
     missing: forms.flatMap((form) => form.missing),

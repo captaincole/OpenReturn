@@ -15,10 +15,11 @@
  * services; Form 6765, the credit for increasing research activities; Form
  * 6478, the biofuel producer credit a pass-through entity allocates from a tax
  * year that began in 2024; Form 7210, the clean hydrogen production credit of
- * each facility the taxpayer owns; and Form 8864, the small agri-biodiesel
- * producer credit. They are joined here, in this order, and filingInfo.ts
- * takes them as one, so that file stays under its line limit. A new credit
- * form adds its type and resolver here, not to filingInfo.ts.
+ * each facility the taxpayer owns; Form 8864, the small agri-biodiesel
+ * producer credit; and Form 8820, the orphan drug credit. They are joined here,
+ * in this order, and filingInfo.ts takes them as one, so that file stays under
+ * its line limit. A new credit form adds its type and resolver here, not to
+ * filingInfo.ts.
  */
 
 import type { BaseFilingInfo } from "../filingInfo.js";
@@ -41,6 +42,8 @@ import type { Form8586FilingInfo } from "./8586/filingInfo.js";
 import { resolve8586Info } from "./8586/resolveInfo.js";
 import type { Form8609AFilingInfo } from "./8609-a/filingInfo.js";
 import { resolve8609AInfo } from "./8609-a/resolveInfo.js";
+import type { Form8820FilingInfo } from "./8820/filingInfo.js";
+import { resolve8820Info } from "./8820/resolveInfo.js";
 import type { Form8826FilingInfo } from "./8826/filingInfo.js";
 import { resolve8826Info } from "./8826/resolveInfo.js";
 import type { Form8834FilingInfo } from "./8834/filingInfo.js";
@@ -74,7 +77,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form6765FilingInfo &
   Form6478FilingInfo &
   Form7210FilingInfo &
-  Form8864FilingInfo;
+  Form8864FilingInfo &
+  Form8820FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -94,4 +98,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve6478Info,
   resolve7210Info,
   resolve8864Info,
+  resolve8820Info,
 ];

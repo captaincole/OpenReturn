@@ -10,6 +10,7 @@ import { roundDollars, sumOrBlank } from "../../money.js";
 import { filingStatusOf, resolveMustFile, type ResolverInputs } from "../../resolverInputs.js";
 import { unsupported, type Unsupported } from "../../types.js";
 import { RESEARCH_LINES } from "../3800/rows.js";
+import { clinicalAndResearchOverlapGap } from "../8820/coordination.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
 import { researchFiguresOf, waitsOnMethod, type ResearchFigures } from "./figures.js";
 import type { Form6765FilingInfo, Form6765Lines, ResearchBusiness } from "./filingInfo.js";
@@ -68,7 +69,11 @@ function researchBusiness(inputs: ResolverInputs, key: string): ResearchBusiness
   };
 }
 
-/* Line 28 is a gap when the business is not on the return, or the 280C reduction does not fit on its lines. */
+/*
+ * Line 28 is a gap when the business is not on the return, when its research
+ * expenses may hold clinical testing expenses of Form 8820 (8820/coordination.ts),
+ * or when the 280C reduction does not fit on its lines.
+ */
 function withBusinessGaps(
   inputs: ResolverInputs,
   figures: ResearchFigures,
@@ -78,6 +83,8 @@ function withBusinessGaps(
   if (business === undefined) return { ...figures, line28: { gap: BUSINESS_GAP } };
   const status = filingStatusOf(inputs);
   const joint = status === undefined || status === "married_filing_jointly";
+  const overlap = clinicalAndResearchOverlapGap(inputs.facts, joint);
+  if (overlap !== undefined) return { ...figures, line28: { gap: overlap } };
   const placed = researchCreditPlacement(inputs.facts, joint)?.placed;
   if (placed !== undefined && placed.left > 0)
     return { ...figures, line28: { gap: REDUCTION_GAP } };
