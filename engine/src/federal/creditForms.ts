@@ -16,7 +16,8 @@
  * 6478, the biofuel producer credit a pass-through entity allocates from a tax
  * year that began in 2024; Form 7210, the clean hydrogen production credit of
  * each facility the taxpayer owns; Form 8864, the small agri-biodiesel
- * producer credit; and Form 8820, the orphan drug credit. They are joined here,
+ * producer credit; Form 8820, the orphan drug credit; and Form 8874, the new
+ * markets credit of each qualified equity investment. They are joined here,
  * in this order, and filingInfo.ts takes them as one, so that file stays under
  * its line limit. A new credit form adds its type and resolver here, not to
  * filingInfo.ts.
@@ -54,6 +55,8 @@ import type { Form8846FilingInfo } from "./8846/filingInfo.js";
 import { resolve8846Info } from "./8846/resolveInfo.js";
 import type { Form8864FilingInfo } from "./8864/filingInfo.js";
 import { resolve8864Info } from "./8864/resolveInfo.js";
+import type { Form8874FilingInfo } from "./8874/filingInfo.js";
+import { resolve8874Info } from "./8874/resolveInfo.js";
 import type { Form8881FilingInfo } from "./8881/filingInfo.js";
 import { resolve8881Info } from "./8881/resolveInfo.js";
 import type { Form8882FilingInfo } from "./8882/filingInfo.js";
@@ -78,7 +81,8 @@ export type CreditFormsFilingInfo = Form3800FilingInfo &
   Form6478FilingInfo &
   Form7210FilingInfo &
   Form8864FilingInfo &
-  Form8820FilingInfo;
+  Form8820FilingInfo &
+  Form8874FilingInfo;
 
 export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => BaseFilingInfo> = [
   resolve3800Info,
@@ -99,4 +103,5 @@ export const CREDIT_FORMS_RESOLVERS: ReadonlyArray<(inputs: ResolverInputs) => B
   resolve7210Info,
   resolve8864Info,
   resolve8820Info,
+  resolve8874Info,
 ];

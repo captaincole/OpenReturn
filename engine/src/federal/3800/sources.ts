@@ -30,6 +30,7 @@ import { withForm8844 } from "../8844/sources.js";
 import { tipCreditSourcesOf } from "../8846/form3800.js";
 import { biodieselCreditSourcesOf } from "../8864/form3800.js";
 import { isBiodieselK1Credit } from "../8864/k1.js";
+import { newMarketsCreditSourcesOf } from "../8874/form3800.js";
 import { smallEmployerPlanSources } from "../8881/sources.js";
 import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
@@ -214,12 +215,14 @@ const missingResearch = (source: CreditSource) =>
  * - Lines 1l and 1ff: Form 8864 line 11, the taxpayer's own production and each
  *   K-1 code AC (8864/form3800.ts).
  * - Line 1h: Form 8820 line 2c, the taxpayer's own clinical testing (8820/form3800.ts).
+ * - Line 1i: Form 8874 line 1, the qualified equity investments held directly (8874/form3800.ts).
  */
 function laterFormSources(inputs: ResolverInputs): { sources: CreditSource[]; missing: string[] } {
   const forms = [
     cleanHydrogenSourcesOf(inputs),
     biodieselCreditSourcesOf(inputs),
     orphanDrugCreditSourcesOf(inputs),
+    newMarketsCreditSourcesOf(inputs),
   ];
   return {
     sources: forms.flatMap((form) => form.sources),

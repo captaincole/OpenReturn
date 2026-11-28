@@ -108,6 +108,7 @@ export * from "./kinds/mortgageCreditCertificate.js";
 export * from "./kinds/mortgageSubsidy.js";
 export * from "./kinds/netInvestmentIncome.js";
 export * from "./kinds/netOperatingLoss.js";
+export * from "./kinds/newMarketsInvestment.js";
 export * from "./kinds/noncashGifts.js";
 export * from "./kinds/nonemployeeCompensation.js";
 export * from "./kinds/orphanDrugCredit.js";
