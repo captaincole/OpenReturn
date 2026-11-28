@@ -39,6 +39,7 @@ import { newMarketsCreditSourcesOf } from "../8874/form3800.js";
 import { smallEmployerPlanSources } from "../8881/sources.js";
 import { childcareCreditSourcesOf } from "../8882/form3800.js";
 import { trackMaintenanceSourcesOf } from "../8900/form3800.js";
+import { differentialWageSourcesOf } from "../8932/form3800.js";
 import { smallEmployerHealthSourcesOf } from "../8941/form3800.js";
 import type { ReceivedItem } from "../passThrough/receipts.js";
 import { k1EntitiesWithRoute } from "../passThrough/receipts.js";
@@ -235,6 +236,7 @@ const missingResearch = (source: CreditSource) =>
  * - Line 1i: Form 8874 line 1, the qualified equity investments held directly (8874/form3800.ts).
  * - Line 4g: Form 8900 line 5, the taxpayer's own track maintenance (8900/form3800.ts).
  * - Line 4h: Form 8941 line 12, the premiums of the taxpayer's own employees (8941/form3800.ts).
+ * - Line 1w: Form 8932 line 2, the taxpayer's own employees (8932/form3800.ts).
  */
 function laterFormSources(
   inputs: ResolverInputs,
@@ -253,6 +255,7 @@ function laterFormSources(
     newMarketsCreditSourcesOf(inputs),
     trackMaintenanceSourcesOf(inputs),
     smallEmployerHealthSourcesOf(inputs),
+    differentialWageSourcesOf(inputs),
   ];
   return {
     stated: cleanFuel.stated,

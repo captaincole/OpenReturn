@@ -57,6 +57,7 @@ export * from "./kinds/dcHomebuyerCredit.js";
 export * from "./kinds/dependentCare.js";
 export * from "./kinds/dependents.js";
 export * from "./kinds/depreciation.js";
+export * from "./kinds/differentialWage.js";
 export * from "./kinds/disabledAccess.js";
 export * from "./kinds/disasterRetirement.js";
 export * from "./kinds/dividends.js";

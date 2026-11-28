@@ -25,8 +25,8 @@ import {
   type BusinessFactValue,
 } from "./business.js";
 import { placesPersonalProperty, type ScopedDepreciation } from "./depreciation.js";
+import { wageCreditsByBusiness } from "./differentialWage.js";
 import { empowermentZoneFigures } from "./empowermentZone.js";
-import { statedWageCreditsByBusiness } from "./generalBusinessCredit.js";
 import { statedRentalsOnReturn, type RentalFactValue } from "./rental.js";
 import { readResearchCreditFact } from "./researchCredit.js";
 import { section179RecaptureByBusiness } from "./section179Recapture.js";
@@ -166,12 +166,14 @@ const BUSINESS_CREDIT_REDUCTIONS: ReadonlyArray<CreditReduction> = [
     californiaAddsBack: true,
   },
   /*
-   * The same line's Form 8932 and Form 8994: the engine takes these credits as
-   * stated, each naming the business that paid the wages (generalBusinessCredit.ts).
-   * Section 280C(a) takes them off, and California does not apply it
+   * The same line's Form 8932 and Form 8994. Form 8932 line 2 of the
+   * business's own employees, when the return has employee facts
+   * (differentialWage.ts); otherwise the stated credit, each naming the
+   * business that paid the wages (generalBusinessCredit.ts). Form 8994 as
+   * stated. Section 280C(a) takes them off, and California does not apply it
    * (ca-rtc-2025::sec::s17270::b; federal/8820/QUESTIONS.md item 19).
    */
-  { reductionsOf: onLine("wages", statedWageCreditsByBusiness), californiaAddsBack: true },
+  { reductionsOf: onLine("wages", wageCreditsByBusiness), californiaAddsBack: true },
   /*
    * Line 23: "Reduce your deduction by the amount shown on Form 8846, line 4"
    * (irs-1040sc-inst-2025::sec::line-23::b01). The stated taxesAndLicenses hold
